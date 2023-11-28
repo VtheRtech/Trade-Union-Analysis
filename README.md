@@ -1,4 +1,18 @@
 # Trade-Union-Analysis
+This analysis tries to explore unions and their relationship to each other and the nation-states that govern them. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 https://www.sciencedirect.com/science/article/abs/pii/S0167268105002556#!
 
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/9dbcacdd-a04c-4ed0-9d0d-2b2398e51617)
