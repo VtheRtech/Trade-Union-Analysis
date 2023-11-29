@@ -113,7 +113,7 @@ count_TUDR <- TUDR %>% distinct(ref_area, .keep_all = TRUE) %>% count() %>% pull
 count_TradeUnionDensity <- TradeUnionDensity %>% distinct(Country, .keep_all = TRUE) %>% count() %>% pull(n)
 count_WorkplaceRights <- WorkplaceRights %>% distinct(ref_area, .keep_all = TRUE) %>% count() %>% pull(n)
 
-# Combine into a named vector
+# Combine into a na2med vector
 counts <- c(CollectiveBargaining = count_CollectiveBargaining,
             CBCR = count_CBCR,
             TUDR = count_TUDR,
@@ -212,7 +212,15 @@ joined_full_data_set <- joined_full_data_set %>%
          "Collective Bargaining Coverage"    = obs_value
   )
 
-#below is the data exploration
+
+TradeUnionDensity <- TradeUnionDensity %>% 
+  rename("Year" = Time)
+
+count_CollectiveBargaining
+
+OldData <- inner_join(TradeUnionDensity, CollectiveBargaining, by =c("Country","Year"))
+
+#below is the data exploration & data modelings
 
 joined_data2017 %>%
   select(National_Compliance_wth_Labour_Rights, `Collective Bargaining Coverage`) %>%
@@ -225,6 +233,7 @@ ggplot(joined_data2017, aes(x = National_Compliance_wth_Labour_Rights, y = `Coll
 
 model <- lm(`Collective Bargaining Coverage` ~ National_Compliance_wth_Labour_Rights, data = joined_data2017)
 summary(model)
+
 ####full joined data exploration
 
 joined_full_data_set %>%
@@ -331,7 +340,4 @@ ggplot(TradeUnionDensity, aes(x = Value)) +
 #summary that can guide further analysis, but it's always important to consider
 #other factors and context related to your data.
 
-
-
-#test case 12
 

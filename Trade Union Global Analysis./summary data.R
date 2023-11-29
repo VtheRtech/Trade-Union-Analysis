@@ -14,3 +14,18 @@ ILO_Summary_data <- joined_full_data_set %>%
 print(ILO_Summary_data)
 
 View(ILO_Summary_data)
+# joined_full_data_set
+
+OldData <- OldData %>% 
+  rename( CollectiveBargainingCoverage = Value.y ,
+         UnionDensity = Value.x)
+
+Old_Summary<- OldData %>% 
+  select(Country,Year,UnionDensity,CollectiveBargainingCoverage) %>% 
+  group_by(Country) %>% 
+  summarise(
+    MeanCollectiveBargainingCoverage = mean(CollectiveBargainingCoverage),
+    MeanUnionDensity = mean(UnionDensity)
+  )
+
+print(Old_Summary)
