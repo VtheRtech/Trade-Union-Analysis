@@ -1,5 +1,5 @@
 # Trade-Union-Analysis
-This analysis tries to explore unions and their relationship to each other and the nation-states that govern them. 
+This analysis explores unions and their relationship to each other and the nation-states that govern them.
 
 https://www.bls.gov/news.release/union2.nr0.htm
 
