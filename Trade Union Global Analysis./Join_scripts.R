@@ -37,3 +37,7 @@ TradeUnionDensity <- TradeUnionDensity %>%
 count_CollectiveBargaining
 
 OldData <- inner_join(TradeUnionDensity, CollectiveBargaining, by =c("Country","Year"))
+
+
+
+
