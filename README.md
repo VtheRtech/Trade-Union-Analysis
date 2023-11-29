@@ -1,6 +1,8 @@
 # Trade-Union-Analysis
 This analysis tries to explore unions and their relationship to each other and the nation-states that govern them. 
 
+https://www.bls.gov/news.release/union2.nr0.htm
+
 https://www.epi.org/publication/unions-and-well-being/
 
 https://www.politico.com/news/2023/01/19/union-membership-drops-to-record-low-in-2022-00078525
