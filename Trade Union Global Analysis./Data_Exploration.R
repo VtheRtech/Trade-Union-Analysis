@@ -9,39 +9,39 @@ library(GGally)
 
 setwd("~/workbook")
 
-con <- dbConnect(RSQLite::SQLite(),"trade_union_data.db")
+con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
 
-TUDR <- as_tibble(dbReadTable(con,"TUDR"))
-CBCR <- as_tibble(dbReadTable(con,"CBCR"))
-CollectiveBargaining <- as_tibble(dbReadTable(con,"CollectiveBargaining"))
-TradeUnionDensity <- as_tibble(dbReadTable(con,"TradeUnionDensity"))
-WorkplaceRights <- as_tibble(dbReadTable(con,"WorkplaceRights"))
+TUDR <- as_tibble(dbReadTable(con, "TUDR"))
+CBCR <- as_tibble(dbReadTable(con, "CBCR"))
+CollectiveBargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
+TradeUnionDensity <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
+WorkplaceRights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
 
 dbDisconnect(con)
 
 
-CollectiveBargaining %>% 
-  group_by(Country) %>% 
+CollectiveBargaining %>%
+  group_by(Country) %>%
   summary()
 
-CBCR %>% 
-  select(ref_area,time,obs_value) %>% 
+CBCR %>%
+  select(ref_area, time, obs_value) %>%
   group_by(ref_area) %>%
   summary()
 
-TUDR %>% 
-  select(ref_area,time,obs_value) %>% 
-  group_by(ref_area) %>% 
+TUDR %>%
+  select(ref_area, time, obs_value) %>%
+  group_by(ref_area) %>%
   summary()
 
-TradeUnionDensity %>% 
-  select(Country,Time,Value) %>% 
-  group_by(Country) %>% 
+TradeUnionDensity %>%
+  select(Country, Time, Value) %>% 
+  group_by(Country) %>%
   summary()
 
 WorkplaceRights %>%
   select(ref_area, time, obs_value) %>% 
-  group_by(ref_area) %>% 
+  group_by(ref_area) %>%
   summary()
 
 CollectiveBargaining %>%
