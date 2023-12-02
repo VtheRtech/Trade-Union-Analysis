@@ -5,7 +5,7 @@ This project explores unions and their relationship to each other and the nation
 This analysis will be conducted using the following programs: R programming and Tableau.
 
 ## References
-below are some sources used when researching the current state of trade unions, and the effect they have within the nation-states they operate within. 
+Below are some sources used when researching the current state of trade unions, and the effect they have within the nation-states they operate within. 
 
 https://www.bls.gov/news.release/union2.nr0.htm
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/02cae343-5e39-4cf6-9f5f-ef629895255d)
