@@ -9,8 +9,12 @@ below are some sources used when researching the current state of trade unions, 
 https://www.bls.gov/news.release/union2.nr0.htm
 
 https://www.epi.org/publication/unions-and-well-being/
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/309ce2ce-ad0c-40ce-bbc4-9548107074a6)
+
 
 https://www.politico.com/news/2023/01/19/union-membership-drops-to-record-low-in-2022-00078525
+
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/5e97bc28-699b-4610-90c3-e6586503c113)
 
 https://www.sciencedirect.com/science/article/abs/pii/S0167268105002556#!
 
