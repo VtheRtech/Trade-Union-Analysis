@@ -9,6 +9,10 @@ This analysis will be conducted using the following programs: R programming and 
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/015e61a2-4a2a-4dd3-a3af-4dde082f2372)
 
 
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/f240de6f-0976-42c3-945b-e19d1a73caf5)
+
+
+
 ## References for Background on the Issue of Unions
 Below are some sources used when researching the current state of trade unions, and the effect they have within the nation-states they operate within. 
 
