@@ -5,7 +5,7 @@ This project explores unions and their relationship to each other and the nation
 This analysis will be conducted using the following programs: R programming and Tableau.
 
 
-## Small Multiple line graph Union Density.
+## Small Multiple Line Graph Union Density.
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/015e61a2-4a2a-4dd3-a3af-4dde082f2372)
 
 
