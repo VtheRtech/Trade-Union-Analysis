@@ -6,10 +6,18 @@ This analysis will be conducted using the following programs: R programming and 
 
 
 ## Small Multiple Line Graph Union Density.
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/015e61a2-4a2a-4dd3-a3af-4dde082f2372)
+
+Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. There are a couple of caveats with the displayed data. China's unions could be considered a mechanism of state control, union leadership instead of traditionally being chosen by members of the union is chosen by the state, or the ceo's of the industries under which the unions are under. Their unions have a fair more limiting effect on quality of life within the Chinese state. There are more caveats regarding China which will be discussed later.
 
 
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/f240de6f-0976-42c3-945b-e19d1a73caf5)
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/a21d49af-e2ea-4126-a1f9-fd316d72d998)
+
+The adjusted collective bargaining coverage rate is defined as the number of employees covered by a collective agreement in force as a proportion of the number of eligible employees equipped (i.e., the total number of employees minus the number of employees legally excluded from the right to bargain). Data reported in this Table refer to the AdjCov_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology.
+
+Collective bargaining coverage rate represents the share of workers covered by valid collective agreements in force. What counts as a valid collective agreement in force is defined by international and national legislations and, in some case, tribunals. The OECD/AIAS ICTWSS database follows the rules and definitions of the ILO (ILO (2018), Quick guide on sources and uses of collective bargaining statistics, International Labour Organization, Geneva). In particular, only agreements negotiated by independent representation, i.e. bona fide trade unions, are considered. However, at this stage, given the limited sources available, it is not possible to fully rule that, in a few instances, the data might also include some agreements negotiated by non-union bodies. But the problem, if confirmed, would be small and not much to put in question the comparability of the estimates.
+
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/a5290048-7d43-41fd-8650-8b9859cf1bb0)
+
 
 
 
