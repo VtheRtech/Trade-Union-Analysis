@@ -30,7 +30,30 @@ print(plots[["Germany"]])
 print(plots[["Austria"]])
 print(plots[["Sweden"]])
 print(plots[["China"]])
+print(plots[["Brazil"]])
+print(plots[["Spain"]])
+print(plots[["Japan"]])
+print(plots[["Australia"]])
 
+library(ggplot2)
+library(dplyr)
+
+# Assuming TUDR is your dataset and it contains columns: ref_area, time, and obs_value
+
+# Filter out any NA values if necessary
+joined_full_data_set <- na.omit(joined_full_data_set)
+
+# Plotting the trend of Trade Union Density over time for all countries
+h <- ggplot(joined_full_data_set, aes(x = time, y = `Union Density`, group = ref_area, color = ref_area)) +
+  geom_line() +
+  labs(title = "Time Series of Trade Union Density by Country (ILOdata)",
+       x = "Time",
+       y = "Union Density") +
+  theme_minimal() +
+  theme(legend.position="bottom")
+
+# Print the plot
+print(h)
 
 
 
@@ -63,7 +86,10 @@ print(plots[["Germany"]])
 print(plots[["Austria"]])
 print(plots[["Sweden"]])
 print(plots[["China"]])
-
+print(plots[["Brazil"]])
+print(plots[["Spain"]])
+print(plots[["Japan"]])
+print(plots[["Australia"]])
 
 
 
@@ -101,6 +127,10 @@ print(plots[["Germany"]])
 print(plots[["Austria"]])
 print(plots[["Sweden"]])
 print(plots[["China"]])
+print(plots[["Brazil"]])
+print(plots[["Spain"]])
+print(plots[["Japan"]])
+print(plots[["Australia"]])
 
 
 
@@ -135,12 +165,10 @@ print(plots[["Germany"]])
 print(plots[["Austria"]])
 print(plots[["Sweden"]])
 print(plots[["China"]])
-
-
-
-
-
-
+print(plots[["Brazil"]])
+print(plots[["Spain"]])
+print(plots[["Japan"]])
+print(plots[["Australia"]])
 
 
 
