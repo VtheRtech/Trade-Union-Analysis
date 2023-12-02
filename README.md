@@ -1,5 +1,5 @@
 # Trade-Union-Analysis
-This project explores unions and their relationship to each other and the nation-states that govern them. So far there will be 4 analyses: a linear regression analysis exploring the relationship between union density and collective bargaining agreement coverage. A time series analysis of the trade union database on both the state of unions globally and in the United States. A comparative analysis between the United States compared the rest of the world. Lastly, a descriptive analysis consisting of frequency tables will be utilized to analyze the whole trade union database. 
+This project explores unions and their relationship to each other and the nation-states that govern them. So far, there will be four analyses: a linear regression analysis exploring the relationship between union density and collective bargaining agreement coverage. A time series analysis of the trade union database on the state of unions globally and in the United States. A comparative analysis between the United States and the rest of the world. Lastly, a descriptive analysis consisting of frequency tables will analyze the whole trade union database.
 
 ## Method
 This analysis will be conducted using the following programs: R programming and Tableau.
