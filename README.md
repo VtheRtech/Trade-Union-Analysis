@@ -6,7 +6,9 @@ This analysis will be conducted using the following programs: R programming and 
 
 ## references
 below are some sources used when researching the current state of trade unions, and the effect they have within the nation-states they operate within. 
+
 https://www.bls.gov/news.release/union2.nr0.htm
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/02cae343-5e39-4cf6-9f5f-ef629895255d)
 
 https://www.epi.org/publication/unions-and-well-being/
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/309ce2ce-ad0c-40ce-bbc4-9548107074a6)
