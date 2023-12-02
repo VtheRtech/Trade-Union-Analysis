@@ -38,3 +38,34 @@ p1 <- filtered_data %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 p1
+
+
+# Plotting Collective Bargaining Coverage over time for each country with custom brighter colors
+p2 <- filtered_data %>%
+  ggplot(aes(x = time, y = `Collective Bargaining Coverage`, group = ref_area, color = ref_area)) +
+  geom_line() +
+  gghighlight(use_direct_label = FALSE, unhighlighted_params = list(colour = alpha("grey50", 0.5))) +
+  facet_wrap(~ ref_area, scales = "free_x") +
+  theme_minimal(base_family = "Gudea") +
+  theme(
+    plot.background = element_rect(fill = "black", color = NA),
+    panel.background = element_rect(fill = "black", color = NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    text = element_text(color = "white"),
+    axis.text = element_text(color = "white"),
+    axis.title = element_text(color = "white"),
+    strip.text = element_text(color = "white"),
+    legend.text = element_text(color = "white"),
+    legend.title = element_text(color = "white")
+  ) +
+  scale_color_manual(values = custom_colors) +
+  labs(title = "Collective Bargaining Coverage Over Time",
+       x = "Year",
+       y = "Collective Bargaining Coverage",
+       color = "Country") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p2
+
+
