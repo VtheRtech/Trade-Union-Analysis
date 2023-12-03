@@ -5,7 +5,7 @@ This project explores unions and their relationship to each other and the nation
 This analysis will be conducted using the following programs: R programming and Tableau.
 
 
-## about the datasets
+## About The Datasets
 ### Stata
 
 "The adjusted collective bargaining coverage rate is defined as the number of employees covered by a collective agreement in force as a proportion of the number of eligible employees equipped (i.e., the total number of employees minus the number of employees legally excluded from the right to bargain). Data reported in this Table refer to the AdjCov_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology.
