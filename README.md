@@ -12,6 +12,8 @@ This analysis will be conducted using the following programs: R programming and 
 
 The collective bargaining coverage rate represents the share of workers covered by valid collective agreements in force. What counts as a valid collective agreement in force is defined by international and national legislations and, in some cases, tribunals. The OECD/AIAS ICTWSS database follows the rules and definitions of the ILO (ILO (2018), Quick guide on sources and uses of collective bargaining statistics, International Labour Organization, Geneva). In particular, only agreements negotiated by independent representation, i.e. bona fide trade unions, are considered. However, at this stage, given the limited sources available, it is not possible to fully rule that, in a few instances, the data might also include some agreements negotiated by non-union bodies. But the problem, if confirmed, would be small and not much to put in question the comparability of the estimates."
 
+"The trade union density is defined as the number of net union members (i.e excluding those who are not in the labour force, unemployed and self-employed) as a proportion of the number of employees. Data reported in this Table refer to the UD_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources or labour force surveys or both. For more information and full methodology."
+
 from [stata](https://stats.oecd.org/Index.aspx?DataSetCode=CBC)
 
 ## Small Multiple Line Graph Union Density.
