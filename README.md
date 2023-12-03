@@ -5,6 +5,14 @@ This project explores unions and their relationship to each other and the nation
 This analysis will be conducted using the following programs: R programming and Tableau.
 
 
+## about the datasets
+### Stata
+
+"The adjusted collective bargaining coverage rate is defined as the number of employees covered by a collective agreement in force as a proportion of the number of eligible employees equipped (i.e., the total number of employees minus the number of employees legally excluded from the right to bargain). Data reported in this Table refer to the AdjCov_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology.
+
+The collective bargaining coverage rate represents the share of workers covered by valid collective agreements in force. What counts as a valid collective agreement in force is defined by international and national legislations and, in some cases, tribunals. The OECD/AIAS ICTWSS database follows the rules and definitions of the ILO (ILO (2018), Quick guide on sources and uses of collective bargaining statistics, International Labour Organization, Geneva). In particular, only agreements negotiated by independent representation, i.e. bona fide trade unions, are considered. However, at this stage, given the limited sources available, it is not possible to fully rule that, in a few instances, the data might also include some agreements negotiated by non-union bodies. But the problem, if confirmed, would be small and not much to put in question the comparability of the estimates.
+from [stata](https://stats.oecd.org/Index.aspx?DataSetCode=CBC)"
+
 ## Small Multiple Line Graph Union Density.
 
 Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. There are a couple of caveats with the displayed data. China's unions could be considered a mechanism of state control, union leadership instead of traditionally being chosen by members of the union is chosen by the state, or the CEOs of the industries under which the unions are under. Their unions have a fair more limiting effect on quality of life within the Chinese state. There are more caveats regarding China which will be discussed later.
@@ -12,10 +20,7 @@ Union Density is the measure of the amount of employees within a country's indus
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/1f8dd910-7f7d-43ad-ae5e-e42ed83742ed)
 
 
-The adjusted collective bargaining coverage rate is defined as the number of employees covered by a collective agreement in force as a proportion of the number of eligible employees equipped (i.e., the total number of employees minus the number of employees legally excluded from the right to bargain). Data reported in this Table refer to the AdjCov_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology.
 
-The collective bargaining coverage rate represents the share of workers covered by valid collective agreements in force. What counts as a valid collective agreement in force is defined by international and national legislations and, in some cases, tribunals. The OECD/AIAS ICTWSS database follows the rules and definitions of the ILO (ILO (2018), Quick guide on sources and uses of collective bargaining statistics, International Labour Organization, Geneva). In particular, only agreements negotiated by independent representation, i.e. bona fide trade unions, are considered. However, at this stage, given the limited sources available, it is not possible to fully rule that, in a few instances, the data might also include some agreements negotiated by non-union bodies. But the problem, if confirmed, would be small and not much to put in question the comparability of the estimates.
-from [stata](https://stats.oecd.org/Index.aspx?DataSetCode=CBC)
 
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/377e8da0-2030-4b57-a031-88aa2d5b4777)
 
