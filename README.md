@@ -16,7 +16,8 @@ from [stata](https://stats.oecd.org/Index.aspx?DataSetCode=CBC)
 
 ## Small Multiple Line Graph Union Density.
 
-Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. There are a couple of caveats with the displayed data. China's unions could be considered a mechanism of state control, union leadership instead of traditionally being chosen by members of the union is chosen by the state, or the CEOs of the industries under which the unions are under. Their unions have a fair more limiting effect on quality of life within the Chinese state. There are more caveats regarding China which will be discussed later.
+Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. 
+
 
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/1f8dd910-7f7d-43ad-ae5e-e42ed83742ed)
 
