@@ -35,12 +35,12 @@ TUDR %>%
   summary()
 
 TradeUnionDensity %>%
-  select(Country, Time, Value) %>% 
+  select(Country, Time, Value) %>%
   group_by(Country) %>%
   summary()
 
 WorkplaceRights %>%
-  select(ref_area, time, obs_value) %>% 
+  select(ref_area, time, obs_value) %>%
   group_by(ref_area) %>%
   summary()
 
@@ -48,54 +48,56 @@ CollectiveBargaining %>%
   mutate(Country = fct_reorder(Country, Country, .fun = length)) %>%
   ggplot(aes(x = Country)) +
   geom_bar() +
-  coord_flip()  # Optional: flip coordinates to make it horizontal
+  coord_flip() # Optional: flip coordinates to make it horizontal
 
-  
+
 CollectiveBargaining %>%
-    mutate(Year = factor(Year),  # Convert Year to a factor
-           Year = fct_infreq(Year)) %>%  # Reorder factor levels based on frequency
-    ggplot(aes(x = Year)) +
-    geom_bar()+
+  mutate(
+    Year = factor(Year), # Convert Year to a factor
+    Year = fct_infreq(Year)
+  ) %>% # Reorder factor levels based on frequency
+  ggplot(aes(x = Year)) +
+  geom_bar() +
   coord_flip()
-  
-  
-CollectiveBargaining %>% 
-  filter(Country == "United States") %>% 
+
+
+CollectiveBargaining %>%
+  filter(Country == "United States") %>%
   count()
 # counts how many times the "United State data point is found in a column it was found 21 times"
 
-CollectiveBargaining %>% 
-  filter(Year == "2015") %>% 
+CollectiveBargaining %>%
+  filter(Year == "2015") %>%
   count()
 
-CollectiveBargaining %>% 
-  distinct(Country, .keep_all = TRUE) %>% 
+CollectiveBargaining %>%
+  distinct(Country, .keep_all = TRUE) %>%
   count()
 
-CollectiveBargaining %>% 
-  distinct(Year, .keep_all = TRUE) %>% 
+CollectiveBargaining %>%
+  distinct(Year, .keep_all = TRUE) %>%
   count()
 
-WorkplaceRights %>% 
-  filter(time == "2021",obs_value > 5.0) %>% 
-  ggplot(aes(x = ref_area, y = obs_value))+
-  geom_point()+
+WorkplaceRights %>%
+  filter(time == "2021", obs_value > 5.0) %>%
+  ggplot(aes(x = ref_area, y = obs_value)) +
+  geom_point() +
   coord_flip()
 
-WorkplaceRights %>% 
-  filter(time == "2021",obs_value < 5.0) %>% 
-  ggplot(aes(x = ref_area, y = obs_value))+
-  geom_point()+
+WorkplaceRights %>%
+  filter(time == "2021", obs_value < 5.0) %>%
+  ggplot(aes(x = ref_area, y = obs_value)) +
+  geom_point() +
   coord_flip()
 
-WorkplaceRights %>% 
-  filter(time == "2021",obs_value == 0) %>% 
-  View()
+WorkplaceRights %>%
+  filter(time == "2021", obs_value == 0) %>%
+  view()
 
-WorkplaceRights %>% 
-  filter(time == "2021",obs_value == 0) %>% 
+WorkplaceRights %>%
+  filter(time == "2021", obs_value == 0) %>%
   count()
-#14 out of the 39 counties are in compliance with international labor law 
+# 14 out of the 39 counties are in compliance with international labor law
 
 
 # This data need to be joined with Collective Bargaining table left join on the
@@ -104,48 +106,65 @@ WorkplaceRights %>%
 
 
 # Count distinct values
-count_CollectiveBargaining <- CollectiveBargaining %>% distinct(Country, .keep_all = TRUE) %>% count() %>% pull(n)
-count_CBCR <- CBCR %>% distinct(ref_area, .keep_all = TRUE) %>% count() %>% pull(n)
-count_TUDR <- TUDR %>% distinct(ref_area, .keep_all = TRUE) %>% count() %>% pull(n)
-count_TradeUnionDensity <- TradeUnionDensity %>% distinct(Country, .keep_all = TRUE) %>% count() %>% pull(n)
-count_WorkplaceRights <- WorkplaceRights %>% distinct(ref_area, .keep_all = TRUE) %>% count() %>% pull(n)
+count_CollectiveBargaining <- CollectiveBargaining %>%
+  distinct(Country, .keep_all = TRUE) %>%
+  count() %>%
+  pull(n)
+count_CBCR <- CBCR %>%
+  distinct(ref_area, .keep_all = TRUE) %>%
+  count() %>%
+  pull(n)
+count_TUDR <- TUDR %>%
+  distinct(ref_area, .keep_all = TRUE) %>%
+  count() %>%
+  pull(n)
+count_TradeUnionDensity <- TradeUnionDensity %>%
+  distinct(Country, .keep_all = TRUE) %>%
+  count() %>%
+  pull(n)
+count_WorkplaceRights <- WorkplaceRights %>%
+  distinct(ref_area, .keep_all = TRUE) %>%
+  count() %>%
+  pull(n)
 
 # Combine into a na2med vector
-counts <- c(CollectiveBargaining = count_CollectiveBargaining,
-            CBCR = count_CBCR,
-            TUDR = count_TUDR,
-            TradeUnionDensity = count_TradeUnionDensity,
-            WorkplaceRights = count_WorkplaceRights)
+counts <- c(
+  CollectiveBargaining = count_CollectiveBargaining,
+  CBCR = count_CBCR,
+  TUDR = count_TUDR,
+  TradeUnionDensity = count_TradeUnionDensity,
+  WorkplaceRights = count_WorkplaceRights
+)
 
 # Convert to a tibble
 counts_tibble <- tibble(Dataset = names(counts), Countrycount = counts)
 
 
-#below is the combined data set for year
+# below is the combined data set for year
 
-YearCount_WorkplaceRights <- WorkplaceRights %>% 
-  distinct(time, .keep_all = TRUE) %>% 
-  count() %>% 
+YearCount_WorkplaceRights <- WorkplaceRights %>%
+  distinct(time, .keep_all = TRUE) %>%
+  count() %>%
   pull(n)
 
-YearCount_TradeUnionDensity <- TradeUnionDensity %>% 
-  distinct(Time, .keep_all = TRUE) %>% 
-  count() %>% 
+YearCount_TradeUnionDensity <- TradeUnionDensity %>%
+  distinct(Time, .keep_all = TRUE) %>%
+  count() %>%
   pull(n)
 
-YearCount_TUDR <- TUDR %>% 
-  distinct(time, .keep_all = TRUE) %>% 
-  count() %>% 
+YearCount_TUDR <- TUDR %>%
+  distinct(time, .keep_all = TRUE) %>%
+  count() %>%
   pull(n)
 
-YearCount_CBCR <- CBCR %>% 
-  distinct(time, .keep_all = TRUE) %>% 
-  count() %>% 
+YearCount_CBCR <- CBCR %>%
+  distinct(time, .keep_all = TRUE) %>%
+  count() %>%
   pull(n)
 
-YearCount_CollectiveBargaining <- CollectiveBargaining %>% 
-  distinct(Year, .keep_all = TRUE) %>% 
-  count() %>% 
+YearCount_CollectiveBargaining <- CollectiveBargaining %>%
+  distinct(Year, .keep_all = TRUE) %>%
+  count() %>%
   pull(n)
 
 # Combine into a tibble
@@ -158,23 +177,23 @@ YearCounts_tibble <- tibble(
 print(YearCounts_tibble)
 print(counts_tibble)
 
-combinedtibble <- bind_rows(counts_tibble,YearCounts_tibble)
+combinedtibble <- bind_rows(counts_tibble, YearCounts_tibble)
 
 print(combinedtibble)
 
-#the more comprehensive data sets from this data base is TUDR, CBCR, workplace
-#rights. (unsurprising because these where sources directly from the ILO's
-#website)
+# the more comprehensive data sets from this data base is TUDR, CBCR, workplace
+# rights. (unsurprising because these where sources directly from the ILO's
+# website)
 
 
 
-TUDR_2017 <- TUDR %>% 
+TUDR_2017 <- TUDR %>%
   filter(time == 2017)
 
-CBCR_2017 <- CBCR %>% 
+CBCR_2017 <- CBCR %>%
   filter(time == 2017)
 
-WorkplaceRights_2017 <- WorkplaceRights %>% 
+WorkplaceRights_2017 <- WorkplaceRights %>%
   filter(time == 2017)
 
 
@@ -182,21 +201,22 @@ joined_data <- inner_join(WorkplaceRights_2017, TUDR_2017, by = c("ref_area", "t
 
 # View the structure of the combined data
 str(joined_data)
-View(joined_data)
+view(joined_data)
 
-joined_data2017 <- inner_join(joined_data, CBCR_2017, by = c("ref_area","time"))
+joined_data2017 <- inner_join(joined_data, CBCR_2017, by = c("ref_area", "time"))
 
-View(joined_data2017)
+view(joined_data2017)
 
 
-joined_data2017 <- joined_data2017 %>% 
-  rename("National_Compliance_wth_Labour_Rights" = obs_value.x,
-         "Union Density"  = obs_value.y,
-         "Collective Bargaining Coverage"   = obs_value
-           )
+joined_data2017 <- joined_data2017 %>%
+  rename(
+    "National_Compliance_wth_Labour_Rights" = obs_value.x,
+    "Union Density" = obs_value.y,
+    "Collective Bargaining Coverage" = obs_value
+  )
 
-joined_data2017 %>% 
-  select(National_Compliance_wth_Labour_Rights,`Collective Bargaining Coverage`)
+joined_data2017 %>%
+  select(National_Compliance_wth_Labour_Rights, `Collective Bargaining Coverage`)
 
 ### Time Series Analysis
 
@@ -210,12 +230,14 @@ TUD_country <- TradeUnionDensity %>%
 # Plotting the trend of Union Density over time
 ggplot(TUD_country, aes(x = Year, y = Value)) +
   geom_line() +
-  labs(title = paste("Year Series of Union Density in", country_focus),
-       x = "Year",
-       y = "Union Density") +
+  labs(
+    title = paste("Year Series of Union Density in", country_focus),
+    x = "Year",
+    y = "Union Density"
+  ) +
   theme_minimal()
 
-### Comparative Analysis 
+### Comparative Analysis
 
 # Ensure the year_focus variable is set to the desired year
 year_focus <- 2017
@@ -232,9 +254,11 @@ CBC_year <- CBC_year %>%
 ggplot(CBC_year, aes(x = ref_area, y = `Collective Bargaining Coverage`)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  labs(title = paste("Comparative Analysis of Collective Bargaining Coverage in", year_focus),
-       x = "Country",
-       y = "Collective Bargaining Coverage") +
+  labs(
+    title = paste("Comparative Analysis of Collective Bargaining Coverage in", year_focus),
+    x = "Country",
+    y = "Collective Bargaining Coverage"
+  ) +
   theme_minimal()
 
 
@@ -242,27 +266,29 @@ ggplot(CBC_year, aes(x = ref_area, y = `Collective Bargaining Coverage`)) +
 
 # Descriptive statistics
 summary_stats <- TradeUnionDensity %>%
-  summarise(Mean = mean(Value, na.rm = TRUE),
-            Median = median(Value, na.rm = TRUE),
-            SD = sd(Value, na.rm = TRUE))
+  summarise(
+    Mean = mean(Value, na.rm = TRUE),
+    Median = median(Value, na.rm = TRUE),
+    SD = sd(Value, na.rm = TRUE)
+  )
 
 print(summary_stats)
 
 # Histogram of Union Density
 ggplot(TradeUnionDensity, aes(x = Value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
-  labs(title = "Histogram of Union Density",
-       x = "Union Density",
-       y = "Frequency") +
+  labs(
+    title = "Histogram of Union Density",
+    x = "Union Density",
+    y = "Frequency"
+  ) +
   theme_minimal()
 
 
-#Union Density is right-skewed, it would suggest that most countries have a lower union
-#density, but a few countries have a very high union density. The peak of the
-#histogram would indicate the most common range of union density. If there are
-#any gaps or isolated bars, they might indicate outliers or special cases.
-#remember, a histogram is a tool for exploring your data. It provides a visual
-#summary that can guide further analysis, but it's always important to consider
-#other factors and context related to your data.
-
-
+# Union Density is right-skewed, it would suggest that most countries have a lower union
+# density, but a few countries have a very high union density. The peak of the
+# histogram would indicate the most common range of union density. If there are
+# any gaps or isolated bars, they might indicate outliers or special cases.
+# remember, a histogram is a tool for exploring your data. It provides a visual
+# summary that can guide further analysis, but it's always important to consider
+# other factors and context related to your data.
