@@ -1,4 +1,4 @@
-# Trade-Union-Analysis
+  # Trade-Union-Analysis
 This project explores unions and their relationship to each other and the nation-states that govern them. So far, there will be four analyses: a linear regression analysis exploring the relationship between union density and collective bargaining agreement coverage. A time series analysis of the trade union database on the state of unions globally and in the United States. A comparative analysis between the United States and the rest of the world. Lastly, a descriptive analysis consisting of frequency tables will analyze the whole trade union database.
 
 ## Method
@@ -21,12 +21,12 @@ The collective bargaining coverage rate represents the share of workers covered 
 Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. 
 
 
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/3944480d-e98a-4327-9ba5-c3b20848303b)
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/cda8c065-fb6e-484f-8672-897fca84884c)
 
 
 
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/9a09b969-0f55-49d3-917d-59d73576752c)
 
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/4336b8c2-92e6-493d-98eb-1c8dfe3bc844)
 
 
 
