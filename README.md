@@ -20,12 +20,11 @@ The collective bargaining coverage rate represents the share of workers covered 
 
 Union Density is the measure of the amount of employees within a country's industries who are members of a union. The graphs below show union density throughout 4 to 5 years. 
 
-
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/cda8c065-fb6e-484f-8672-897fca84884c)
-
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/65c1ea7b-ba86-4de7-9f03-de90c7a85b93)
 
 
-![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/9a09b969-0f55-49d3-917d-59d73576752c)
+
+![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/aeec43db-a6b3-4eff-bf68-a16eb533de57)
 
 
 
