@@ -184,3 +184,63 @@ for (country in country_focus) {
 
 
 print(plots[["United States"]])
+
+
+
+
+#                         state_union_membership_density
+
+# Reshape the data from wide to long format
+long_data <- state_union_membership_density %>%
+  pivot_longer(
+    cols = -c(StateName, StateID), # Exclude non-year columns
+    names_to = "Year",
+    values_to = "Value"
+  )
+
+# Convert Year to a numeric value for plotting
+long_data$Year <- as.numeric(long_data$Year)
+
+# Plotting with ggplot2
+ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
+  geom_line() +
+  theme_minimal() +
+  labs(
+    title = "Time Series Analysis by State",
+    x = "Year",
+    y = "Value",
+    color = "State"
+  ) +
+  theme(legend.position = "bottom")
+
+
+
+
+
+#                          HiGHLIGHTED DATA IN THE GRAPHS
+#
+# Reshape the data from wide to long format
+long_data <- state_union_membership_density %>%
+  pivot_longer(
+    cols = -c(StateName, StateID), # Exclude non-year columns
+    names_to = "Year",
+    values_to = "Value"
+  )
+
+# Convert Year to a numeric value for plotting
+long_data$Year <- as.numeric(long_data$Year)
+
+# Create a new column for the color mapping
+long_data$Color <- ifelse(long_data$StateName == "Maryland", "Maryland", "Other States")
+
+# Plotting with ggplot2
+ggplot(long_data, aes(x = Year, y = Value, group = StateName, color = Color)) +
+  geom_line() +
+  scale_color_manual(values = c("Maryland" = "blue", "Other States" = "grey")) +
+  theme_minimal() +
+  labs(
+    title = "Time Series Analysis with Highlight on Maryland",
+    x = "Year",
+    y = "Value"
+  ) +
+  theme(legend.position = "none") # Remove legend

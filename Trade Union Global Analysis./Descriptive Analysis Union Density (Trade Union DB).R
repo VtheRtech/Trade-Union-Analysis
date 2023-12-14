@@ -54,17 +54,7 @@ HistogramCBCR <- ggplot(CBCR, aes(x = obs_value)) +
 print(HistogramCBCR)
 
 
-United_States_ILO_Data <- joined_full_data_set %>%
-  select(
-    ref_area, time, `Union Density`,
-    `National_Compliance_wth_Labour_Rights`,
-    `Collective Bargaining Coverage`
-  ) %>%
-  filter(ref_area == "United States")
-
-
-
-
+#### frequency tables to be added to to the Wiki
 # Assuming TradeUnionDensity is your data frame and it
 # has columns named 'Country' and 'Value'
 US_UnionDensity <- TradeUnionDensity %>%
@@ -91,47 +81,13 @@ HistogramUnionDensity <- ggplot(TradeUnionDensity, aes(x = Value)) +
   scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
   labs(
     title = "Histogram of Union Density",
-    x = "Union Density",
+    x = "Union Density(in %)",
     y = "Frequency"
   ) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 
 print(HistogramUnionDensity)
-
-
-
-
-# Assuming WorkplaceRights is your data frame
-US_WorkplaceRights <- WorkplaceRights %>%
-  filter(ref_area == "United States") %>%
-  summarize(WorkplaceRightsValue = mean(obs_value)) %>%
-  .$WorkplaceRightsValue
-
-# Calculate the median of Workplace Rights
-Median_WorkplaceRights <- median(WorkplaceRights$obs_value)
-
-# Create a data frame for the lines
-lines_df_wr <- data.frame(
-  xintercept = c(US_WorkplaceRights, Median_WorkplaceRights),
-  line_id = c("United States", "Median")
-)
-
-# Create histogram for Workplace Rights
-HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
-  geom_histogram(bins = 30, fill = "#3498DB", color = "#1F2E2E") +
-  geom_vline(data = lines_df_wr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
-  scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
-  scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
-  labs(
-    title = "Histogram of National Compliance with International Law (ILO)",
-    x = "Workplace Rights Compliance with International Law",
-    y = "Frequency"
-  ) +
-  theme_minimal() +
-  guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
-
-print(HistogramWorkplaceRights)
 
 
 
@@ -159,10 +115,45 @@ HistogramCBCR <- ggplot(CBCR, aes(x = obs_value)) +
   scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
   labs(
     title = "Histogram of National Collective Bargaining Coverage",
-    x = "CBCR",
+    x = "Collective Bargaining Coverage (in %)",
     y = "Frequency"
   ) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 
 print(HistogramCBCR)
+
+
+library(ggplot2)
+library(dplyr)
+
+# Assuming WorkplaceRights is your data frame
+US_WorkplaceRights <- WorkplaceRights %>%
+  filter(ref_area == "United States") %>%
+  summarize(WorkplaceRightsValue = mean(obs_value)) %>%
+  .$WorkplaceRightsValue
+
+# Calculate the median of Workplace Rights
+Median_WorkplaceRights <- median(WorkplaceRights$obs_value)
+
+# Create a data frame for the lines
+lines_df_wr <- data.frame(
+  xintercept = c(US_WorkplaceRights, Median_WorkplaceRights),
+  line_id = c("United States", "Median")
+)
+
+# Create histogram for Workplace Rights
+HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
+  geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
+  geom_vline(data = lines_df_wr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
+  scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
+  scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
+  labs(
+    title = "Histogram of National Compliance with International Law (ILO)",
+    x = "Workplace Rights Compliance with International Law (Rating)",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
+
+print(HistogramWorkplaceRights)

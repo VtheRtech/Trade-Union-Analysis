@@ -5,53 +5,59 @@ library(ggplot2)
 library(dplyr)
 library(forcats)
 library(GGally)
-
+library(stringr)
 
 setwd("~/workbook")
 
 con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
 
-TUDR <- as_tibble(dbReadTable(con, "TUDR"))
-CBCR <- as_tibble(dbReadTable(con, "CBCR"))
-CollectiveBargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
-TradeUnionDensity <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
-WorkplaceRights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
+dbListTables(con)
+
+
+tudr <- as_tibble(dbReadTable(con, "TUDR"))
+cbcr <- as_tibble(dbReadTable(con, "CBCR"))
+collective_bargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
+trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
+workplace_rights <-
+  as_tibble(dbReadTable(con, "WorkplaceRights"))
+
+state_union_membership_density <-
+  as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
 
 dbDisconnect(con)
-
-
-CollectiveBargaining %>%
+# Summary statistics
+collective_bargaining %>%
   group_by(Country) %>%
   summary()
 
-CBCR %>%
+cbcr %>%
   select(ref_area, time, obs_value) %>%
   group_by(ref_area) %>%
   summary()
 
-TUDR %>%
+tudr %>%
   select(ref_area, time, obs_value) %>%
   group_by(ref_area) %>%
   summary()
 
-TradeUnionDensity %>%
+trade_union_density %>%
   select(Country, Time, Value) %>%
   group_by(Country) %>%
   summary()
 
-WorkplaceRights %>%
+workplace_rights %>%
   select(ref_area, time, obs_value) %>%
   group_by(ref_area) %>%
   summary()
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   mutate(Country = fct_reorder(Country, Country, .fun = length)) %>%
   ggplot(aes(x = Country)) +
   geom_bar() +
   coord_flip() # Optional: flip coordinates to make it horizontal
 
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   mutate(
     Year = factor(Year), # Convert Year to a factor
     Year = fct_infreq(Year)
@@ -61,40 +67,40 @@ CollectiveBargaining %>%
   coord_flip()
 
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   filter(Country == "United States") %>%
   count()
 # counts how many times the "United State data point is found in a column it was found 21 times"
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   filter(Year == "2015") %>%
   count()
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   distinct(Country, .keep_all = TRUE) %>%
   count()
 
-CollectiveBargaining %>%
+collective_bargaining %>%
   distinct(Year, .keep_all = TRUE) %>%
   count()
 
-WorkplaceRights %>%
+workplace_rights %>%
   filter(time == "2021", obs_value > 5.0) %>%
   ggplot(aes(x = ref_area, y = obs_value)) +
   geom_point() +
   coord_flip()
 
-WorkplaceRights %>%
+workplace_rights %>%
   filter(time == "2021", obs_value < 5.0) %>%
   ggplot(aes(x = ref_area, y = obs_value)) +
   geom_point() +
   coord_flip()
 
-WorkplaceRights %>%
+workplace_rights %>%
   filter(time == "2021", obs_value == 0) %>%
   view()
 
-WorkplaceRights %>%
+workplace_rights %>%
   filter(time == "2021", obs_value == 0) %>%
   count()
 # 14 out of the 39 counties are in compliance with international labor law
@@ -106,23 +112,23 @@ WorkplaceRights %>%
 
 
 # Count distinct values
-count_CollectiveBargaining <- CollectiveBargaining %>%
+count_CollectiveBargaining <- collective_bargaining %>%
   distinct(Country, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_CBCR <- CBCR %>%
+count_CBCR <- cbcr %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_TUDR <- TUDR %>%
+count_TUDR <- tudr %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_TradeUnionDensity <- TradeUnionDensity %>%
+count_TradeUnionDensity <- trade_union_density %>%
   distinct(Country, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_WorkplaceRights <- WorkplaceRights %>%
+count_WorkplaceRights <- workplace_rights %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
@@ -142,42 +148,54 @@ counts_tibble <- tibble(Dataset = names(counts), Countrycount = counts)
 
 # below is the combined data set for year
 
-YearCount_WorkplaceRights <- WorkplaceRights %>%
+YearCount_WorkplaceRights <- workplace_rights %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_TradeUnionDensity <- TradeUnionDensity %>%
+YearCount_TradeUnionDensity <- trade_union_density %>%
   distinct(Time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_TUDR <- TUDR %>%
+YearCount_TUDR <- tudr %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_CBCR <- CBCR %>%
+YearCount_CBCR <- cbcr %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_CollectiveBargaining <- CollectiveBargaining %>%
+YearCount_CollectiveBargaining <- collective_bargaining %>%
   distinct(Year, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
 # Combine into a tibble
 YearCounts_tibble <- tibble(
-  Dataset = c("WorkplaceRights", "TradeUnionDensity", "TUDR", "CBCR", "CollectiveBargaining"),
-  YearCount = c(YearCount_WorkplaceRights, YearCount_TradeUnionDensity, YearCount_TUDR, YearCount_CBCR, YearCount_CollectiveBargaining)
+  Dataset = c(
+    "WorkplaceRights", "TradeUnionDensity",
+    "TUDR", "CBCR", "CollectiveBargaining"
+  ),
+  YearCount = c(
+    YearCount_WorkplaceRights,
+    YearCount_TradeUnionDensity,
+    YearCount_TUDR,
+    YearCount_CBCR,
+    YearCount_CollectiveBargaining
+  )
 )
 
 # Display the tibble
 print(YearCounts_tibble)
 print(counts_tibble)
 
-combinedtibble <- bind_rows(counts_tibble, YearCounts_tibble)
+combinedtibble <- bind_rows(
+  counts_tibble,
+  YearCounts_tibble
+)
 
 print(combinedtibble)
 
@@ -187,26 +205,29 @@ print(combinedtibble)
 
 
 
-TUDR_2017 <- TUDR %>%
+TUDR_2017 <- tudr %>%
   filter(time == 2017)
 
-CBCR_2017 <- CBCR %>%
+CBCR_2017 <- cbcr %>%
   filter(time == 2017)
 
-WorkplaceRights_2017 <- WorkplaceRights %>%
+WorkplaceRights_2017 <- workplace_rights %>%
   filter(time == 2017)
 
 
-joined_data <- inner_join(WorkplaceRights_2017, TUDR_2017, by = c("ref_area", "time"))
+joined_data <- inner_join(WorkplaceRights_2017, TUDR_2017,
+  by = c("ref_area", "time")
+)
 
 # View the structure of the combined data
 str(joined_data)
 view(joined_data)
 
-joined_data2017 <- inner_join(joined_data, CBCR_2017, by = c("ref_area", "time"))
+joined_data2017 <- inner_join(joined_data, CBCR_2017,
+  by = c("ref_area", "time")
+)
 
 view(joined_data2017)
-
 
 joined_data2017 <- joined_data2017 %>%
   rename(
@@ -216,79 +237,63 @@ joined_data2017 <- joined_data2017 %>%
   )
 
 joined_data2017 %>%
-  select(National_Compliance_wth_Labour_Rights, `Collective Bargaining Coverage`)
-
-### Time Series Analysis
-
-# Select a country for the analysis, e.g., "United States"
-country_focus <- "United States"
-
-# Filter the data for the selected country
-TUD_country <- TradeUnionDensity %>%
-  filter(Country == country_focus)
-
-# Plotting the trend of Union Density over time
-ggplot(TUD_country, aes(x = Year, y = Value)) +
-  geom_line() +
-  labs(
-    title = paste("Year Series of Union Density in", country_focus),
-    x = "Year",
-    y = "Union Density"
-  ) +
-  theme_minimal()
-
-### Comparative Analysis
-
-# Ensure the year_focus variable is set to the desired year
-year_focus <- 2017
-
-# Filter the data for the selected year
-CBC_year <- joined_full_data_set %>%
-  filter(time == year_focus)
-
-# Reordering the ref_area based on the Collective Bargaining Coverage
-CBC_year <- CBC_year %>%
-  mutate(ref_area = fct_reorder(ref_area, `Collective Bargaining Coverage`))
-
-# Comparative plot
-ggplot(CBC_year, aes(x = ref_area, y = `Collective Bargaining Coverage`)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  labs(
-    title = paste("Comparative Analysis of Collective Bargaining Coverage in", year_focus),
-    x = "Country",
-    y = "Collective Bargaining Coverage"
-  ) +
-  theme_minimal()
-
-
-### Descriptive Analysis
-
-# Descriptive statistics
-summary_stats <- TradeUnionDensity %>%
-  summarise(
-    Mean = mean(Value, na.rm = TRUE),
-    Median = median(Value, na.rm = TRUE),
-    SD = sd(Value, na.rm = TRUE)
+  select(
+    National_Compliance_wth_Labour_Rights,
+    `Collective Bargaining Coverage`
   )
 
-print(summary_stats)
 
-# Histogram of Union Density
-ggplot(TradeUnionDensity, aes(x = Value)) +
-  geom_histogram(bins = 30, fill = "blue", color = "black") +
-  labs(
-    title = "Histogram of Union Density",
-    x = "Union Density",
-    y = "Frequency"
-  ) +
-  theme_minimal()
+# full joined data is below
+joined_data4 <- inner_join(workplace_rights, tudr, by = c("ref_area", "time"))
+joined_full_data_set <- inner_join(joined_data4, cbcr,
+  by = c("ref_area", "time")
+)
+
+joined_full_data_set <- joined_full_data_set %>%
+  rename(
+    "National_Compliance_wth_Labour_Rights" = obs_value.x,
+    "Union Density" = obs_value.y,
+    "Collective Bargaining Coverage" = obs_value
+  )
 
 
-# Union Density is right-skewed, it would suggest that most countries have a lower union
-# density, but a few countries have a very high union density. The peak of the
-# histogram would indicate the most common range of union density. If there are
-# any gaps or isolated bars, they might indicate outliers or special cases.
-# remember, a histogram is a tool for exploring your data. It provides a visual
-# summary that can guide further analysis, but it's always important to consider
-# other factors and context related to your data.
+TradeUnionDensity <- trade_union_density %>%
+  rename("Year" = Time)
+
+OldData <- inner_join(TradeUnionDensity, collective_bargaining,
+  by = c("Country", "Year")
+)
+
+colnames(OldData)
+
+
+####                  this for state_union_membership_density       ###### #
+
+# Assuming your tibble is named state_union_membership_density
+state_union_membership_density <- state_union_membership_density %>%
+  rename_with(~ str_replace(.x, "X.Mem", "19"), starts_with("X.Mem"))
+
+# Assuming your tibble is named state_union_membership_density
+
+# Get the current column names
+col_names <- colnames(state_union_membership_density)
+
+# Loop through each column name
+for (i in seq_along(col_names)) {
+  # Extract the year part of the column name and convert it to a numeric value
+  year <- as.numeric(col_names[i])
+
+  # Check if the year is less than 1960 and starts with 19
+  if (!is.na(year) && year < 1960 && startsWith(col_names[i], "19")) {
+    # Replace "19" with "20" in the year part
+    new_year <- sub("19", "20", col_names[i])
+    # Update the column name
+    col_names[i] <- new_year
+  }
+}
+
+# Assign the new column names back to the tibble
+colnames(state_union_membership_density) <- col_names
+
+state_union_membership_density %>%
+  colnames()
