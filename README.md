@@ -1,12 +1,29 @@
-  # Trade-Union-Analysis
-This project explores unions and their relationship to each other and the nation-states that govern them. So far, there will be four analyses: a linear regression analysis exploring the relationship between union density and collective bargaining agreement coverage. A time series analysis of the trade union database on the state of unions globally and in the United States. A comparative analysis between the United States and the rest of the world. Lastly, a descriptive analysis consisting of frequency tables will analyze the whole trade union database.
+# Trade-Union-Analysis
+
 
 ## Method
 This analysis will be conducted using the following programs: R programming and Tableau.
 
+This project explores unions and their relationship to each other and the nation-states that govern them. So far, there will be four analyses: a linear regression analysis exploring the relationship between union density and collective bargaining agreement coverage. A time series analysis of the trade union database on the state of unions globally and in the United States. A comparative analysis between the United States and the rest of the world. Lastly, a descriptive analysis consisting of frequency tables will analyze the whole trade union database.
+
 
 ## About The Datasets
 ### Stata
+
+
+Level of national compliance with labor rights, 2021
+The indicator has a range from 0 to 10, with 0 being the best possible score (indicating higher levels of compliance withfundamental rights at work) and 10 the worst (indicating lower levels of compliance with fundamental rights at work).
+Data source: International Labour Organization (ILO) – Learn more about this data
+OurWorldInData.org/trade-and-globalization | CC BY
+
+
+
+Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman, “Estimates of Union Density by State,” Monthly Labor Review, Vol. 124, No. 7, July 2001, pp. 51-55.
+  (accompanying data online at www.unionstats.com).
+  © 2022 by Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman
+    (accompanying data online at www.unionstats.com).
+© 2022 by Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman
+
 
 "The trade union density is defined as the number of net union members (i.e excluding those who are not in the labor force, unemployed and self-employed) as a proportion of the number of employees. Data reported in this Table refer to the UD_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology."
 
@@ -66,6 +83,10 @@ https://www.sciencedirect.com/science/article/abs/pii/S026137941100062X
 
 
 https://www.sciencedirect.com/science/article/abs/pii/S0016718519300995
+
+
+###  Sources to examine further
+https://onlinelibrary.wiley.com/doi/full/10.1111/irj.12347
 
 ![image](https://github.com/Unfixable47/Trade-Union-Analysis/assets/137025578/8df26e2d-e7aa-41ec-b17d-d93d5e414d9f)
 
