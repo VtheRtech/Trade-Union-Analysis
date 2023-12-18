@@ -1,9 +1,7 @@
 # Assuming your data frame is named joined_full_data_set
 # and it has columns like ref_area, time, and Union Density
-
 # Unique countries in the dataset
 country_focus <- unique(joined_full_data_set$ref_area)
-
 # Loop over each country and create a plot
 plots <- list()
 for (country in country_focus) {
@@ -30,17 +28,13 @@ for (country in country_focus) {
     )
   plots[[country]] <- p
 }
-
 # If you want to view a specific plot, you can do so by
 # print(plots[["United States"]]) # as an example
 
 print(plots[["United States"]])
-
 # Assuming tudr is your dataset and it contains columns: ref_area, time, and obs_value
-
 # Filter out any NA values if necessary
 joined_full_data_set <- na.omit(joined_full_data_set)
-
 # Plotting the trend of Trade Union Density over time for all countries
 h <- ggplot(joined_full_data_set, aes(x = time, y = `Union Density`, group = ref_area, color = ref_area)) +
   geom_line(size = 1) + # Slightly thicker lines for visibility
@@ -68,14 +62,12 @@ print(h)
 
 # Unique countries in the dataset
 country_focus <- unique(tudr$ref_area)
-
 # Loop over each country and create a plot
 plots <- list()
 for (country in country_focus) {
   # Filter data for the current country
   tudr_country <- tudr %>%
     filter(ref_area == country)
-
   # Plotting the trend of Trade Union Density over time
   p <- ggplot(tudr_country, aes(x = time, y = obs_value)) +
     geom_line(color = "#1b9e77", size = 1.2) + # A distinct color for the line, increased thickness
@@ -96,10 +88,8 @@ for (country in country_focus) {
     )
   plots[[country]] <- p
 }
-
 # If you want to view a specific plot, you can do so by
 # print(plots[["United States"]]) as an example
-
 print(plots[["United States"]])
 
 
@@ -110,7 +100,6 @@ print(plots[["United States"]])
 
 # Unique countries in the dataset
 country_focus <- unique(cbcr$ref_area)
-
 # Loop over each country and create a plot
 plots <- list()
 for (country in country_focus) {
@@ -138,10 +127,8 @@ for (country in country_focus) {
     )
   plots[[country]] <- p
 }
-
 # If you want to view a specific plot, you can do so by
-# print(plots[["United States"]]) # as an example
-
+# print(plots[["United States"]]) as an example
 print(plots[["United States"]])
 
 
@@ -149,14 +136,12 @@ print(plots[["United States"]])
 
 # Unique countries in the dataset
 country_focus <- unique(workplace_rights$ref_area)
-
 # Loop over each country and create a plot
 plots <- list()
 for (country in country_focus) {
   # Filter data for the current country
   workplace_rights_country <- workplace_rights %>%
     filter(ref_area == country)
-
   # Plotting the trend of Compliance with International Labor Law over time
   p <- ggplot(workplace_rights_country, aes(x = time, y = obs_value)) +
     geom_line(color = "#1f78b4", size = 1.2) + # Change color and line size
@@ -175,121 +160,8 @@ for (country in country_focus) {
       panel.grid.minor = element_blank(), # Remove minor grid lines
       plot.margin = margin(1, 1, 1, 1, "cm") # Adjust plot margins
     )
-
   plots[[country]] <- p
 }
-
 # If you want to view a specific plot, you can do so by
 # print(plots[["United States"]]) as an example
-
-
 print(plots[["United States"]])
-
-
-
-
-#                         state_union_membership_density
-
-# Reshape the data from wide to long format
-long_data <- state_union_membership_density %>%
-  pivot_longer(
-    cols = -c(StateName, StateID), # Exclude non-year columns
-    names_to = "Year",
-    values_to = "Value"
-  )
-
-# Convert Year to a numeric value for plotting
-long_data$Year <- as.numeric(long_data$Year)
-
-# Plotting with ggplot2
-ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
-  geom_line() +
-  theme_minimal() +
-  labs(
-    title = "Time Series Analysis by State",
-    x = "Year",
-    y = "Value",
-    color = "State"
-  ) +
-  theme(legend.position = "bottom")
-
-
-
-
-
-
-
-southern_states <- c(
-  "Alabama", "Arkansas", "Florida", "Georgia", "Kentucky",
-  "Louisiana", "Mississippi", "North Carolina", "South Carolina",
-  "Tennessee", "Texas", "Virginia", "West Virginia"
-)
-
-# To view the vector
-print(southern_states)
-
-
-northern_states <- c(
-  "Connecticut", "Illinois", "Indiana", "Iowa", "Maine",
-  "Massachusetts", "Michigan", "Minnesota", "New Hampshire",
-  "New Jersey", "New York", "Ohio", "Pennsylvania", "Rhode Island",
-  "Vermont", "Wisconsin"
-)
-
-# To view the vector
-print(northern_states)
-
-
-#           northern_states time series
-# Plotting with ggplot2
-ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
-  # Plot all states not in northern_states in grey
-  geom_line(
-    data = filter(long_data, !StateName %in% northern_states),
-    aes(color = "Other States"), size = 0.5
-  ) +
-  # Highlight northern_states with individual colors
-  geom_line(
-    data = filter(long_data, StateName %in% northern_states),
-    aes(color = StateName), linewidth = 1.5
-  ) +
-  scale_color_manual(values = c(
-    "Other States" = "grey",
-    setNames(rainbow(length(northern_states)), northern_states)
-  )) +
-  scale_x_continuous(breaks = seq(min(long_data$Year), max(long_data$Year), by = 5)) +
-  theme_minimal() +
-  labs(
-    title = "Time Series Analysis with Highlight on Northern States",
-    x = "Year",
-    y = "Value"
-  ) +
-  theme(legend.position = "bottom") # Include legend
-
-
-
-
-#          southern_states time series
-ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
-  # Plot all states not in southern_states in grey
-  geom_line(
-    data = filter(long_data, !StateName %in% southern_states),
-    aes(color = "Other States"), size = 0.5
-  ) +
-  # Highlight southern_states with individual colors
-  geom_line(
-    data = filter(long_data, StateName %in% southern_states),
-    aes(color = StateName), linewidth = 1.5
-  ) +
-  scale_color_manual(values = c(
-    "Other States" = "grey",
-    setNames(rainbow(length(southern_states)), southern_states)
-  )) +
-  scale_x_continuous(breaks = seq(min(long_data$Year), max(long_data$Year), by = 5)) +
-  theme_minimal() +
-  labs(
-    title = "Time Series Analysis with Highlight on Southern States",
-    x = "Year",
-    y = "Value"
-  ) +
-  theme(legend.position = "bottom") # Include legend

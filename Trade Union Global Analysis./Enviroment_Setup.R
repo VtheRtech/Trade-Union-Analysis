@@ -8,23 +8,16 @@ library(GGally)
 library(stringr)
 
 setwd("~/workbook")
-
 con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
-
 dbListTables(con)
-
-
 tudr <- as_tibble(dbReadTable(con, "TUDR"))
 cbcr <- as_tibble(dbReadTable(con, "CBCR"))
 collective_bargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
 trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
-workplace_rights <-
-  as_tibble(dbReadTable(con, "WorkplaceRights"))
-
-state_union_membership_density <-
-  as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
-
+workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
+state_union_membership_density <- as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
 dbDisconnect(con)
+
 # Summary statistics
 collective_bargaining %>%
   group_by(Country) %>%
@@ -71,7 +64,6 @@ collective_bargaining %>%
   filter(Country == "United States") %>%
   count()
 # counts how many times the "United State data point is found in a column it was found 21 times"
-
 collective_bargaining %>%
   filter(Year == "2015") %>%
   count()
@@ -112,34 +104,34 @@ workplace_rights %>%
 
 
 # Count distinct values
-count_CollectiveBargaining <- collective_bargaining %>%
+count_collective_bargaining <- collective_bargaining %>%
   distinct(Country, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_CBCR <- cbcr %>%
+count_cbcr <- cbcr %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_TUDR <- tudr %>%
+count_tudr <- tudr %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_TradeUnionDensity <- trade_union_density %>%
+count_trade_union_density <- trade_union_density %>%
   distinct(Country, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
-count_WorkplaceRights <- workplace_rights %>%
+count_workplaces_rights <- workplace_rights %>%
   distinct(ref_area, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
 # Combine into a na2med vector
 counts <- c(
-  CollectiveBargaining = count_CollectiveBargaining,
-  CBCR = count_CBCR,
-  TUDR = count_TUDR,
-  TradeUnionDensity = count_TradeUnionDensity,
-  WorkplaceRights = count_WorkplaceRights
+  collective_bargaining = count_collective_bargaining,
+  cbcr = count_cbcr,
+  tudr = count_tudr,
+  trade_union_density = count_trade_union_density,
+  workplaces_rights = count_workplaces_rights
 )
 
 # Convert to a tibble
@@ -148,74 +140,74 @@ counts_tibble <- tibble(Dataset = names(counts), Countrycount = counts)
 
 # below is the combined data set for year
 
-YearCount_WorkplaceRights <- workplace_rights %>%
+year_count_workplaces_rights <- workplace_rights %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_TradeUnionDensity <- trade_union_density %>%
+year_count_trade_union_density <- trade_union_density %>%
   distinct(Time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_TUDR <- tudr %>%
+year_count_tudr <- tudr %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_CBCR <- cbcr %>%
+year_count_cbcr <- cbcr %>%
   distinct(time, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
-YearCount_CollectiveBargaining <- collective_bargaining %>%
+year_count_collective_bargaining <- collective_bargaining %>%
   distinct(Year, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
 
 # Combine into a tibble
-YearCounts_tibble <- tibble(
+year_counts_tibble <- tibble(
   Dataset = c(
-    "WorkplaceRights", "TradeUnionDensity",
-    "TUDR", "CBCR", "CollectiveBargaining"
+    "workplaces_rights", "trade_union_density",
+    "tudr", "cbcr", "collective_bargaining"
   ),
-  YearCount = c(
-    YearCount_WorkplaceRights,
-    YearCount_TradeUnionDensity,
-    YearCount_TUDR,
-    YearCount_CBCR,
-    YearCount_CollectiveBargaining
+  year_count = c(
+    year_count_workplaces_rights,
+    year_count_trade_union_density,
+    year_count_tudr,
+    year_count_cbcr,
+    year_count_collective_bargaining
   )
 )
 
 # Display the tibble
-print(YearCounts_tibble)
+print(year_counts_tibble)
 print(counts_tibble)
 
 combinedtibble <- bind_rows(
   counts_tibble,
-  YearCounts_tibble
+  year_counts_tibble
 )
 
 print(combinedtibble)
 
-# the more comprehensive data sets from this data base is TUDR, CBCR, workplace
+# the more comprehensive data sets from this data base is tudr, cbcr, workplace
 # rights. (unsurprising because these where sources directly from the ILO's
 # website)
 
 
 
-TUDR_2017 <- tudr %>%
+tudr_2017 <- tudr %>%
   filter(time == 2017)
 
-CBCR_2017 <- cbcr %>%
+cbcr_2017 <- cbcr %>%
   filter(time == 2017)
 
-WorkplaceRights_2017 <- workplace_rights %>%
+workplaces_rights_2017 <- workplace_rights %>%
   filter(time == 2017)
 
 
-joined_data <- inner_join(WorkplaceRights_2017, TUDR_2017,
+joined_data <- inner_join(workplaces_rights_2017, tudr_2017,
   by = c("ref_area", "time")
 )
 
@@ -223,7 +215,7 @@ joined_data <- inner_join(WorkplaceRights_2017, TUDR_2017,
 str(joined_data)
 view(joined_data)
 
-joined_data2017 <- inner_join(joined_data, CBCR_2017,
+joined_data2017 <- inner_join(joined_data, cbcr_2017,
   by = c("ref_area", "time")
 )
 
@@ -248,7 +240,6 @@ joined_data4 <- inner_join(workplace_rights, tudr, by = c("ref_area", "time"))
 joined_full_data_set <- inner_join(joined_data4, cbcr,
   by = c("ref_area", "time")
 )
-
 joined_full_data_set <- joined_full_data_set %>%
   rename(
     "National_Compliance_wth_Labour_Rights" = obs_value.x,
@@ -257,13 +248,11 @@ joined_full_data_set <- joined_full_data_set %>%
   )
 
 
-TradeUnionDensity <- trade_union_density %>%
+trade_union_density <- trade_union_density %>%
   rename("Year" = Time)
-
-OldData <- inner_join(TradeUnionDensity, collective_bargaining,
+OldData <- inner_join(trade_union_density, collective_bargaining,
   by = c("Country", "Year")
 )
-
 colnames(OldData)
 
 
@@ -272,17 +261,13 @@ colnames(OldData)
 # Assuming your tibble is named state_union_membership_density
 state_union_membership_density <- state_union_membership_density %>%
   rename_with(~ str_replace(.x, "X.Mem", "19"), starts_with("X.Mem"))
-
 # Assuming your tibble is named state_union_membership_density
-
 # Get the current column names
 col_names <- colnames(state_union_membership_density)
-
 # Loop through each column name
 for (i in seq_along(col_names)) {
   # Extract the year part of the column name and convert it to a numeric value
   year <- as.numeric(col_names[i])
-
   # Check if the year is less than 1960 and starts with 19
   if (!is.na(year) && year < 1960 && startsWith(col_names[i], "19")) {
     # Replace "19" with "20" in the year part
@@ -291,9 +276,7 @@ for (i in seq_along(col_names)) {
     col_names[i] <- new_year
   }
 }
-
 # Assign the new column names back to the tibble
 colnames(state_union_membership_density) <- col_names
-
 state_union_membership_density %>%
   colnames()

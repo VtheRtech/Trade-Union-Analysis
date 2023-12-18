@@ -31,8 +31,8 @@ print(HistogramUnionDensity)
 
 
 
-# Histogram WorkplaceRights
-HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
+# Histogram workplace_rights
+Histogramworkplace_rights <- ggplot(workplace_rights, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
   labs(
     title = "Histogram of National Complianance with International Law (ILO)",
@@ -40,18 +40,18 @@ HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
     y = "Frequency"
   ) +
   theme_minimal()
-print(HistogramWorkplaceRights)
+print(Histogramworkplace_rights)
 
-HistogramCBCR <- ggplot(CBCR, aes(x = obs_value)) +
+Histogramcbcr <- ggplot(cbcr, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
   labs(
     title = "Histogram of National Collective Bargaining Coverage",
-    x = "CBCR",
+    x = "cbcr",
     y = "Frequency"
   ) +
   theme_minimal()
 
-print(HistogramCBCR)
+print(Histogramcbcr)
 
 
 #### frequency tables to be added to to the Wiki
@@ -92,23 +92,23 @@ print(HistogramUnionDensity)
 
 
 
-# Assuming CBCR is your data frame
-US_CBCR <- CBCR %>%
+# Assuming cbcr is your data frame
+US_cbcr <- cbcr %>%
   filter(ref_area == "United States") %>%
-  summarize(CBCRValue = mean(obs_value)) %>%
-  .$CBCRValue
+  summarize(cbcrValue = mean(obs_value)) %>%
+  .$cbcrValue
 
 # Calculate the median of Collective Bargaining Coverage
-Median_CBCR <- median(CBCR$obs_value)
+Median_cbcr <- median(cbcr$obs_value)
 
 # Create a data frame for the lines
 lines_df_cbcr <- data.frame(
-  xintercept = c(US_CBCR, Median_CBCR),
+  xintercept = c(US_cbcr, Median_cbcr),
   line_id = c("United States", "Median")
 )
 
 # Create histogram for Collective Bargaining Coverage
-HistogramCBCR <- ggplot(CBCR, aes(x = obs_value)) +
+Histogramcbcr <- ggplot(cbcr, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
   geom_vline(data = lines_df_cbcr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
   scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
@@ -121,29 +121,29 @@ HistogramCBCR <- ggplot(CBCR, aes(x = obs_value)) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 
-print(HistogramCBCR)
+print(Histogramcbcr)
 
 
 library(ggplot2)
 library(dplyr)
 
-# Assuming WorkplaceRights is your data frame
-US_WorkplaceRights <- WorkplaceRights %>%
+# Assuming workplace_rights is your data frame
+US_workplace_rights <- workplace_rights %>%
   filter(ref_area == "United States") %>%
-  summarize(WorkplaceRightsValue = mean(obs_value)) %>%
-  .$WorkplaceRightsValue
+  summarize(workplace_rightsValue = mean(obs_value)) %>%
+  .$workplace_rightsValue
 
 # Calculate the median of Workplace Rights
-Median_WorkplaceRights <- median(WorkplaceRights$obs_value)
+Median_workplace_rights <- median(workplace_rights$obs_value)
 
 # Create a data frame for the lines
 lines_df_wr <- data.frame(
-  xintercept = c(US_WorkplaceRights, Median_WorkplaceRights),
+  xintercept = c(US_workplace_rights, Median_workplace_rights),
   line_id = c("United States", "Median")
 )
 
 # Create histogram for Workplace Rights
-HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
+Histogramworkplace_rights <- ggplot(workplace_rights, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
   geom_vline(data = lines_df_wr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
   scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
@@ -156,4 +156,4 @@ HistogramWorkplaceRights <- ggplot(WorkplaceRights, aes(x = obs_value)) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 
-print(HistogramWorkplaceRights)
+print(Histogramworkplace_rights)
