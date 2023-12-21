@@ -8,11 +8,11 @@ long_data <- state_union_membership_density %>%
   )
 # Convert Year to a numeric value for plotting
 long_data$Year <- as.numeric(long_data$Year)
-# Define the text
+# wrap and edit citation
 citation_text <- "Source: Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman, “Estimates of Union Density by State,” Monthly Labor Review, Vol. 124, No. 7, July 2001, pp. 51-55."
-title_text <- "Time Series Analysis of Union Density in the United States (%Percentage of a States Industry that are Unionized)"
-# Wrap the text
 wrapped_citation <- str_wrap(citation_text, width = 50) # Adjust width as needed
+# wrap and edit title
+title_text <- "Time Series Analysis of Union Density in the United States (%Percentage of a States Industry that are Unionized)"
 wrapped_title <- str_wrap(title_text, width = 40)
 # Define the labels
 plot_labels <- labs(
@@ -55,7 +55,7 @@ cit_style <- annotate(
   "text",
   x = max(long_data$Year), y = min(long_data$Value),
   label = wrapped_citation,
-  hjust = 1, vjust = -9.6,
+  hjust = 1, vjust = -9.4,
   size = 3, color = "grey50",
   angle = 0
 )
@@ -94,6 +94,8 @@ print(northern_states)
 
 
 
+title_text <- "Time Series Analysis of Union Density in the United States Northern States are Highlighted (%Percentage of a States Industry that are Unionized)"
+wrapped_title <- str_wrap(title_text, width = 40)
 #           northern_states time series
 # Plotting with ggplot2
 ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
@@ -117,7 +119,7 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   )) +
   theme_minimal() +
   labs(
-    title = "Time Series Analysis with Highlight on Northern States",
+    title = wrapped_title,
     x = "Year",
     y = "Union Membership Density",
   ) +
@@ -132,6 +134,8 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
 
 
 
+title_text <- "Time Series Analysis of Union Density in the United States Southern States are Highlighted (%Percentage of a States Industry that are Unionized)"
+wrapped_title <- str_wrap(title_text, width = 40)
 #          southern_states time series
 ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   # Plot all states not in southern_states in grey
@@ -154,7 +158,7 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   )) +
   theme_minimal() +
   labs(
-    title = "Time Series Analysis with Highlight on Southern States",
+    title = wrapped_title,
     x = "Year",
     y = "Union Membership Density",
   ) +
