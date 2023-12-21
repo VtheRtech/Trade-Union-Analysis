@@ -159,6 +159,10 @@ for (country in country_focus) {
       panel.grid.major = element_line(color = "gray80"), # Adjust major grid lines
       panel.grid.minor = element_blank(), # Remove minor grid lines
       plot.margin = margin(1, 1, 1, 1, "cm") # Adjust plot margins
+    ) +
+    annotate("text",
+      x = Inf, y = Inf, label = "Source: Your Source Here",
+      hjust = 1.1, vjust = 2, size = 3.5, color = "grey50"
     )
   plots[[country]] <- p
 }

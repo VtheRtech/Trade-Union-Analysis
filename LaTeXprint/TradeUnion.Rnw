@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+
+% Packages for graphics & layout
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[a4paper,margin=1in]{geometry}
+
+% Packages for math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Package for bibliography
+\usepackage{natbib}
+
+\title{Data Analysis Report}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document presents a comprehensive analysis of the data pertaining to...
+\end{abstract}
+
+\section{Introduction}
+Introduce the context of your data analysis, including the background, objectives, and significance of your study.
+
+\section{Methodology}
+Describe the methods used in your analysis. This may include data collection methods, data cleaning and preparation processes, and the statistical or computational techniques applied.
+
+\subsection{Data Collection}
+Detail how and where the data was sourced.
+
+\subsection{Data Preparation}
+Explain any preprocessing steps like cleaning, normalization, or transformations.
+
+\section{Results}
+Present the findings of your analysis. Use tables, graphs, and charts to illustrate your points.
+\subsection{Union Density North vs South USA}
+<<echo=FALSE>>=
+#                         state_union_membership_density
+# Reshape the data from wide to long format
+long_data <- state_union_membership_density %>%
+  pivot_longer(
+    cols = -c(StateName, StateID), # Exclude non-year columns
+    names_to = "Year",
+    values_to = "Value"
+  )
+# Convert Year to a numeric value for plotting
+long_data$Year <- as.numeric(long_data$Year)
+# Plotting with ggplot2
+ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
+  geom_line() +
+  theme_minimal() +
+  labs(
+    title = "Time Series Analysis by State",
+    x = "Year",
+    y = "Value",
+    color = "State"
+  ) +
+  theme(legend.position = "bottom")
+
+
+
+southern_states <- c(
+  "Alabama", "Arkansas", "Florida", "Georgia", "Kentucky",
+  "Louisiana", "Mississippi", "North Carolina", "South Carolina",
+  "Tennessee", "Texas", "Virginia", "West Virginia"
+)
+# To view the vector
+print(southern_states)
+northern_states <- c(
+  "Connecticut", "Illinois", "Indiana", "Iowa", "Maine",
+  "Massachusetts", "Michigan", "Minnesota", "New Hampshire",
+  "New Jersey", "New York", "Ohio", "Pennsylvania", "Rhode Island",
+  "Vermont", "Wisconsin"
+)
+# To view the vector
+print(northern_states)
+
+
+
+#           northern_states time series
+# Plotting with ggplot2
+ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
+  # Plot all states not in northern_states in grey
+  geom_line(
+    data = filter(long_data, !StateName %in% northern_states),
+    aes(color = "Other States"), linewidth = 0.5
+  ) +
+  # Highlight northern_states with individual colors
+  geom_line(
+    data = filter(long_data, StateName %in% northern_states),
+    aes(color = StateName), linewidth = 1.5
+  ) +
+  scale_color_manual(values = c(
+    "Other States" = "grey",
+    setNames(rainbow(length(northern_states)), northern_states)
+  )) +
+  scale_x_continuous(breaks = seq(min(long_data$Year),
+    max(long_data$Year),
+    by = 5
+  )) +
+  theme_minimal() +
+  labs(
+    title = "Time Series Analysis with Highlight on Northern States",
+    x = "Year",
+    y = "Union Membership Density",
+  ) +
+  theme(legend.position = "bottom") # Include legend
+@
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{path/to/your/image/file}
+\caption{Caption for your figure.}
+\label{fig:yourlabel}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ccc}
+\toprule
+Column 1 & Column 2 & Column 3 \\
+\midrule
+Data 1 & Data 2 & Data 3 \\
+Data 4 & Data 5 & Data 6 \\
+\bottomrule
+\end{tabular}
+\caption{Caption for your table.}
+\label{tab:yourlabel}
+\end{table}
+
+\section{Discussion}
+Discuss the implications of your findings, potential limitations of your analysis, and suggestions for future research.
+
+\section{Conclusion}
+Summarize the main findings and their relevance to the initial objectives of your study.
+
+\section{References}
+\bibliographystyle{plain}
+\bibliography{yourbibfile}
+
+\end{document}
+

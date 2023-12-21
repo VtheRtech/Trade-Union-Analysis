@@ -15,7 +15,8 @@ cbcr <- as_tibble(dbReadTable(con, "CBCR"))
 collective_bargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
 trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
 workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
-state_union_membership_density <- as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
+state_union_membership_density <-
+  as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
 dbDisconnect(con)
 
 # Summary statistics
@@ -63,7 +64,7 @@ collective_bargaining %>%
 collective_bargaining %>%
   filter(Country == "United States") %>%
   count()
-# counts how many times the "United State data point is found in a column it was found 21 times"
+# counts how many times the "United State data point is found
 collective_bargaining %>%
   filter(Year == "2015") %>%
   count()
@@ -160,7 +161,7 @@ year_count_cbcr <- cbcr %>%
   count() %>%
   pull(n)
 
-year_count_collective_bargaining <- collective_bargaining %>%
+yc_collective_bargaining <- collective_bargaining %>%
   distinct(Year, .keep_all = TRUE) %>%
   count() %>%
   pull(n)
@@ -176,7 +177,7 @@ year_counts_tibble <- tibble(
     year_count_trade_union_density,
     year_count_tudr,
     year_count_cbcr,
-    year_count_collective_bargaining
+    yc_collective_bargaining
   )
 )
 
