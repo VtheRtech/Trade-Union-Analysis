@@ -1,26 +1,32 @@
+library(hrbrthemes)
+
 # Descriptive statistics
-summary_stats <- TradeUnionDensity %>%
+summary_stats <- trade_union_density %>%
   summarise(
     Mean = mean(Value, na.rm = TRUE),
     Median = median(Value, na.rm = TRUE),
     SD = sd(Value, na.rm = TRUE)
   )
-
 print(summary_stats)
-
+ftheme <- theme(
+  plot.title = element_text(size = 30),
+  axis.title = element_text(size = 25),
+  axis.text.x = element_text(size = 16),
+  axis.text.y = element_text(size = 16)
+)
 # Histogram of Union Density
-HistogramUnionDensity <- ggplot(TradeUnionDensity, aes(x = Value)) +
-  geom_histogram(bins = 30, fill = "blue", color = "black") +
+d1 <- ggplot(trade_union_density, aes(x = Value)) +
+  geom_histogram(bins = 30, fill = "#69b3a2", color = "black") +
   labs(
     title = "Histogram of Union Density",
-    x = "Union Density",
+    x = "Union Density in(%)",
     y = "Frequency"
   ) +
-  theme_minimal()
+  ftheme
+print(d1)
 
-print(HistogramUnionDensity)
-
-# Union Density is right-skewed, it would suggest that most countries have a lower union
+# Union Density is right-skewed,
+# it would suggest that most countries have a lower union
 # density, but a few countries have a very high union density. The peak of the
 # histogram would indicate the most common range of union density. If there are
 # any gaps or isolated bars, they might indicate outliers or special cases.
@@ -32,38 +38,37 @@ print(HistogramUnionDensity)
 
 
 # Histogram workplace_rights
-Histogramworkplace_rights <- ggplot(workplace_rights, aes(x = obs_value)) +
+d2 <- ggplot(workplace_rights, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
   labs(
     title = "Histogram of National Complianance with International Law (ILO)",
     x = "Workplace Rights Complianace with International Law",
     y = "Frequency"
   ) +
-  theme_minimal()
-print(Histogramworkplace_rights)
+  ftheme
+print(d2)
 
-Histogramcbcr <- ggplot(cbcr, aes(x = obs_value)) +
-  geom_histogram(bins = 30, fill = "blue", color = "black") +
+d3 <- ggplot(cbcr, aes(x = obs_value)) +
+  geom_histogram(bins = 30, fill = "#404080", color = "black") +
   labs(
     title = "Histogram of National Collective Bargaining Coverage",
-    x = "cbcr",
+    x = "Collective Bargaining Coverage",
     y = "Frequency"
   ) +
-  theme_minimal()
-
-print(Histogramcbcr)
+  ftheme
+print(d3)
 
 
 #### frequency tables to be added to to the Wiki
-# Assuming TradeUnionDensity is your data frame and it
+# Assuming trade_union_density is your data frame and it
 # has columns named 'Country' and 'Value'
-US_UnionDensity <- TradeUnionDensity %>%
+US_UnionDensity <- trade_union_density %>%
   filter(Country == "United States") %>%
   summarize(UnionDensityValue = mean(Value)) %>%
   .$UnionDensityValue # Extracting the numeric value
 
 # Calculate the median of the Union Density
-Median_UnionDensity <- median(TradeUnionDensity$Value)
+Median_UnionDensity <- median(trade_union_density$Value)
 
 # Create a data frame for the lines
 lines_df <- data.frame(
@@ -71,7 +76,7 @@ lines_df <- data.frame(
   line_id = c("United States", "Median")
 )
 
-HistogramUnionDensity <- ggplot(TradeUnionDensity, aes(x = Value)) +
+d1 <- ggplot(trade_union_density, aes(x = Value)) +
   geom_histogram(bins = 30, fill = "#3498DB", color = "#1F2E2E") +
   geom_vline(data = lines_df, aes(
     xintercept = xintercept,
@@ -87,7 +92,7 @@ HistogramUnionDensity <- ggplot(TradeUnionDensity, aes(x = Value)) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 
-print(HistogramUnionDensity)
+print(d1)
 
 
 
@@ -108,7 +113,7 @@ lines_df_cbcr <- data.frame(
 )
 
 # Create histogram for Collective Bargaining Coverage
-Histogramcbcr <- ggplot(cbcr, aes(x = obs_value)) +
+d3 <- ggplot(cbcr, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
   geom_vline(data = lines_df_cbcr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
   scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
@@ -120,30 +125,23 @@ Histogramcbcr <- ggplot(cbcr, aes(x = obs_value)) +
   ) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
+print(d3)
 
-print(Histogramcbcr)
-
-
-library(ggplot2)
-library(dplyr)
 
 # Assuming workplace_rights is your data frame
 US_workplace_rights <- workplace_rights %>%
   filter(ref_area == "United States") %>%
   summarize(workplace_rightsValue = mean(obs_value)) %>%
   .$workplace_rightsValue
-
 # Calculate the median of Workplace Rights
 Median_workplace_rights <- median(workplace_rights$obs_value)
-
 # Create a data frame for the lines
 lines_df_wr <- data.frame(
   xintercept = c(US_workplace_rights, Median_workplace_rights),
   line_id = c("United States", "Median")
 )
-
 # Create histogram for Workplace Rights
-Histogramworkplace_rights <- ggplot(workplace_rights, aes(x = obs_value)) +
+d2 <- ggplot(workplace_rights, aes(x = obs_value)) +
   geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
   geom_vline(data = lines_df_wr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
   scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
@@ -155,5 +153,4 @@ Histogramworkplace_rights <- ggplot(workplace_rights, aes(x = obs_value)) +
   ) +
   theme_minimal() +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
-
-print(Histogramworkplace_rights)
+print(d2)
