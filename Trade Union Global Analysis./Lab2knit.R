@@ -1,3 +1,15 @@
+# install.packages("knitr", lib = "~/Rpackages")
+# install.packages("xfun", lib = "~/Rpackages")
+# install.packages(c("evaluate", "highr"), lib = "~/Rpackages")
+# .libPaths("~/Rpackages")
+
+
+
+
+library(knitr)
+library(highr)
+library(evaluate)
+library(xfun)
 library(tidyverse)
 library(RSQLite)
 library(DBI)
@@ -17,7 +29,32 @@ trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
 workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
 state_union_membership_density <-
   as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
-dbDisconnect(con)
+dbDworkplaces_rights_2017 <- workplace_rights %>%
+  filter(time == 2017)
+
+
+joined_data <- inner_join(workplaces_rights_2017, tudr_2017,
+  by = c("ref_area", "time")
+)
+
+joined_data2017 <- inner_join(joined_data, cbcr_2017,
+  by = c("ref_area", "time")
+)
+
+view(joined_data2017)
+
+joined_data2017 <- joined_data2017 %>%
+  rename(
+    "National_Compliance_wth_Labour_Rights" = obs_value.x,
+    "Union Density" = obs_value.y,
+    "Collective Bargaining Coverage" = obs_value
+  )
+
+joined_data2017 %>%
+  select(
+    National_Compliance_wth_Labour_Rights,
+    `Collective Bargaining Coverage`
+  )
 
 
 # full joined data is below
@@ -65,3 +102,7 @@ for (i in seq_along(col_names)) {
 colnames(state_union_membership_density) <- col_names
 state_union_membership_density %>%
   colnames()
+
+
+setwd("~/Lab2/LaTeXprint")
+knit("TradeUnion.Rnw")

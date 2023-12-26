@@ -71,9 +71,8 @@ p1 <- ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
   cit_style # Add the theme
 # Print the plot
 print(p1)
-
-
-
+file_path <- ("~/Lab2/graphs/plot_10")
+ggsave(file_path, plot = p1)
 
 
 southern_states <- c(
@@ -91,14 +90,11 @@ northern_states <- c(
 )
 # To view the vector
 print(northern_states)
-
-
-
 title_text <- "Time Series Analysis of Union Density in the United States Northern States are Highlighted (%Percentage of a States Industry that are Unionized)"
 wrapped_title <- str_wrap(title_text, width = 40)
 #           northern_states time series
 # Plotting with ggplot2
-ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
+p2 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   # Plot all states not in northern_states in grey
   geom_line(
     data = filter(long_data, !StateName %in% northern_states),
@@ -126,8 +122,8 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   theme(legend.position = "bottom") +
   plot_theme +
   cit_style
-
-
+file_path <- ("~/Lab2/graphs/plot_11")
+ggsave(file_path, plot = p2)
 
 
 
@@ -137,7 +133,7 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
 title_text <- "Time Series Analysis of Union Density in the United States Southern States are Highlighted (%Percentage of a States Industry that are Unionized)"
 wrapped_title <- str_wrap(title_text, width = 40)
 #          southern_states time series
-ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
+p3 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   # Plot all states not in southern_states in grey
   geom_line(
     data = filter(long_data, !StateName %in% southern_states),
@@ -165,10 +161,8 @@ ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   theme(legend.position = "bottom") +
   plot_theme +
   cit_style
-
-
-colnames(state_union_membership_density)
-colnames(long_data)
+file_path <- ("~/Lab2/graphs/plot_12")
+ggsave(file_path, plot = p3)
 
 ##                               South vs North Summary Data
 southern_states_mean <- long_data %>%
