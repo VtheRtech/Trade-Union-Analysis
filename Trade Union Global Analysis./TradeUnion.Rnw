@@ -3,9 +3,11 @@
 % Packages for graphics & layout
 \usepackage{graphicx}
 \usepackage{epstopdf}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage[a4paper,margin=0.5in]{geometry}
+\usepackage{lipsum}
 
 % Packages for math
 \usepackage{amsmath}
@@ -16,8 +18,35 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 
+
+% listing setup
+\usepackage{listings}
+\usepackage{color} % For syntax highlighting color
+
+\lstset{ 
+  language=R,
+  basicstyle=\small,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{gray},
+  stringstyle=\color{purple},
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
+}
+
+\captionsetup{labelfont=bf}
+\setlength{\parskip}{0.5\baselineskip}
+
+
 \title{Data Analysis Report}
-\author{[Michael V Cumbo]}
+\author{Michael V Cumbo}
 \date{\today}
 
 \begin{document}
@@ -32,9 +61,9 @@ This document presents a comprehensive analysis of the data pertaining to trade 
 This paper was written in response to the United Auto Workers strike and the SAG-AFTRA strike of 2023. The goal of this paper is to contextualize the state of trade union power in the United States, blending data analysis with a literature review. The findings in this paper also contextualize union power in a select number of nation-states, adding perspective to the modes of influence individual working-class individuals may have within those states.
 
 \section{Methodology}
-\subsection*{Libraries Used in Analysis}
+\subsection*{Libraries Used in the Analysis}
 
-Our analysis utilized several R packages, each contributing unique functions essential for data management, manipulation, visualization, and database interaction. Below is a description of each package and its role in our analysis:
+This analysis utilized several R packages, each contributing unique functions essential for data management, manipulation, visualization, and database interaction. Below is a description of each package and its role in our analysis:
 
 \begin{itemize}
     \item \textbf{tidyverse}: An aggregation of several data manipulation packages, \texttt{tidyverse} simplifies many aspects of data analysis. It includes packages like \texttt{ggplot2} for data visualization, \texttt{dplyr} for data manipulation, and \texttt{readr} for data import. Its unified data philosophy makes data science tasks more straightforward and efficient.
@@ -92,54 +121,98 @@ These libraries collectively provided the comprehensive toolkit necessary for ou
 Data was sourced from the International Labor Organization, OECD datasets, and Harvard datasets.
 
 \subsection{Data Preparation}
-[Explain any preprocessing steps like cleaning, normalization, or transformations.]
+Data was sourced from the appropiate online databases and stored into a SQLite database. The data cleaning required the changing of column names to make the data more readable. Data was extracted from the databases into a tibble and prepared to be analysed using the following code: 
+\begin{lstlisting}{language=R}
+# R code snippet
+setwd("~/workbook")
+con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
+dbListTables(con)
+tudr <- as_tibble(dbReadTable(con, "TUDR"))
+cbcr <- as_tibble(dbReadTable(con, "CBCR"))
+collective_bargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
+trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
+workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
+state_union_membership_density <-
+  as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
+dbDisconnect(con)
+\end{lstlisting}
 
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+  \includegraphics[width=\linewidth]{~/Lab2/graphs/udstudfy.jpg}
+  \caption{Histogram depicting the distribution of the collective labour force index. The incomplete data availability pushes the Index down to around 72 countries, so the ranking matters less than the Index itself. The picture it paints is the freedom a working person has in the labor force(Union Power). This study is an assessment of union power. It indicates union power by combining and weighing the following stats: Trade Union Density, Collective Bargaining Coverage, Labour Force Participation Rate, Employment in agriculture, Democracy, Core labor rights ratification, hiring and firing constraints, and Hours Regulation. The United States is 62(3.32 index rating) in the Index, and China's place is 68 (1.92 index rating). The data is only recorded from 2010 to 2016. }
+  \label{fig:1.0}
+  \end{minipage}
+\end{figure}
+\footnotetext{Source: Metten, A. (2021). \textit{Rethinking Trade Union Density: A new index for Measuring Union Strength.}Industrial Relations Journal, 52(6), 528–549. https://doi.org/10.1111/irj.12347}
+
+
+\clearpage
 \section{Discussion}
-Discuss the implications of your findings, potential limitations of your analysis, and suggestions for future research.
+For the United States, it is essential to note that the 2020s have seen a growing labor movement, a slow but consistent growth in strikes and labor action, which typically leads to increases in labor union density and collective bargaining coverage (see West Virginia in the 1970s as shown in figure~\ref{fig:1.3}, which saw a sharp increase of ten percent union membership due to wildcat strikes). Because of this, there is a strong possibility that the quality of life could improve greatly for working-class people in the US at the end of this decade. 
+
+China, when breaking down the stats, has a density of forty percent; however, there is only one union that exists in China, the All-China Federation of Trade Unions (ACFTU), a state-controlled union that allows company chiefs to elect the leadership of the union. It is not really a union, as it is an apparatus of state control. So, things like strikes and collective bargaining agreements are off the table for your average Chinese citizen. See this book for more details on how the ACFTU operates:  Fu, Diana (2017). Mobilizing Without the Masses: \href{https://www.amazon.com/Mobilizing-without-Masses-Contention-Contentious/dp/1108430414}{Control and Contention in China. Cambridge University Press.}
+
+Unions, and thus the quality of life in the United States, have been decreasing over the past 50 years. The US, for the first time in a century, has a National Labour Relations Board that is \href {https://www.theguardian.com/us-news/2023/sep/02/union-nlrb-decision-delays-busting}{friendly toward unions} There are things to look forward to coming to the US(including but not limited to a maglev \href{https://northeastmaglev.com/project/}{connecting Baltimore to New York and DC}. ), and the more active our unions get, the better our quality of life will get. China, however, doesn't have access to mechanisms that can truly redistribute wealth as it is created. Even if the ACFTU wanted to, it would be up to what the company chiefs allow. 
 
 
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_10.pdf}
-\caption{[Detailed caption for Figure 1]}
-\label{fig:1.1}
+  \begin{minipage}{0.9\linewidth}
+  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_10.png}
+  \caption{[Detailed caption for Figure 1]}
+  \label{fig:1.1}
+  \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_11.pdf}
-\caption{[Detailed caption for Figure 2]}
-\label{fig:1.2}
+\begin{minipage}{0.9\linewidth}
+  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_11.png}
+  \caption{[Detailed caption for Figure 2]}
+  \label{fig:1.2}
+  \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_12.pdf}
-\caption{[Detailed caption for Figure 3]}
-\label{fig:1.3}
+\begin{minipage}{0.9\linewidth}
+  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_12.png}
+  \caption{[Detailed caption for Figure 3]}
+  \label{fig:1.3}
+  \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_8.pdf}
-\caption{Histogram depicting the frequency distribution of annual collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
-\label{fig:2.1}
+\begin{minipage}{0.7\linewidth}
+  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8.pdf}
+  \caption[Collective Bargaining Coverage]{\textbf {Collective Bargaining Coverage 2000-2019} Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
+  \label{fig:2.1}
+  \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_8-1.pdf}
-\caption{[Detailed caption for Figure 5]}
-\label{fig:2.2}
+  \begin{minipage}{0.7\linewidth}
+  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8-1.pdf}
+  \caption{Histogram depicting the frequency distribution of Union Density in percent. The percentage measures a country's total unionized industries; the higher the percentage, the more of that country's workforce is unionized. This data is grouped by country; the mean of the United States and the mean of the total population are marked on this graph.} 
+  \label{fig:2.2}
+  \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.7\textwidth]{~/Lab2/graphs/plot_9.pdf}
-\caption{Figure 2.3: Histogram depicting the frequency distribution of Compliance with international law bargaining coverage as scale from 0 to 10 with 10 being the most out of compliance with international law a country could be, and 0 being completely incompliance with international labor law recorded by the International Labor organization. This data is grouped by country, the united states place is marked in the along with the mean of all countries.}
-\label{fig:2.3}
+  \begin{minipage}{0.7\linewidth}
+  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_9.pdf}
+  \caption{Histogram depicting the frequency distribution of Compliance with international law bargaining coverage as scale from 0 to 10 with 10 being the most out of compliance with international law a country could be, and 0 being completely incompliance with international labor law recorded by the International Labor organization. This data is grouped by country, the united states place is marked in the along with the mean of all countries.}
+  \label{fig:2.3}
+  \end{minipage}
 \end{figure}
 
 \clearpage
