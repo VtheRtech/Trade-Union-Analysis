@@ -1,3 +1,7 @@
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(extrafont)
 #                         state_union_membership_density
 # Reshape the data from wide to long format
 long_data <- state_union_membership_density %>%
@@ -71,7 +75,8 @@ p1 <- ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
   cit_style # Add the theme
 # Print the plot
 print(p1)
-file_path <- ("~/Lab2/graphs/plot_10")
+
+file_path <- ("~/Lab2/graphs/plot_10.png")
 ggsave(file_path, plot = p1)
 
 
@@ -122,7 +127,7 @@ p2 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   theme(legend.position = "bottom") +
   plot_theme +
   cit_style
-file_path <- ("~/Lab2/graphs/plot_11")
+file_path <- ("~/Lab2/graphs/plot_11.png")
 ggsave(file_path, plot = p2)
 
 
@@ -161,7 +166,7 @@ p3 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
   theme(legend.position = "bottom") +
   plot_theme +
   cit_style
-file_path <- ("~/Lab2/graphs/plot_12")
+file_path <- ("~/Lab2/graphs/plot_12.png")
 ggsave(file_path, plot = p3)
 
 ##                               South vs North Summary Data

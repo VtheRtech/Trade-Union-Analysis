@@ -9,10 +9,10 @@ summary_stats <- trade_union_density %>%
   )
 print(summary_stats)
 ftheme <- theme(
-  plot.title = element_text(size = 30),
-  axis.title = element_text(size = 25),
-  axis.text.x = element_text(size = 16),
-  axis.text.y = element_text(size = 16)
+  plot.title = element_text(size = 25),
+  axis.title = element_text(size = 20),
+  axis.text.x = element_text(size = 15),
+  axis.text.y = element_text(size = 15)
 )
 # Histogram of Union Density
 d1 <- ggplot(trade_union_density, aes(x = Value)) +
@@ -59,29 +59,26 @@ d3 <- ggplot(cbcr, aes(x = obs_value)) +
 print(d3)
 
 
-#### frequency tables to be added to to the Wiki
+####                                                    frequency tables to be added to to the Wiki
 # Assuming trade_union_density is your data frame and it
 # has columns named 'Country' and 'Value'
 US_UnionDensity <- trade_union_density %>%
   filter(Country == "United States") %>%
   summarize(UnionDensityValue = mean(Value)) %>%
   .$UnionDensityValue # Extracting the numeric value
-
 # Calculate the median of the Union Density
 Median_UnionDensity <- median(trade_union_density$Value)
-
 # Create a data frame for the lines
 lines_df <- data.frame(
   xintercept = c(US_UnionDensity, Median_UnionDensity),
   line_id = c("United States", "Median")
 )
-
 d1 <- ggplot(trade_union_density, aes(x = Value)) +
-  geom_histogram(bins = 30, fill = "#3498DB", color = "#1F2E2E") +
+  geom_histogram(bins = 30, fill = "#69b3a2", color = "black") +
   geom_vline(data = lines_df, aes(
     xintercept = xintercept,
     linetype = line_id, color = line_id
-  ), size = 1) +
+  ), size = 3) +
   scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
   scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
   labs(
@@ -89,11 +86,11 @@ d1 <- ggplot(trade_union_density, aes(x = Value)) +
     x = "Union Density(in %)",
     y = "Frequency"
   ) +
-  theme_minimal() +
+  ftheme +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
-
 print(d1)
-
+file_path <- ("~/Lab2/graphs/plot_8-1.pdf")
+ggsave(file_path, plot = d1)
 
 
 
@@ -102,30 +99,52 @@ US_cbcr <- cbcr %>%
   filter(ref_area == "United States") %>%
   summarize(cbcrValue = mean(obs_value)) %>%
   .$cbcrValue
-
 # Calculate the median of Collective Bargaining Coverage
 Median_cbcr <- median(cbcr$obs_value)
-
 # Create a data frame for the lines
 lines_df_cbcr <- data.frame(
   xintercept = c(US_cbcr, Median_cbcr),
   line_id = c("United States", "Median")
 )
-
 # Create histogram for Collective Bargaining Coverage
 d3 <- ggplot(cbcr, aes(x = obs_value)) +
-  geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
-  geom_vline(data = lines_df_cbcr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
-  scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
-  scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
+  geom_histogram(bins = 30, fill = "#404080", color = "black") +
+  geom_vline(
+    data = lines_df_cbcr,
+    aes(
+      xintercept = xintercept,
+      linetype = line_id,
+      color = line_id
+    ),
+    size = 3
+  ) +
+  scale_color_manual(
+    name = "Line Type",
+    values = c(
+      "United States" = "red",
+      "Median" = "green"
+    )
+  ) +
+  scale_linetype_manual(
+    name = "Line Type",
+    values = c(
+      "United States" = "dotted",
+      "Median" = "dashed"
+    )
+  ) +
   labs(
     title = "Histogram of National Collective Bargaining Coverage",
     x = "Collective Bargaining Coverage (in %)",
     y = "Frequency"
   ) +
-  theme_minimal() +
+  ftheme +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 print(d3)
+file_path <- ("~/Lab2/graphs/plot_8.pdf")
+ggsave(file_path, plot = d3)
+
+
+
 
 
 # Assuming workplace_rights is your data frame
@@ -142,15 +161,26 @@ lines_df_wr <- data.frame(
 )
 # Create histogram for Workplace Rights
 d2 <- ggplot(workplace_rights, aes(x = obs_value)) +
-  geom_histogram(bins = 30, fill = "#3498DB", color = "black") +
-  geom_vline(data = lines_df_wr, aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 1) +
-  scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
-  scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  geom_vline(
+    data = lines_df_wr,
+    aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 3
+  ) +
+  scale_color_manual(
+    name = "Line Type",
+    values = c("United States" = "red", "Median" = "green")
+  ) +
+  scale_linetype_manual(
+    name = "Line Type",
+    values = c("United States" = "dotted", "Median" = "dashed")
+  ) +
   labs(
     title = "Histogram of National Compliance with International Law (ILO)",
     x = "Workplace Rights Compliance with International Law (Rating)",
     y = "Frequency"
   ) +
-  theme_minimal() +
+  ftheme +
   guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
 print(d2)
+file_path <- ("~/Lab2/graphs/plot_9.pdf")
+ggsave(file_path, plot = d2)
