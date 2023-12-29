@@ -8,30 +8,21 @@ This project explores unions and their relationship to each other and the nation
 
 
 ## About The Datasets
-### Stata
 
+**SDG indicator 8.8.2 - Level of national compliance with labour rights (freedom of association and collective bargaining) based on ILO textual sources and national legislation -- Annual**  
+  
+SDG indicator 8.8.2 seeks to measure the level of national compliance with fundamental labour rights (freedom of association and collective bargaining or FACB). It has a range from 0 to 10, with 0 being the best possible score (indicating higher levels of compliance with FACB rights) and 10 the worst (indicating lower levels of compliance with FACB rights). It is based on six ILO supervisory body textual sources and also on national legislation. National law is not enacted for the purpose of generating a statistical indicator of compliance with fundamental rights, nor were any of the ILO textual sources created for this purpose. Indicator 8.8.2 is compiled from these sources and its use does not constitute a waiver of the respective ILO Constituents> divergent points of view on the sources> conclusions. SDG indicator 8.8.2 is not intended as a tool to compare compliance among ILO member States. It should specifically be noted that reporting obligations of an ILO member State to the ILO>s supervisory system and thus ILO textual sources are different for ratifying and non-ratifying ILO member States. For more information, refer to the [Labour Market-related SDG Indicators (ILOSDG) database description](https://ilostat.ilo.org/resources/concepts-and-definitions/description-sustainable-development-labour-market-indicators/).  
 
-Level of national compliance with labor rights, 2021
-The indicator has a range from 0 to 10, with 0 being the best possible score (indicating higher levels of compliance withfundamental rights at work) and 10 the worst (indicating lower levels of compliance with fundamental rights at work).
-Data source: International Labour Organization (ILO) – Learn more about this data
-OurWorldInData.org/trade-and-globalization | CC BY
+### Collective bargaining coverage rate (%) -- Annual (ILO)
+  
+The collective bargaining coverage rate conveys the number of employees whose pay and/or conditions of employment are determined by one or more collective agreement(s) as a percentage of the total number of employees. Collective bargaining coverage includes, to the extent possible, workers covered by collective agreements in virtue of their extension. Collective bargaining coverage rates are adjusted for the possibility that some workers do not have the right to bargain collectively over wages (e.g. workers in the public services who have their wages determined by state regulation or other methods involving consultation), unless otherwise stated in the notes. The statistics presented in this table result from an ILO data compilation effort (including an annual questionnaire and numerous special enquiries), with contributions from J. Visser. For more information, refer to the [Industrial Relations data (IRdata) database description](https://ilostat.ilo.org/resources/concepts-and-definitions/description-industrial-relations-data/).  
 
+### Trade Union Density ILO
+Trade union density rate (%) -- Annual
+A trade union is defined as a workers' organization constituted for the purpose of furthering and defending the interests of workers. This trade union density rate conveys the number of union members who are employees as a percentage of the total number of employees. For the purpose of this indicator in particular, trade union membership excludes union members who are not in paid employment (self-employed, unemployed, retired, etc.), unless otherwise stated in the notes. The statistics presented in this table result from an ILO data compilation effort (including an annual questionnaire and numerous special enquiries), with contributions from J. Visser. For more information, refer to the [Industrial Relations data (IRdata) database description](https://ilostat.ilo.org/resources/concepts-and-definitions/description-industrial-relations-data/).  
 
-
-Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman, “Estimates of Union Density by State,” Monthly Labor Review, Vol. 124, No. 7, July 2001, pp. 51-55.
-  (accompanying data online at www.unionstats.com).
-  © 2022 by Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman
-    (accompanying data online at www.unionstats.com).
-© 2022 by Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman
-
-
-"The trade union density is defined as the number of net union members (i.e excluding those who are not in the labor force, unemployed and self-employed) as a proportion of the number of employees. Data reported in this Table refer to the UD_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology."
-
-"The adjusted collective bargaining coverage rate is defined as the number of employees covered by a collective agreement in force as a proportion of the number of eligible employees equipped (i.e., the total number of employees minus the number of employees legally excluded from the right to bargain). Data reported in this Table refer to the AdjCov_hist variable of the OECD/AIAS ICTWSS database and combine estimates based either on administrative sources labor force surveys or both. For more information and full methodology.
-
-The collective bargaining coverage rate represents the share of workers covered by valid collective agreements in force. What counts as a valid collective agreement in force is defined by international and national legislations and, in some cases, tribunals. The OECD/AIAS ICTWSS database follows the rules and definitions of the ILO (ILO (2018), Quick guide on sources and uses of collective bargaining statistics, International Labour Organization, Geneva). In particular, only agreements negotiated by independent representation, i.e. bona fide trade unions, are considered. However, at this stage, given the limited sources available, it is not possible to fully rule that, in a few instances, the data might also include some agreements negotiated by non-union bodies. But the problem, if confirmed, would be small and not much to put in question the comparability of the estimates."
-
-  from [stata](https://stats.oecd.org/Index.aspx?DataSetCode=CBC)
+### Collective Bargaining Coverage(stata)
+- The database on Institutional Characteristics of Trade Unions, Wage Setting, State Intervention and Social Pacts (ICTWSS) has been developed by Prof. Jelle Visser at the University of Amsterdam. It was first released in May 2007. In its initial form, the ICTWSS database combined data from various sources and projects with a main focus on trade union in EU and OECD countries, collective bargaining and employment relations in Europe, and social pacts. In 2021, the ICTWSS database has been rebranded as the OECD/AIAS ICTWSS database. This new name reflects the joint effort by the OECD and AIAS-HSI to ensure the continuation of the database after Prof. Visser’s retirement. The OECD/AIAS ICTWSS database is publicly available at:
 
 ## Small Multiple Line Graph Union Density.
 
