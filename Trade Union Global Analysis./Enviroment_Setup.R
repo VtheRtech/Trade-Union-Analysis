@@ -40,7 +40,48 @@ OldData <- inner_join(trade_union_density, collective_bargaining,
 )
 colnames(OldData)
 
+# themes
 
+# themes for NorthvsSouth
+plot_theme <- theme_minimal(base_size = 8, base_family = "Roboto") +
+  theme(
+    plot.title = element_text(
+      size = 20, family = "Lobster Two",
+      face = "bold", color = "#2a475e"
+    ),
+    axis.title.x = element_text(size = 15, face = "bold", color = "black"),
+    axis.title.y = element_text(
+      size = 15, face = "bold", color = "black",
+      margin = margin(t = 10, b = 0, l = 10, r = 2)
+    ),
+    axis.text.x = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 5, b = 0, l = 0, r = 0)
+    ),
+    axis.text.y = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 0, b = 5, l = 0, r = 5)
+    ),
+    legend.position = "none",
+    plot.margin = margin(t = 1, r = 1, b = 40, l = 1, unit = "pt"),
+    axis.ticks = element_line(size = 2, colour = "grey50"),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(linetype = "dashed"),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  )
+
+fstheme <- theme(
+  plot.title = element_text(size = 16, face = "bold"), # Bold and larger title
+  axis.title.x = element_text(size = 14, face = "bold"), # Bold X axis title
+  axis.title.y = element_text(size = 14, face = "bold"), # Bold Y axis title
+  panel.grid.major = element_line(color = "gray80"), # Lighter color for major grid lines
+  panel.grid.minor = element_blank(), # Remove minor grid lines
+  plot.margin = margin(1, 1, 1, 1, "cm") # Adjust plot margins
+)
 ####                  this for state_union_membership_density       ###### #
 
 # Assuming your tibble is named state_union_membership_density

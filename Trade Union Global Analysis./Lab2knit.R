@@ -1,6 +1,6 @@
-# install.packages("knitr", lib = "~/Rpackages")
-# install.packages("xfun", lib = "~/Rpackages")
-# install.packages(c("evaluate", "highr"), lib = "~/Rpackages")
+install.packages("knitr", lib = "~/Rpackages")
+install.packages("xfun", lib = "~/Rpackages")
+install.packages(c("evaluate", "highr"), lib = "~/Rpackages")
 # .libPaths("~/Rpackages")
 
 
@@ -104,5 +104,5 @@ state_union_membership_density %>%
   colnames()
 
 
-setwd("~/Lab2/LaTeXprint")
+setwd("~/Lab2/Trade Union Global Analysis./")
 knit("TradeUnion.Rnw")
