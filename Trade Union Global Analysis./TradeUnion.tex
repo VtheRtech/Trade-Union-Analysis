@@ -68,29 +68,8 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 
-
-% listing setup
-\usepackage{listings}
+% listing setup \usepackage{listings}
 \usepackage{color} % For syntax highlighting color
-
-\lstset{ 
-  language=R,
-  basicstyle=\small,
-  commentstyle=\color{red},
-  keywordstyle=\color{blue},
-  numberstyle=\tiny\color{gray},
-  stringstyle=\color{purple},
-  breaklines=true,
-  captionpos=b,
-  keepspaces=true,
-  numbers=left,
-  numbersep=5pt,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  tabsize=2
-}
-
 \captionsetup{labelfont=bf}
 \setlength{\parskip}{0.5\baselineskip}
 
@@ -172,20 +151,9 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
 
 \subsection{Data Preparation}
 Data was sourced from the appropiate online databases and stored into a SQLite database. The data cleaning required the changing of column names to make the data more readable. Data was extracted from the databases into a tibble and prepared to be analysed using the following code: 
-\begin{lstlisting}{language=R}
-# R code snippet
-setwd("~/workbook")
-con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
-dbListTables(con)
-tudr <- as_tibble(dbReadTable(con, "TUDR"))
-cbcr <- as_tibble(dbReadTable(con, "CBCR"))
-collective_bargaining <- as_tibble(dbReadTable(con, "CollectiveBargaining"))
-trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
-workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
-state_union_membership_density <-
-  as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
-dbDisconnect(con)
-\end{lstlisting}
+
+
+
 
 
 
@@ -241,16 +209,32 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8.pdf}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/CollectiveBargaining-1} 
+
+}
+
+
+\end{knitrout}
   \caption[Collective Bargaining Coverage]{\textbf {Collective Bargaining Coverage 2000-2019} Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
   \label{fig:2.1}
   \end{minipage}
 \end{figure}
-
+\hspace{5pt}
 \begin{figure}[h]
 \centering
   \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8-1.pdf}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/UnionDensity-1} 
+
+}
+
+
+\end{knitrout}
   \caption{Histogram depicting the frequency distribution of Union Density in percent. The percentage measures a country's total unionized industries; the higher the percentage, the more of that country's workforce is unionized. This data is grouped by country; the mean of the United States and the mean of the total population are marked on this graph.} 
   \label{fig:2.2}
   \end{minipage}
@@ -259,11 +243,98 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{figure}[h]
 \centering
   \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_9.pdf}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/WorkplaceRights-1} 
+
+}
+
+
+\end{knitrout}
   \caption{Histogram depicting the frequency distribution of Compliance with international law bargaining coverage as scale from 0 to 10 with 10 being the most out of compliance with international law a country could be, and 0 being completely incompliance with international labor law recorded by the International Labor organization. This data is grouped by country, the united states place is marked in the along with the mean of all countries.}
   \label{fig:2.3}
   \end{minipage}
 \end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [[1]]
+\end{verbatim}
+\end{kframe}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/Chinatradeuniondensity-1} 
+
+}
+
+
+
+\end{knitrout}
+  \caption{}
+  \label{fig:2.3}
+  \end{minipage}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.9\linewidth} % Adjusted minipage width
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [[1]]
+\end{verbatim}
+\end{kframe}
+
+{\centering \includegraphics[width=0.9\linewidth]{figure/ChinaCollectiveBargaining-1} 
+
+}
+
+
+
+\end{knitrout}
+    \caption{Your caption here}
+    \label{fig:ChinaCollectiveBargaining}
+  \end{minipage}
+\end{figure}
+
+
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [[1]]
+\end{verbatim}
+\end{kframe}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/China_labor_compliance-1} 
+
+}
+
+
+
+\end{knitrout}
+  \caption{}
+  \label{fig:2.3}
+  \end{minipage}
+\end{figure}
+
 
 \clearpage
 \section{Conclusion}

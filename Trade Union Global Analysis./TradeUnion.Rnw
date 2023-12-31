@@ -18,29 +18,8 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 
-
-% listing setup
-\usepackage{listings}
+% listing setup \usepackage{listings}
 \usepackage{color} % For syntax highlighting color
-
-\lstset{ 
-  language=R,
-  basicstyle=\small,
-  commentstyle=\color{red},
-  keywordstyle=\color{blue},
-  numberstyle=\tiny\color{gray},
-  stringstyle=\color{purple},
-  breaklines=true,
-  captionpos=b,
-  keepspaces=true,
-  numbers=left,
-  numbersep=5pt,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  tabsize=2
-}
-
 \captionsetup{labelfont=bf}
 \setlength{\parskip}{0.5\baselineskip}
 
@@ -122,8 +101,18 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
 
 \subsection{Data Preparation}
 Data was sourced from the appropiate online databases and stored into a SQLite database. The data cleaning required the changing of column names to make the data more readable. Data was extracted from the databases into a tibble and prepared to be analysed using the following code: 
-\begin{lstlisting}{language=R}
-# R code snippet
+
+<<setup, include=FALSE>>=
+library(tidyverse)
+library(RSQLite)
+library(DBI)
+library(ggplot2)
+library(dplyr)
+library(forcats)
+library(GGally)
+library(stringr)
+library(tibble)
+
 setwd("~/workbook")
 con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
 dbListTables(con)
@@ -135,8 +124,185 @@ workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
 state_union_membership_density <-
   as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
 dbDisconnect(con)
-\end{lstlisting}
 
+
+# full joined data is below
+joined_data4 <- inner_join(workplace_rights, tudr, by = c("ref_area", "time"))
+joined_full_data_set <- inner_join(joined_data4, cbcr,
+  by = c("ref_area", "time")
+)
+joined_full_data_set <- joined_full_data_set %>%
+  rename(
+    "National_Compliance_wth_Labour_Rights" = obs_value.x,
+    "Union Density" = obs_value.y,
+    "Collective Bargaining Coverage" = obs_value
+  )
+
+
+trade_union_density <- trade_union_density %>%
+  rename("Year" = Time)
+OldData <- inner_join(trade_union_density, collective_bargaining,
+  by = c("Country", "Year")
+)
+colnames(OldData)
+
+# themes
+
+# themes for NorthvsSouth
+plot_theme <- theme_minimal(base_size = 8, base_family = "Roboto") +
+  theme(
+    plot.title = element_text(
+      size = 20, family = "Lobster Two",
+      face = "bold", color = "#2a475e"
+    ),
+    axis.title.x = element_text(size = 15, face = "bold", color = "black"),
+    axis.title.y = element_text(
+      size = 15, face = "bold", color = "black",
+      margin = margin(t = 10, b = 0, l = 10, r = 2)
+    ),
+    axis.text.x = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 5, b = 0, l = 0, r = 0)
+    ),
+    axis.text.y = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 0, b = 5, l = 0, r = 5)
+    ),
+    legend.position = "none",
+    plot.margin = margin(t = 1, r = 1, b = 40, l = 1, unit = "pt"),
+    axis.ticks = element_line(size = 2, colour = "grey50"),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(linetype = "dashed"),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  )
+
+tstheme <- theme(
+  plot.title = element_text(size = 16, face = "bold"), # Bold and larger title
+  axis.title.x = element_text(size = 14, face = "bold"), # Bold X axis title
+  axis.title.y = element_text(size = 14, face = "bold"), # Bold Y axis title
+  panel.grid.major = element_line(color = "gray80"), # Lighter color for major grid lines
+  panel.grid.minor = element_blank(), # Remove minor grid lines
+  plot.margin = margin(1, 1, 1, 1, "cm") # Adjust plot margins
+)
+####                  this for state_union_membership_density       ###### #
+
+# Assuming your tibble is named state_union_membership_density
+state_union_membership_density <- state_union_membership_density %>%
+  rename_with(~ str_replace(.x, "X.Mem", "19"), starts_with("X.Mem"))
+# Assuming your tibble is named state_union_membership_density
+# Get the current column names
+col_names <- colnames(state_union_membership_density)
+# Loop through each column name
+for (i in seq_along(col_names)) {
+  # Extract the year part of the column name and convert it to a numeric value
+  year <- as.numeric(col_names[i])
+  # Check if the year is less than 1960 and starts with 19
+  if (!is.na(year) && year < 1960 && startsWith(col_names[i], "19")) {
+    # Replace "19" with "20" in the year part
+    new_year <- sub("19", "20", col_names[i])
+    # Update the column name
+    col_names[i] <- new_year
+  }
+}
+# Assign the new column names back to the tibble
+colnames(state_union_membership_density) <- col_names
+state_union_membership_density %>%
+  colnames()
+
+
+# Assuming your data frames are named 'joined_full_data_set', 'tudr', 'cbcr', 'workplace_rights'
+# and they have columns like 'ref_area', 'time', and relevant data columns
+@
+
+<<loopsetup, include=FALSE>>=
+
+
+# Initialize an empty list to store plots
+plots_list <- list()
+
+# Loop for joined_full_data_set (Union Density)
+country_focus <- unique(joined_full_data_set$ref_area)
+for (country in country_focus) {
+  TUD_country <- joined_full_data_set %>%
+    filter(ref_area == country)
+  plot <- ggplot(TUD_country, aes(x = time, y = `Union Density`)) +
+    geom_line(color = "#00BFC4", size = 1.2) +
+    labs(
+      title = paste("Time Series of Union Density in", country, "(ILOdata)"),
+      x = "Year", y = "Union Density (in %)"
+    ) +
+    theme_minimal(base_size = 14) +
+    # Add your custom theme here, if tstheme is defined
+    tstheme
+  plots_list[[paste("Union_Density", country)]] <- plot
+}
+
+# Repeat similar loops for other data sets 'tudr', 'cbcr', 'workplace_rights'
+# Ensure you change the data frame, y-axis, and plot title accordingly
+
+# Loop for 'tudr' data frame
+country_focus <- unique(tudr$ref_area)
+for (country in country_focus) {
+  tudr_country <- tudr %>%
+    filter(ref_area == country)
+  plot <- ggplot(tudr_country, aes(x = time, y = obs_value)) +
+    geom_line(color = "#1b9e77", size = 1.2) +
+    geom_point(color = "#7570b3", size = 2, alpha = 0.7) +
+    labs(
+      title = paste("Time Series of Trade Union Density in", country, "(ILOdata)"),
+      x = "Year", y = "Trade Union Density (in %)"
+    ) +
+    theme_minimal(base_size = 14) +
+    tstheme
+  plots_list[[paste("Trade_Union_Density", country)]] <- plot
+}
+
+# Loop for 'cbcr' data frame
+country_focus <- unique(cbcr$ref_area)
+for (country in country_focus) {
+  cbcr_country <- cbcr %>%
+    filter(ref_area == country)
+  plot <- ggplot(cbcr_country, aes(x = time, y = obs_value)) +
+    geom_line(color = "#2ca02c", size = 1.2) +
+    geom_point(color = "#d62728", size = 2, alpha = 0.7) +
+    labs(
+      title = paste("Collective Bargaining Coverage Over Time in", country, "(ILOdata)"),
+      x = "Year", y = "Collective Bargaining Coverage (in %)"
+    ) +
+    theme_minimal(base_size = 14) +
+    tstheme
+  plots_list[[paste("CB_Coverage", country)]] <- plot
+}
+
+# Loop for 'workplace_rights' data frame
+country_focus <- unique(workplace_rights$ref_area)
+for (country in country_focus) {
+  workplace_rights_country <- workplace_rights %>%
+    filter(ref_area == country)
+  plot <- ggplot(workplace_rights_country, aes(x = time, y = obs_value)) +
+    geom_line(color = "#1f78b4", size = 1.2) +
+    geom_point(color = "#33a02c", size = 2, alpha = 0.7) +
+    labs(
+      title = paste("Compliance with International Labor Law Over Time in", country, "(ILOdata)"),
+      x = "Year", y = "Compliance with International Labor Law (Rating)"
+    ) +
+    theme_minimal(base_size = 14) +
+    tstheme +
+    annotate("text",
+      x = Inf, y = Inf, label = "Source: Your Source Here",
+      hjust = 1.1, vjust = 2, size = 3.5, color = "grey50"
+    )
+  plots_list[[paste("Labor_Compliance", country)]] <- plot
+}
+
+# Convert the list of plots to a tibble
+tsplots_tibble <- tibble::enframe(plots_list, name = "Plot_Type", value = "Plot")
+tsplots_tibble
+@
 
 
 \begin{figure}[h]
@@ -191,16 +357,91 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8.pdf}
+<<CollectiveBargaining, echo = FALSE, fig.align='center', out.width='0.7\\linewidth' >>=
+# Assuming cbcr is your data frame
+US_cbcr <- cbcr %>%
+  filter(ref_area == "United States") %>%
+  summarize(cbcrValue = mean(obs_value)) %>%
+  .$cbcrValue
+# Calculate the median of Collective Bargaining Coverage
+Median_cbcr <- median(cbcr$obs_value)
+# Create a data frame for the lines
+lines_df_cbcr <- data.frame(
+  xintercept = c(US_cbcr, Median_cbcr),
+  line_id = c("United States", "Median")
+)
+# Create histogram for Collective Bargaining Coverage
+d3 <- ggplot(cbcr, aes(x = obs_value)) +
+  geom_histogram(bins = 30, fill = "#404080", color = "black") +
+  geom_vline(
+    data = lines_df_cbcr,
+    aes(
+      xintercept = xintercept,
+      linetype = line_id,
+      color = line_id
+    ),
+    size = 3
+  ) +
+  scale_color_manual(
+    name = "Line Type",
+    values = c(
+      "United States" = "red",
+      "Median" = "green"
+    )
+  ) +
+  scale_linetype_manual(
+    name = "Line Type",
+    values = c(
+      "United States" = "dotted",
+      "Median" = "dashed"
+    )
+  ) +
+  labs(
+    title = "Histogram of National Collective Bargaining Coverage",
+    x = "Collective Bargaining Coverage (in %)",
+    y = "Frequency"
+  ) +
+  tstheme +
+  guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
+print(d3)
+@
   \caption[Collective Bargaining Coverage]{\textbf {Collective Bargaining Coverage 2000-2019} Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
   \label{fig:2.1}
   \end{minipage}
 \end{figure}
-
+\hspace{5pt}
 \begin{figure}[h]
 \centering
   \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_8-1.pdf}
+<<UnionDensity, echo = FALSE, fig.align='center', out.width='0.7\\linewidth' >>=
+US_UnionDensity <- trade_union_density %>%
+  filter(Country == "United States") %>%
+  summarize(UnionDensityValue = mean(Value)) %>%
+  .$UnionDensityValue # Extracting the numeric value
+# Calculate the median of the Union Density
+Median_UnionDensity <- median(trade_union_density$Value)
+# Create a data frame for the lines
+lines_df <- data.frame(
+  xintercept = c(US_UnionDensity, Median_UnionDensity),
+  line_id = c("United States", "Median")
+)
+d1 <- ggplot(trade_union_density, aes(x = Value)) +
+  geom_histogram(bins = 30, fill = "#69b3a2", color = "black") +
+  geom_vline(data = lines_df, aes(
+    xintercept = xintercept,
+    linetype = line_id, color = line_id
+  ), size = 3) +
+  scale_color_manual(name = "Line Type", values = c("United States" = "red", "Median" = "green")) +
+  scale_linetype_manual(name = "Line Type", values = c("United States" = "dotted", "Median" = "dashed")) +
+  labs(
+    title = "Histogram of Union Density",
+    x = "Union Density(in %)",
+    y = "Frequency"
+  ) +
+  tstheme +
+  guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
+print(d1)
+@
   \caption{Histogram depicting the frequency distribution of Union Density in percent. The percentage measures a country's total unionized industries; the higher the percentage, the more of that country's workforce is unionized. This data is grouped by country; the mean of the United States and the mean of the total population are marked on this graph.} 
   \label{fig:2.2}
   \end{minipage}
@@ -209,11 +450,106 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{figure}[h]
 \centering
   \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=.9\textwidth]{~/Lab2/graphs/plot_9.pdf}
+<<WorkplaceRights, echo = FALSE, fig.align='center', out.width='0.7\\linewidth' >>=
+
+# Assuming workplace_rights is your data frame
+US_workplace_rights <- workplace_rights %>%
+  filter(ref_area == "United States") %>%
+  summarize(workplace_rightsValue = mean(obs_value)) %>%
+  .$workplace_rightsValue
+# Calculate the median of Workplace Rights
+Median_workplace_rights <- median(workplace_rights$obs_value)
+# Create a data frame for the lines
+lines_df_wr <- data.frame(
+  xintercept = c(US_workplace_rights, Median_workplace_rights),
+  line_id = c("United States", "Median")
+)
+# Create histogram for Workplace Rights
+d2 <- ggplot(workplace_rights, aes(x = obs_value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  geom_vline(
+    data = lines_df_wr,
+    aes(xintercept = xintercept, linetype = line_id, color = line_id), size = 3
+  ) +
+  scale_color_manual(
+    name = "Line Type",
+    values = c("United States" = "red", "Median" = "green")
+  ) +
+  scale_linetype_manual(
+    name = "Line Type",
+    values = c("United States" = "dotted", "Median" = "dashed")
+  ) +
+  labs(
+    title = "Histogram of National Compliance with International Law (ILO)",
+    x = "Workplace Rights Compliance with International Law (Rating)",
+    y = "Frequency"
+  ) +
+  tstheme +
+  guides(color = guide_legend(override.aes = list(linetype = c("dashed", "dotted"))))
+print(d2)
+@
   \caption{Histogram depicting the frequency distribution of Compliance with international law bargaining coverage as scale from 0 to 10 with 10 being the most out of compliance with international law a country could be, and 0 being completely incompliance with international labor law recorded by the International Labor organization. This data is grouped by country, the united states place is marked in the along with the mean of all countries.}
   \label{fig:2.3}
   \end{minipage}
 \end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+<<Chinatradeuniondensity, echo = FALSE, fig.align='center', out.width='0.7\\linewidth'>>=
+# Display "Trade_Union_Density China" plot
+desired_plot_row <- tsplots_tibble %>%
+  filter(Plot_Type == "Trade_Union_Density China")
+desired_plot <- desired_plot_row$Plot
+print(desired_plot)
+@
+  \caption{}
+  \label{fig:2.3}
+  \end{minipage}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.9\linewidth} % Adjusted minipage width
+<<ChinaCollectiveBargaining, echo=FALSE, fig.align='center', out.width='0.9\\linewidth'>>=
+# Display "CB_Coverage China" plot
+desired_plot_row <- tsplots_tibble %>%
+  filter(Plot_Type == "CB_Coverage China")
+desired_plot <- desired_plot_row$Plot
+print(desired_plot)
+@
+    \caption{Your caption here}
+    \label{fig:ChinaCollectiveBargaining}
+  \end{minipage}
+\end{figure}
+
+
+
+
+
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+<<China labor compliance, echo = FALSE, fig.align='center', out.width='0.7\\linewidth' >>=
+# Display "Labor_Compliance China" plot
+desired_plot_row <- tsplots_tibble %>%
+  filter(Plot_Type == "Labor_Compliance China")
+desired_plot <- desired_plot_row$Plot
+print(desired_plot)
+@
+  \caption{}
+  \label{fig:2.3}
+  \end{minipage}
+\end{figure}
+
 
 \clearpage
 \section{Conclusion}

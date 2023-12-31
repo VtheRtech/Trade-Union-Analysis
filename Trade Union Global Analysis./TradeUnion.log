@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.20)  27 DEC 2023 21:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.20)  31 DEC 2023 02:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -336,74 +336,52 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip56
-) (/usr/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count298
-\lst@gtempboxa=\box54
-\lst@token=\toks23
-\lst@length=\count299
-\lst@currlwidth=\dimen189
-\lst@column=\count300
-\lst@pos=\count301
-\lst@lostspace=\dimen190
-\lst@width=\dimen191
-\lst@newlines=\count302
-\lst@lineno=\count303
-\lst@maxwidth=\dimen192
- (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count304
-\lst@skipnumbers=\count305
-\lst@framebox=\box55
-) (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2023/02/27 1.9 listings configuration
-))
-Package: listings 2023/02/27 1.9 (Carsten Heinz)
- (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-) (/usr/share/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2023/02/27 1.9 listings language file
-) (/usr/share/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
-) (./TradeUnion.aux)
+) (./TradeUnion.aux
+
+LaTeX Warning: Label `fig:2.3' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.3' multiply defined.
+
+)
 \openout1 = `TradeUnion.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
-\scratchdimen=\dimen193
-\scratchbox=\box56
-\nofMPsegments=\count307
-\nofMParguments=\count308
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count309
-\MPscratchDim=\dimen194
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count298
+\scratchdimen=\dimen189
+\scratchbox=\box54
+\nofMPsegments=\count299
+\nofMParguments=\count300
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count301
+\MPscratchDim=\dimen190
+\MPnumerator=\count302
+\makeMPintoPDFobject=\count303
+\everyMPtoPDFconversion=\toks24
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
-Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
 *geometry* driver: auto-detecting
@@ -440,124 +418,140 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 102.
+Package hyperref Info: Link coloring OFF on input line 81.
 (./TradeUnion.out) (./TradeUnion.out)
 \@outlinefile=\write3
 \openout3 = `TradeUnion.out'.
 
- (/usr/share/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-)
-\c@lstlisting=\count312
-LaTeX Font Info:    Trying to load font information for U+msa on input line 105.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 84.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 105.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 84.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 175.
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 178.
- (/usr/share/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 178.
 <~/Lab2/graphs/udstudfy.jpg, id=53, 1168.0pt x 1776.09pt>
 File: ~/Lab2/graphs/udstudfy.jpg Graphic file (type jpg)
 <use ~/Lab2/graphs/udstudfy.jpg>
-Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 195.
+Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 163.
 (pdftex.def)             Requested size: 367.6649pt x 559.0919pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 200.
+Package hyperref Warning: Ignoring empty anchor on input line 168.
 
 [2] [3 </home/pretender/Lab2/graphs/udstudfy.jpg>]
-<~/Lab2/graphs/plot_10.png, id=85, 1067.9097pt x 639.1077pt>
+<~/Lab2/graphs/plot_10.png, id=70, 722.7pt x 577.9191pt>
 File: ~/Lab2/graphs/plot_10.png Graphic file (type png)
 <use ~/Lab2/graphs/plot_10.png>
-Package pdftex.def Info: ~/Lab2/graphs/plot_10.png  used on input line 217.
-(pdftex.def)             Requested size: 472.71088pt x 282.89534pt.
-<~/Lab2/graphs/plot_11.png, id=86, 1067.9097pt x 639.1077pt>
+Package pdftex.def Info: ~/Lab2/graphs/plot_10.png  used on input line 185.
+(pdftex.def)             Requested size: 472.71088pt x 378.01509pt.
+<~/Lab2/graphs/plot_11.png, id=71, 722.7pt x 577.9191pt>
 File: ~/Lab2/graphs/plot_11.png Graphic file (type png)
 <use ~/Lab2/graphs/plot_11.png>
-Package pdftex.def Info: ~/Lab2/graphs/plot_11.png  used on input line 226.
-(pdftex.def)             Requested size: 472.71088pt x 282.89534pt.
+Package pdftex.def Info: ~/Lab2/graphs/plot_11.png  used on input line 194.
+(pdftex.def)             Requested size: 472.71088pt x 378.01509pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_12.png, id=87, 1067.9097pt x 639.1077pt>
+<~/Lab2/graphs/plot_12.png, id=72, 722.7pt x 577.9191pt>
 File: ~/Lab2/graphs/plot_12.png Graphic file (type png)
 <use ~/Lab2/graphs/plot_12.png>
-Package pdftex.def Info: ~/Lab2/graphs/plot_12.png  used on input line 235.
-(pdftex.def)             Requested size: 472.71088pt x 282.89534pt.
+Package pdftex.def Info: ~/Lab2/graphs/plot_12.png  used on input line 203.
+(pdftex.def)             Requested size: 472.71088pt x 378.01509pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_8.pdf, id=88, 966.61125pt x 578.16pt>
-File: ~/Lab2/graphs/plot_8.pdf Graphic file (type pdf)
-<use ~/Lab2/graphs/plot_8.pdf>
-Package pdftex.def Info: ~/Lab2/graphs/plot_8.pdf  used on input line 244.
-(pdftex.def)             Requested size: 330.89616pt x 197.92155pt.
+<figure/CollectiveBargaining-1.pdf, id=73, 505.89pt x 505.89pt>
+File: figure/CollectiveBargaining-1.pdf Graphic file (type pdf)
+<use figure/CollectiveBargaining-1.pdf>
+Package pdftex.def Info: figure/CollectiveBargaining-1.pdf  used on input line 215.
+(pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_8-1.pdf, id=89, 966.61125pt x 578.16pt>
-File: ~/Lab2/graphs/plot_8-1.pdf Graphic file (type pdf)
-<use ~/Lab2/graphs/plot_8-1.pdf>
-Package pdftex.def Info: ~/Lab2/graphs/plot_8-1.pdf  used on input line 253.
-(pdftex.def)             Requested size: 330.89616pt x 197.92155pt.
+<figure/UnionDensity-1.pdf, id=74, 505.89pt x 505.89pt>
+File: figure/UnionDensity-1.pdf Graphic file (type pdf)
+<use figure/UnionDensity-1.pdf>
+Package pdftex.def Info: figure/UnionDensity-1.pdf  used on input line 232.
+(pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_9.pdf, id=90, 966.61125pt x 578.16pt>
-File: ~/Lab2/graphs/plot_9.pdf Graphic file (type pdf)
-<use ~/Lab2/graphs/plot_9.pdf>
-Package pdftex.def Info: ~/Lab2/graphs/plot_9.pdf  used on input line 262.
-(pdftex.def)             Requested size: 330.89616pt x 197.92155pt.
+<figure/WorkplaceRights-1.pdf, id=75, 505.89pt x 505.89pt>
+File: figure/WorkplaceRights-1.pdf Graphic file (type pdf)
+<use figure/WorkplaceRights-1.pdf>
+Package pdftex.def Info: figure/WorkplaceRights-1.pdf  used on input line 249.
+(pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/Chinatradeuniondensity-1.pdf, id=76, 505.89pt x 505.89pt>
+File: figure/Chinatradeuniondensity-1.pdf Graphic file (type pdf)
+<use figure/Chinatradeuniondensity-1.pdf>
+Package pdftex.def Info: figure/Chinatradeuniondensity-1.pdf  used on input line 272.
+(pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/ChinaCollectiveBargaining-1.pdf, id=77, 505.89pt x 505.89pt>
+File: figure/ChinaCollectiveBargaining-1.pdf Graphic file (type pdf)
+<use figure/ChinaCollectiveBargaining-1.pdf>
+Package pdftex.def Info: figure/ChinaCollectiveBargaining-1.pdf  used on input line 300.
+(pdftex.def)             Requested size: 425.43689pt x 425.44644pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figure/China_labor_compliance-1.pdf, id=78, 505.89pt x 505.89pt>
+File: figure/China_labor_compliance-1.pdf Graphic file (type pdf)
+<use figure/China_labor_compliance-1.pdf>
+Package pdftex.def Info: figure/China_labor_compliance-1.pdf  used on input line 326.
+(pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4
 
- </home/pretender/Lab2/graphs/plot_10.png>] [5 </home/pretender/Lab2/graphs/plot_11.png> </home/pretender/Lab2/graphs/plot_12.png>] [6 </home/pretender/Lab2/graphs/plot_8.pdf> </home/pretender/Lab2/graphs/plot_8-1.pdf>] [7 </home/pretender/Lab2/graphs/plot_9.pdf>] [8
+ </home/pretender/Lab2/graphs/plot_10.png>] [5 </home/pretender/Lab2/graphs/plot_11.png>] [6 </home/pretender/Lab2/graphs/plot_12.png> <./figure/CollectiveBargaining-1.pdf>] [7 <./figure/UnionDensity-1.pdf> <./figure/WorkplaceRights-1.pdf>] [8 <./figure/Chinatradeuniondensity-1.pdf>] [9 <./figure/ChinaCollectiveBargaining-1.pdf>] [10 <./figure/China_labor_compliance-1.pdf>] [11
 
 ]
-Overfull \hbox (26.78679pt too wide) in paragraph at lines 280--284
+Overfull \hbox (26.78679pt too wide) in paragraph at lines 351--355
 []\OT1/cmr/m/n/10.95 International Labour Or-ga-ni-za-tion. (2022). Trade union den-sity rate () -- An-nual (Id: ILR[]TUMT[]NOC[]RT[]A)
  []
 
 
-Overfull \hbox (73.446pt too wide) in paragraph at lines 284--288
+Overfull \hbox (73.446pt too wide) in paragraph at lines 355--359
 []\OT1/cmr/m/n/10.95 International Labour Or-ga-ni-za-tion. (2022). Col-lec-tive bar-gain-ing cov-er-age rate () -- An-nual (Id: ILR[]CBCT[]NOC[]RT[]A)
  []
 
-[9
+[12
 
 ] (./TradeUnion.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `TradeUnion.out' has not changed.
 (rerunfilecheck)             Checksum: 45755E312C6A7B775774CB9210CF7A69;755.
  ) 
 Here is how much of TeX's memory you used:
- 15315 strings out of 477985
- 238324 string characters out of 5840057
- 1948388 words of memory out of 5000000
- 35258 multiletter control sequences out of 15000+600000
- 523686 words of font info for 75 fonts, out of 8000000 for 9000
+ 12937 strings out of 477985
+ 208878 string characters out of 5840057
+ 1864388 words of memory out of 5000000
+ 32912 multiletter control sequences out of 15000+600000
+ 523351 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,8n,77p,932b,2021s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on TradeUnion.pdf (9 pages, 5420236 bytes).
+ 72i,9n,77p,932b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on TradeUnion.pdf (12 pages, 4042152 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 169 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
- 92 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 236 PDF objects out of 1000 (max. 8388607)
+ 185 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 
