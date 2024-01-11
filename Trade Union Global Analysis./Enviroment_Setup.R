@@ -17,6 +17,8 @@ trade_union_density <- as_tibble(dbReadTable(con, "TradeUnionDensity"))
 workplace_rights <- as_tibble(dbReadTable(con, "WorkplaceRights"))
 state_union_membership_density <-
   as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
+state_union_coverage_density <-
+  as_tibble(dbReadTable(con, "State_Union_Coverage_Density_1977-2021"))
 dbDisconnect(con)
 
 
@@ -55,11 +57,11 @@ plot_theme <- theme_minimal(base_size = 8, base_family = "Roboto") +
       margin = margin(t = 10, b = 0, l = 10, r = 2)
     ),
     axis.text.x = element_text(
-      size = 10, color = "black",
+      size = 13, color = "black",
       margin = margin(t = 5, b = 0, l = 0, r = 0)
     ),
     axis.text.y = element_text(
-      size = 10, color = "black",
+      size = 13, color = "black",
       margin = margin(t = 0, b = 5, l = 0, r = 5)
     ),
     legend.position = "none",
@@ -74,15 +76,23 @@ plot_theme <- theme_minimal(base_size = 8, base_family = "Roboto") +
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
   )
 
-fstheme <- theme(
-  plot.title = element_text(size = 16, face = "bold"), # Bold and larger title
-  axis.title.x = element_text(size = 14, face = "bold"), # Bold X axis title
-  axis.title.y = element_text(size = 14, face = "bold"), # Bold Y axis title
+tstheme <- theme(
+  plot.title = element_text(size = 20, face = "bold"), # Bold and larger title
+  axis.title.x = element_text(size = 16, face = "bold"), # Bold X axis title
+  axis.title.y = element_text(size = 16, face = "bold"), # Bold Y axis title
+  axis.text.x = element_text(
+    size = 13, color = "black",
+    margin = margin(t = 5, b = 0, l = 0, r = 0)
+  ),
+  axis.text.y = element_text(
+    size = 13, color = "black",
+    margin = margin(t = 0, b = 5, l = 0, r = 5)
+  ),
   panel.grid.major = element_line(color = "gray80"), # Lighter color for major grid lines
   panel.grid.minor = element_blank(), # Remove minor grid lines
   plot.margin = margin(1, 1, 1, 1, "cm") # Adjust plot margins
 )
-####                  this for state_union_membership_density       ###### #
+####                  loop for state_union_membership_density       ###### #
 
 # Assuming your tibble is named state_union_membership_density
 state_union_membership_density <- state_union_membership_density %>%
@@ -90,7 +100,7 @@ state_union_membership_density <- state_union_membership_density %>%
 # Assuming your tibble is named state_union_membership_density
 # Get the current column names
 col_names <- colnames(state_union_membership_density)
-# Loop through each column name
+#                             Loop through each column name
 for (i in seq_along(col_names)) {
   # Extract the year part of the column name and convert it to a numeric value
   year <- as.numeric(col_names[i])
@@ -104,5 +114,33 @@ for (i in seq_along(col_names)) {
 }
 # Assign the new column names back to the tibble
 colnames(state_union_membership_density) <- col_names
-state_union_membership_density %>%
-  colnames()
+
+
+#####                   loop for state_union_coverage_density         #####
+state_union_coverage_density <- state_union_coverage_density %>%
+  rename_with(~ str_replace(.x, "X.Cov", "19"), starts_with("X.Cov"))
+# Assuming your tibble is named state_union_coverage_density
+# Get the current column names
+col_names <- colnames(state_union_coverage_density)
+for (i in seq_along(col_names)) {
+  # Extract the year part of the column name and convert it to a numeric value
+  year <- as.numeric(col_names[i])
+  # Check if the year is less than 1960 and starts with 19
+  if (!is.na(year) && year < 1960 && startsWith(col_names[i], "19")) {
+    # Replace "19" with "20" in the year part
+    new_year <- sub("19", "20", col_names[i])
+    # Update the column name
+    col_names[i] <- new_year
+  }
+}
+# Assign the new column names back to the tibble
+colnames(state_union_coverage_density) <- col_names
+
+
+library(knitr)
+library(highr)
+library(evaluate)
+library(xfun)
+
+setwd("~/Lab2/Trade Union Global Analysis./")
+knit("TradeUnion.Rnw")

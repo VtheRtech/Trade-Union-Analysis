@@ -10,6 +10,7 @@ library(knitr)
 library(highr)
 library(evaluate)
 library(xfun)
+
 library(tidyverse)
 library(RSQLite)
 library(DBI)
@@ -99,8 +100,8 @@ for (i in seq_along(col_names)) {
   }
 }
 # Assign the new column names back to the tibble
-colnames(state_union_membership_density) <- col_names
-state_union_membership_density %>%
+colnames(state_union_membership_density) <-
+  col_names state_union_membership_density %>%
   colnames()
 
 

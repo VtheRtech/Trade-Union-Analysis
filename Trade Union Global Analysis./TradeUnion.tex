@@ -59,6 +59,9 @@
 \usepackage[a4paper,margin=0.5in]{geometry}
 \usepackage{lipsum}
 
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+
 % Packages for math
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -74,7 +77,7 @@
 \setlength{\parskip}{0.5\baselineskip}
 
 
-\title{Data Analysis Report}
+\title{\textbf{Data Analysis Report}}
 \author{Michael V Cumbo}
 \date{\today}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -82,109 +85,185 @@
 
 \maketitle
 
-\begin{abstract}
-This document presents a comprehensive analysis of the data pertaining to trade unions.
-\end{abstract}
-
 \section{Introduction}
-This paper was written in response to the United Auto Workers strike and the SAG-AFTRA strike of 2023. The goal of this paper is to contextualize the state of trade union power in the United States, blending data analysis with a literature review. The findings in this paper also contextualize union power in a select number of nation-states, adding perspective to the modes of influence individual working-class individuals may have within those states.
+This paper was written in response to the United Auto Workers strike and the SAG-AFTRA strike of 2023. The goal of this paper is to contextualize the state of trade union power in the United States, blending data analysis with a literature review. The data in this paper will contextualize union power in a select number of nation-states, adding perspective to the modes of influence unions have.
 
 \section{Methodology}
 \subsection*{Libraries Used in the Analysis}
 
 This analysis utilized several R packages, each contributing unique functions essential for data management, manipulation, visualization, and database interaction. Below is a description of each package and its role in our analysis:
 
-\begin{itemize}
-    \item \textbf{tidyverse}: An aggregation of several data manipulation packages, \texttt{tidyverse} simplifies many aspects of data analysis. It includes packages like \texttt{ggplot2} for data visualization, \texttt{dplyr} for data manipulation, and \texttt{readr} for data import. Its unified data philosophy makes data science tasks more straightforward and efficient.
-    \begin{itemize}
+\section*{R Packages Overview}
+\begin{enumerate}
+    \item \textbf{Tidyverse}
+    \begin{itemize}[noitemsep]
+        \item Description: An aggregation of several data manipulation packages. Simplifies many aspects of data analysis. Includes packages like \texttt{ggplot2} for data visualization, \texttt{dplyr} for data manipulation, and \texttt{readr} for data import.
         \item Installation: \texttt{install.packages("tidyverse")}
         \item Documentation: \href{https://www.tidyverse.org/}{tidyverse.org}
     \end{itemize}
-    
-    \item \textbf{RSQLite}: This package provides a database interface and SQLite driver for R. It allows for seamless integration of SQLite database capabilities within R, enabling the storage, management, and retrieval of large datasets efficiently.
-    \begin{itemize}
+
+    \item \textbf{RSQLite}
+    \begin{itemize}[noitemsep]
+        \item Description: Provides a database interface and SQLite driver for R. Allows for storage, management, and retrieval of large datasets efficiently.
         \item Installation: \texttt{install.packages("RSQLite")}
         \item Documentation: \href{https://cran.r-project.org/web/packages/RSQLite/index.html}{RSQLite on CRAN}
     \end{itemize}
-    
-    \item \textbf{DBI}: The \texttt{DBI} package defines a common interface between R and database management systems. It is crucial for establishing database connections and executing database queries.
-    \begin{itemize}
+
+    \item \textbf{DBI}
+    \begin{itemize}[noitemsep]
+        \item Description: Defines a common interface between R and database management systems. Essential for establishing database connections and executing queries.
         \item Installation: \texttt{install.packages("DBI")}
         \item Documentation: \href{https://cran.r-project.org/web/packages/DBI/index.html}{DBI on CRAN}
     \end{itemize}
-    
-    \item \textbf{ggplot2}: A part of the \texttt{tidyverse}, \texttt{ggplot2} is a powerful and flexible tool for creating elegant data visualizations in R. It is based on the Grammar of Graphics and allows for building plots iteratively.
-    \begin{itemize}
+
+    \item \textbf{Ggplot2}
+    \begin{itemize}[noitemsep]
+        \item Description: Part of the \texttt{tidyverse}, a tool for creating elegant data visualizations in R, based on the Grammar of Graphics.
         \item Installation: \texttt{install.packages("ggplot2")}
         \item Documentation: \href{https://ggplot2.tidyverse.org/}{ggplot2.tidyverse.org}
     \end{itemize}
-    
-    \item \textbf{dplyr}: Also within the \texttt{tidyverse}, \texttt{dplyr} is used for data manipulation. It provides a set of verbs like filter, select, mutate, and summarize, making data manipulation tasks more intuitive and readable.
-    \begin{itemize}
+
+    \item \textbf{Dplyr}
+    \begin{itemize}[noitemsep]
+        \item Description: Within the \texttt{tidyverse}, used for data manipulation with verbs like filter, select, mutate, and summarize.
         \item Installation: \texttt{install.packages("dplyr")}
         \item Documentation: \href{https://dplyr.tidyverse.org/}{dplyr.tidyverse.org}
     \end{itemize}
-    
-    \item \textbf{forcats}: This package, part of the \texttt{tidyverse}, is designed for handling categorical variables (factors in R). It provides functions for reordering factor levels, collapsing levels, and changing the display of factor levels.
-    \begin{itemize}
+
+    \item \textbf{Forcats}
+    \begin{itemize}[noitemsep]
+        \item Description: Part of the \texttt{tidyverse}, designed for handling categorical variables in R. Provides functions for reordering factor levels and more.
         \item Installation: \texttt{install.packages("forcats")}
         \item Documentation: \href{https://forcats.tidyverse.org/}{forcats.tidyverse.org}
     \end{itemize}
-    
-    \item \textbf{GGally}: An extension of \texttt{ggplot2}, \texttt{GGally} provides additional functions and utilities to enhance the capability of \texttt{ggplot2}, especially for creating complex multi-plot layouts.
-    \begin{itemize}
+
+    \item \textbf{GGally}
+    \begin{itemize}[noitemsep]
+        \item Description: An extension of \texttt{ggplot2}, providing additional functions for creating complex multi-plot layouts.
         \item Installation: \texttt{install.packages("GGally")}
         \item Documentation: \href{https://cran.r-project.org/web/packages/GGally/index.html}{GGally on CRAN}
     \end{itemize}
-    
-    \item \textbf{stringr}: This package, also a part of the \texttt{tidyverse}, simplifies the process of working with strings (text data). It provides consistent and easy-to-use functions for string manipulation.
-    \begin{itemize}
+
+    \item \textbf{Stringr}
+    \begin{itemize}[noitemsep]
+        \item Description: Also part of the \texttt{tidyverse}, it simplifies working with strings (text data) in R.
         \item Installation: \texttt{install.packages("stringr")}
         \item Documentation: \href{https://stringr.tidyverse.org/}{stringr.tidyverse.org}
     \end{itemize}
-\end{itemize}
-
-These libraries collectively provided the comprehensive toolkit necessary for our data analysis, from data manipulation and querying to visualization and string processing.
-
+\end{enumerate}
 \subsection{Data Collection}
 Data was sourced from the International Labor Organization, OECD datasets, and Harvard datasets.
-
 \subsection{Data Preparation}
-Data was sourced from the appropiate online databases and stored into a SQLite database. The data cleaning required the changing of column names to make the data more readable. Data was extracted from the databases into a tibble and prepared to be analysed using the following code: 
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Initialize an empty list to store plots}
+\hlstd{plots_list} \hlkwb{<-} \hlkwd{list}\hlstd{()}
+\hlcom{# Loop for 'joined_full_data_set' (Union Density)}
+\hlstd{country_focus} \hlkwb{<-} \hlkwd{unique}\hlstd{(joined_full_data_set}\hlopt{$}\hlstd{ref_area)}
+\hlkwa{for} \hlstd{(country} \hlkwa{in} \hlstd{country_focus) \{}
+  \hlstd{TUD_country} \hlkwb{<-} \hlstd{joined_full_data_set} \hlopt{%>%}
+    \hlkwd{filter}\hlstd{(ref_area} \hlopt{==} \hlstd{country)}
 
+  \hlstd{wrapped_title} \hlkwb{<-} \hlkwd{str_wrap}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Time Series of Union Density in"}\hlstd{,}
+                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{35}\hlstd{)}
+  \hlstd{plot} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(TUD_country,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= time,} \hlkwc{y} \hlstd{= `Union Density`))} \hlopt{+}
+    \hlkwd{geom_line}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#00BFC4"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1.2}\hlstd{)} \hlopt{+}
+    \hlkwd{labs}\hlstd{(}
+      \hlkwc{title} \hlstd{= wrapped_title,}
+      \hlkwc{x} \hlstd{=} \hlstr{"Year"}\hlstd{,}
+      \hlkwc{y} \hlstd{=} \hlstr{"Union Density (in %)"}
+    \hlstd{)} \hlopt{+}
+    \hlkwd{theme_minimal}\hlstd{(}\hlkwc{base_size} \hlstd{=} \hlnum{14}\hlstd{)} \hlopt{+}
+    \hlstd{tstheme} \hlopt{+}
+    \hlkwd{scale_y_continuous}\hlstd{(}\hlkwc{breaks} \hlstd{= scales}\hlopt{::}\hlkwd{pretty_breaks}\hlstd{(}\hlkwc{n} \hlstd{=} \hlnum{10}\hlstd{),}
+                       \hlkwc{labels} \hlstd{= scales}\hlopt{::}\hlkwd{label_number}\hlstd{(}\hlkwc{auto} \hlstd{=} \hlnum{TRUE}\hlstd{))}
+  \hlstd{plots_list[[}\hlkwd{paste}\hlstd{(}\hlstr{"Union_Density"}\hlstd{, country)]]} \hlkwb{<-} \hlstd{plot}
+\hlstd{\}}
+\hlcom{# Loop for 'cbcr' data frame}
+\hlkwa{for} \hlstd{(country} \hlkwa{in} \hlkwd{unique}\hlstd{(cbcr}\hlopt{$}\hlstd{ref_area)) \{}
+  \hlstd{cbcr_country} \hlkwb{<-} \hlstd{cbcr} \hlopt{%>%}
+    \hlkwd{filter}\hlstd{(ref_area} \hlopt{==} \hlstd{country)}
 
+  \hlstd{wrapped_title} \hlkwb{<-} \hlkwd{str_wrap}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Collective Bargaining Coverage Over Time in"}\hlstd{,}
+                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{35}\hlstd{)}
 
+  \hlstd{plot} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(cbcr_country,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= time,} \hlkwc{y} \hlstd{= obs_value))} \hlopt{+}
+    \hlkwd{geom_line}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#2ca02c"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1.2}\hlstd{)} \hlopt{+}
+    \hlkwd{geom_point}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#d62728"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{alpha} \hlstd{=} \hlnum{0.7}\hlstd{)} \hlopt{+}
+    \hlkwd{labs}\hlstd{(}
+      \hlkwc{title} \hlstd{= wrapped_title,}
+      \hlkwc{x} \hlstd{=} \hlstr{"Year"}\hlstd{,}
+      \hlkwc{y} \hlstd{=} \hlstr{"Collective Bargaining Coverage (in %)"}
+    \hlstd{)} \hlopt{+}
+    \hlkwd{theme_minimal}\hlstd{(}\hlkwc{base_size} \hlstd{=} \hlnum{14}\hlstd{)} \hlopt{+}
+    \hlstd{tstheme}
+  \hlstd{plots_list[[}\hlkwd{paste}\hlstd{(}\hlstr{"CB_Coverage"}\hlstd{, country)]]} \hlkwb{<-} \hlstd{plot}
+\hlstd{\}}
 
+\hlcom{# Loop for 'workplace_rights' data frame}
+\hlkwa{for} \hlstd{(country} \hlkwa{in} \hlkwd{unique}\hlstd{(workplace_rights}\hlopt{$}\hlstd{ref_area)) \{}
+  \hlstd{workplace_rights_country} \hlkwb{<-} \hlstd{workplace_rights} \hlopt{%>%}
+    \hlkwd{filter}\hlstd{(ref_area} \hlopt{==} \hlstd{country)}
 
-\begin{figure}[h]
-\centering
-  \begin{minipage}{0.7\linewidth}
-  \includegraphics[width=\linewidth]{~/Lab2/graphs/udstudfy.jpg}
-  \caption{Histogram depicting the distribution of the collective labour force index. The incomplete data availability pushes the Index down to around 72 countries, so the ranking matters less than the Index itself. The picture it paints is the freedom a working person has in the labor force(Union Power). This study is an assessment of union power. It indicates union power by combining and weighing the following stats: Trade Union Density, Collective Bargaining Coverage, Labour Force Participation Rate, Employment in agriculture, Democracy, Core labor rights ratification, hiring and firing constraints, and Hours Regulation. The United States is 62(3.32 index rating) in the Index, and China's place is 68 (1.92 index rating). The data is only recorded from 2010 to 2016. }
-  \label{fig:1.0}
-  \end{minipage}
-\end{figure}
-\footnotetext{Source: Metten, A. (2021). \textit{Rethinking Trade Union Density: A new index for Measuring Union Strength.}Industrial Relations Journal, 52(6), 528–549. https://doi.org/10.1111/irj.12347}
+  \hlstd{wrapped_title} \hlkwb{<-} \hlkwd{str_wrap}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Compliance with International Labor Law Over Time in"}\hlstd{,}
+                                  \hlstd{country,}
+                                  \hlstr{"(ILOdata)"}\hlstd{),}
+                            \hlkwc{width} \hlstd{=} \hlnum{35}\hlstd{)}
+
+  \hlstd{plot} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(workplace_rights_country,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= time,} \hlkwc{y} \hlstd{= obs_value))} \hlopt{+}
+    \hlkwd{geom_line}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#1f78b4"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1.2}\hlstd{)} \hlopt{+}
+    \hlkwd{geom_point}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#33a02c"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{alpha} \hlstd{=} \hlnum{0.7}\hlstd{)} \hlopt{+}
+    \hlkwd{labs}\hlstd{(}
+      \hlkwc{title} \hlstd{= wrapped_title,}
+      \hlkwc{x} \hlstd{=} \hlstr{"Year"}\hlstd{,}
+      \hlkwc{y} \hlstd{=} \hlstr{"Compliance with International Labor Law (Rating)"}
+    \hlstd{)} \hlopt{+}
+    \hlkwd{theme_minimal}\hlstd{(}\hlkwc{base_size} \hlstd{=} \hlnum{14}\hlstd{)} \hlopt{+}
+    \hlstd{tstheme} \hlopt{+}
+    \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,}
+      \hlkwc{x} \hlstd{=} \hlnum{Inf}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{Inf}\hlstd{,} \hlkwc{label} \hlstd{=} \hlstr{"Source: Your Source Here"}\hlstd{,}
+      \hlkwc{hjust} \hlstd{=} \hlnum{1.1}\hlstd{,} \hlkwc{vjust} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{3.5}\hlstd{,} \hlkwc{color} \hlstd{=} \hlstr{"grey50"}
+    \hlstd{)}
+  \hlstd{plots_list[[}\hlkwd{paste}\hlstd{(}\hlstr{"Labor_Compliance"}\hlstd{, country)]]} \hlkwb{<-} \hlstd{plot}
+\hlstd{\}}
+
+\hlcom{# Convert the list of plots to a tibble}
+\hlstd{tsplots_tibble} \hlkwb{<-} \hlstd{tibble}\hlopt{::}\hlkwd{enframe}\hlstd{(plots_list,} \hlkwc{name} \hlstd{=} \hlstr{"Plot_Type"}\hlstd{,} \hlkwc{value} \hlstd{=} \hlstr{"Plot"}\hlstd{)}
+\hlstd{tsplots_tibble}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
 
 
 \clearpage
 \section{Discussion}
-For the United States, it is essential to note that the 2020s have seen a growing labor movement, a slow but consistent growth in strikes and labor action, which typically leads to increases in labor union density and collective bargaining coverage (see West Virginia in the 1970s as shown in figure~\ref{fig:1.3}, which saw a sharp increase of ten percent union membership due to wildcat strikes). Because of this, there is a strong possibility that the quality of life could improve greatly for working-class people in the US at the end of this decade. 
+Trade unions are the primary focus of this analysis because of their impact on the broader population beyond their membership numbers. Unions come in many different shapes and sizes. Their organizational structure reflects their culture and political climate. Any given country could have a sprawling collection of hierarchical and nonhierarchical unions or have a singular union controlled by the respective state and corporate officers. The behavior of these unions and how they are structured have measured impacts on the surrounding population. Some of the effects Unions have on their population are as follows:  Unions have a strong tendency to increase the psychosocial safety of workers {citation}. Unions have a "spillover effect" that increases voter turnout for a country's population. From 1964 to 2019, the United States has steadily declined in Union Density.~\ref{fig:2}.
 
-China, when breaking down the stats, has a density of forty percent; however, there is only one union that exists in China, the All-China Federation of Trade Unions (ACFTU), a state-controlled union that allows company chiefs to elect the leadership of the union. It is not really a union, as it is an apparatus of state control. So, things like strikes and collective bargaining agreements are off the table for your average Chinese citizen. See this book for more details on how the ACFTU operates:  Fu, Diana (2017). Mobilizing Without the Masses: \href{https://www.amazon.com/Mobilizing-without-Masses-Contention-Contentious/dp/1108430414}{Control and Contention in China. Cambridge University Press.}
+For the United States, it is essential to note that the 2020s have seen a growing labor movement, a slow but consistent growth in strikes and labor action, which typically leads to increases in labor union density and collective bargaining coverage (see West Virginia in the 1970s as shown in figure~\ref{fig:4}, which saw a sharp rise in ten percent union membership due to wildcat strikes). Because of this, there is a strong possibility that the quality of life could improve significantly for working-class people in the US at the end of this decade. 
 
-Unions, and thus the quality of life in the United States, have been decreasing over the past 50 years. The US, for the first time in a century, has a National Labour Relations Board that is \href {https://www.theguardian.com/us-news/2023/sep/02/union-nlrb-decision-delays-busting}{friendly toward unions} There are things to look forward to coming to the US(including but not limited to a maglev \href{https://northeastmaglev.com/project/}{connecting Baltimore to New York and DC}. ), and the more active our unions get, the better our quality of life will get. China, however, doesn't have access to mechanisms that can truly redistribute wealth as it is created. Even if the ACFTU wanted to, it would be up to what the company chiefs allow. 
+When breaking down the stats, China has a density of forty percent; however, only one union exists in China, the All-China Federation of Trade Unions (ACFTU), a state-controlled union that allows company chiefs to elect the union's leadership. It is not a union, as it is an apparatus of state control. So, things like strikes and collective bargaining agreements are off the table for your average Chinese citizen. See this book for more details on how the ACFTU operates:  Fu, Diana (2017). Mobilizing Without the Masses: \href{https://www.amazon.com/Mobilizing-without-Masses-Contention-Contentious/dp/1108430414}{Control and Contention in China. Cambridge University Press.}
 
+Unions and, thus, the quality of life in the United States have decreased over the past 50 years. The US, for the first time in a century, has a National Labour Relations Board that is \href {https://www.theguardian.com/us-news/2023/sep/02/union-nlrb-decision-delays-busting}{friendly toward unions} There are things to look forward to coming to the US(including but not limited to a maglev \href{https://northeastmaglev.com/project/}{connecting Baltimore to New York and DC}. ), and the more active our unions get, the better our quality of life will bring. China, however, doesn't have access to mechanisms that can genuinely redistribute wealth as it is created. Even if the ACFTU wanted to, it would be up to what the company chiefs allow. 
 
 
 
 \begin{figure}[h]
 \centering
-  \begin{minipage}{0.9\linewidth}
-  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_10.png}
-  \caption{[Detailed caption for Figure 1]}
-  \label{fig:1.1}
+  \begin{minipage}{.8\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.8\linewidth]{figure/TimesSeriesUnitedStates-1} 
+
+}
+
+
+\end{knitrout}
+  \caption{detialed caption for figure } 
+  \label{fig:usstatesuniondensity}
   \end{minipage}
 \end{figure}
 
@@ -193,7 +272,7 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{minipage}{0.9\linewidth}
   \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_11.png}
   \caption{[Detailed caption for Figure 2]}
-  \label{fig:1.2}
+  \label{fig:3}
   \end{minipage}
 \end{figure}
 
@@ -202,7 +281,7 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \begin{minipage}{0.9\linewidth}
   \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_12.png}
   \caption{[Detailed caption for Figure 3]}
-  \label{fig:1.3}
+  \label{fig:4}
   \end{minipage}
 \end{figure}
 
@@ -219,7 +298,7 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 
 \end{knitrout}
   \caption[Collective Bargaining Coverage]{\textbf {Collective Bargaining Coverage 2000-2019} Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
-  \label{fig:2.1}
+  \label{fig:5}
   \end{minipage}
 \end{figure}
 \hspace{5pt}
@@ -236,7 +315,7 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 
 \end{knitrout}
   \caption{Histogram depicting the frequency distribution of Union Density in percent. The percentage measures a country's total unionized industries; the higher the percentage, the more of that country's workforce is unionized. This data is grouped by country; the mean of the United States and the mean of the total population are marked on this graph.} 
-  \label{fig:2.2}
+  \label{fig:6}
   \end{minipage}
 \end{figure}
 
@@ -253,85 +332,129 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 
 \end{knitrout}
   \caption{Histogram depicting the frequency distribution of Compliance with international law bargaining coverage as scale from 0 to 10 with 10 being the most out of compliance with international law a country could be, and 0 being completely incompliance with international labor law recorded by the International Labor organization. This data is grouped by country, the united states place is marked in the along with the mean of all countries.}
-  \label{fig:2.3}
+  \label{fig:7}
   \end{minipage}
 \end{figure}
 
+\clearpage
+%                                   United States
+\section{Overview District of Columbia}
+\begin{figure}[h!]
+  \centering
 
-
-\begin{figure}[h]
-\centering
-  \begin{minipage}{0.7\linewidth}
+  \begin{minipage}{0.48\linewidth}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [[1]]
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/United_Statestradeuniondensity-1} 
+
+}
+
+
+\end{knitrout}
+    \caption{Time Series chart depicting union density in United States from 2016 to 2017}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.48\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/United_StatesCollectiveBargaining-1} 
+
+}
+
+
+\end{knitrout}
+    \caption{Time Series chart of collective bargaining coverage...}
+  \end{minipage}
+
+ \begin{minipage}{0.48\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/United_States_West_Virginia-1} 
+
+}
+
+
+\end{knitrout}
+    \caption{Time series chart of Compliance with international law...}
+ \end{minipage}
+\hfill
+  \begin{minipage}{0.48\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=0.7\linewidth]{figure/United_States_labor_compliance-1} 
+
+}
+
+
+\end{knitrout}
+    \caption{Time series chart of Compliance with international law...}
+  \end{minipage}
+\end{figure}
+
+\clearpage
+%                                         China
+% Top two charts side by side
+\begin{figure}[h!]
+  \centering
+  \begin{minipage}{0.48\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
 {\centering \includegraphics[width=0.7\linewidth]{figure/Chinatradeuniondensity-1} 
 
 }
 
 
-
 \end{knitrout}
-  \caption{}
-  \label{fig:2.3}
+    \caption{Time Series chart depicting union density in China from 2016 to 2017}
+    \label{fig:union-density-china}
   \end{minipage}
-\end{figure}
-
-
-
-
-
-
-
-\begin{figure}[h]
-\centering
-  \begin{minipage}{0.9\linewidth} % Adjusted minipage width
+  \hfill % Space between the two minipages
+  \begin{minipage}{0.48\linewidth}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [[1]]
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=0.9\linewidth]{figure/ChinaCollectiveBargaining-1} 
+{\centering \includegraphics[width=0.7\linewidth]{figure/ChinaCollectiveBargaining-1} 
 
 }
 
 
-
 \end{knitrout}
-    \caption{Your caption here}
-    \label{fig:ChinaCollectiveBargaining}
+    \caption{Time Series chart of collective bargaining coverage...}
+    \label{fig:china-collective-bargaining}
   \end{minipage}
 \end{figure}
 
-
-
-
-
-\begin{figure}[h]
-\centering
-  \begin{minipage}{0.7\linewidth}
+% Third chart below
+\begin{figure}[h!]
+  \centering
+  \begin{minipage}{0.6\linewidth}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [[1]]
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
 {\centering \includegraphics[width=0.7\linewidth]{figure/China_labor_compliance-1} 
 
 }
 
 
-
 \end{knitrout}
-  \caption{}
-  \label{fig:2.3}
+    \caption{Time series chart of Compliance with international law...}
+    \label{fig:labor-compliance-china}
+  \end{minipage}
+\end{figure}
+
+
+\clearpage
+\begin{figure}[h]
+\centering
+  \begin{minipage}{0.7\linewidth}
+  \includegraphics[width=\linewidth]{~/Lab2/graphs/udstudfy.jpg}
+  \caption{Histogram depicting the distribution of the collective labour force index. The incomplete data availability pushes the Index down to around 72 countries, so the ranking matters less than the Index itself. The picture it paints is the freedom a working person has in the labor force(Union Power). This study is an assessment of union power. It indicates union power by combining and weighing the following stats: Trade Union Density, Collective Bargaining Coverage, Labour Force Participation Rate, Employment in agriculture, Democracy, Core labor rights ratification, hiring and firing constraints, and Hours Regulation. The United States is 62(3.32 index rating) in the Index, and China's place is 68 (1.92 index rating). The data is only recorded from 2010 to 2016. }
+  \label{fig:1}
   \end{minipage}
 \end{figure}
 
@@ -340,29 +463,27 @@ Unions, and thus the quality of life in the United States, have been decreasing 
 \section{Conclusion}
 Summarize the main findings and their relevance to the initial objectives of your study.
 
-
 \clearpage
-\section{References}
+
+\section*{References}
 \begin{enumerate}
-    \item Visser, J. (2021). OECD/AIAS database on Institutional Characteristics of Trade Unions, Wage Setting, 
-      State Intervention and Social Pacts (ICTWSS) [Data set]. OECD. 
-      Retrieved from 
-      \url{https://www.oecd.org/employment/ictwss-database.htm}
-    \item International Labour Organization. (2022). Trade union density rate () 
-      -- Annual (Id: ILR\_TUMT\_NOC\_RT\_A) [Data set]. Industrial Relations Data (IRdata). 
-      Retrieved from 
-      \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
-    \item International Labour Organization. (2022). Collective bargaining coverage 
-      rate () -- Annual (Id: ILR\_CBCT\_NOC\_RT\_A) [Data set]. 
-      Industrial Relations Data (IRdata). Retrieved from 
-      \url{https://www.ilo.org/shinyapps/bulkexplorer36/?lang=en\&id=ILR\_CBCT\_NOC\_RT\_A}
-    \item International Labour Organization. (2023). SDG indicator 8.8.2 - 
-      Level of national compliance with labour rights
-      (freedom of association and collective bargaining) 
-      based on ILO textual sources and national legislation -- 
-      Annual (Id: SDG\_0882\_NOC\_RT\_A) [Data set]. 
-      SDG Labour Market Indicators (ILOSDG). Retrieved 
-      from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
+  \item Visser, J. (2021). OECD/AIAS database on Institutional Characteristics of Trade Unions, Wage Setting, State Intervention and Social Pacts (ICTWSS) [Data set]. OECD. Retrieved from \url{https://www.oecd.org/employment/ictwss-database.htm}
+  
+  \item International Labour Organization. (2022). Trade union density rate () -- Annual (Id: ILR\_TUMT\_NOC\_RT\_A) [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
+  
+  \item International Labour Organization. (2022). Collective bargaining coverage rate () -- Annual (Id: ILR\_CBCT\_NOC\_RT\_A) [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer36/?lang=en\&id=ILR\_CBCT\_NOC\_RT\_A}
+  
+  \item International Labour Organization. (2023). SDG indicator 8.8.2 - Level of national compliance with labour rights (freedom of association and collective bargaining) based on ILO textual sources and national legislation -- Annual (Id: SDG\_0882\_NOC\_RT\_A) [Data set]. SDG Labour Market Indicators (ILOSDG). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
+  
+  \item Palley, T. I., \& LaJeunesse, R. M. (2007). Social attitudes, labor law, and union organizing: Toward a new economics of union density. \textit{Journal of Economic Behavior and Organization}, 62(2), 237–254. \url{https://doi.org/10.1016/j.jebo.2005.02.003}
+  
+  \item Dollard, M. F., \& Neser, D. Y. (2013). Worker health is good for the economy: Union density and psychosocial safety climate as determinants of country differences in worker health and productivity in 31 European countries. \textit{Social Science \& Medicine}, 92, 114–123. \url{https://doi.org/10.1016/j.socscimed.2013.04.028}
+  
+  \item Normann, H. E., \& Tellmann, S. M. (2021). Trade unions' interpretation of a just transition in a fossil fuel economy. \textit{Environmental Innovation and Societal Transitions}, 40, 421–434. \url{https://doi.org/10.1016/j.eist.2021.09.007}
+  
+  \item Flavin, P., \& Radcliff, B. (2011). Labor union membership and voting across nations. \textit{Electoral Studies}, 30(4), 633–641. \url{https://doi.org/10.1016/j.electstud.2011.06.001}
+  
+  \item McFarland, S. (2019). Spatialities of class formation: Urban sprawl and union density in U.S. metropolitan areas. \textit{Geoforum}, 102, 86–96. \url{https://doi.org/10.1016/j.geoforum.2019.03.015}
 \end{enumerate}
 
 

@@ -2,6 +2,8 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 library(extrafont)
+library(ggExtra)
+
 #                         state_union_membership_density
 # Reshape the data from wide to long format
 long_data <- state_union_membership_density %>%
@@ -63,9 +65,12 @@ cit_style <- annotate(
   size = 3, color = "grey50",
   angle = 0
 )
+
+median_line <- median(long_data$values, na.rm = TRUE)
 # Create the ggplot object
 p1 <- ggplot(long_data, aes(x = Year, y = Value, color = StateName)) +
   geom_line() +
+  geom_hline(yintercept = median_line, linetype = "dashed", color = "blue") +
   scale_x_continuous(breaks = seq(min(long_data$Year),
     max(long_data$Year),
     by = 5
