@@ -12,9 +12,9 @@ plots_list <- list()
 # Loop for joined_full_data_set (Union Density)
 country_focus <- unique(joined_full_data_set$ref_area)
 for (country in country_focus) {
-  TUD_country <- joined_full_data_set %>%
+  tud_country <- joined_full_data_set %>%
     filter(ref_area == country)
-  plot <- ggplot(TUD_country, aes(x = time, y = `Union Density`)) +
+  plot <- ggplot(tud_country, aes(x = time, y = `Union Density`)) +
     geom_line(color = "#00BFC4", size = 1.2) +
     labs(
       title = paste("Time Series of Union Density in", country, "(ILOdata)"),

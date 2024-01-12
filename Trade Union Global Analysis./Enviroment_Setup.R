@@ -19,6 +19,8 @@ state_union_membership_density <-
   as_tibble(dbReadTable(con, "State_Union_Membership_Density_1964-2021"))
 state_union_coverage_density <-
   as_tibble(dbReadTable(con, "State_Union_Coverage_Density_1977-2021"))
+state_union_join <-
+  as_tibble(dbReadTable(con, "state_uniondc_join"))
 dbDisconnect(con)
 
 
@@ -135,6 +137,12 @@ for (i in seq_along(col_names)) {
 }
 # Assign the new column names back to the tibble
 colnames(state_union_coverage_density) <- col_names
+
+colnames(state_union_join)
+head(state_union_join)
+# Simple Linear Regression
+model_simple <- lm(coverage_density ~ membership_density, data = state_union_join)
+summary(model_simple)
 
 
 library(knitr)

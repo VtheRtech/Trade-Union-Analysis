@@ -167,7 +167,7 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
     \hlkwd{filter}\hlstd{(ref_area} \hlopt{==} \hlstd{country)}
 
   \hlstd{wrapped_title} \hlkwb{<-} \hlkwd{str_wrap}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Time Series of Union Density in"}\hlstd{,}
-                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{35}\hlstd{)}
+                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{30}\hlstd{)}
   \hlstd{plot} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(TUD_country,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= time,} \hlkwc{y} \hlstd{= `Union Density`))} \hlopt{+}
     \hlkwd{geom_line}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#00BFC4"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1.2}\hlstd{)} \hlopt{+}
     \hlkwd{labs}\hlstd{(}
@@ -187,7 +187,7 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
     \hlkwd{filter}\hlstd{(ref_area} \hlopt{==} \hlstd{country)}
 
   \hlstd{wrapped_title} \hlkwb{<-} \hlkwd{str_wrap}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Collective Bargaining Coverage Over Time in"}\hlstd{,}
-                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{35}\hlstd{)}
+                                  \hlstd{country,} \hlstr{"(ILOdata)"}\hlstd{),} \hlkwc{width} \hlstd{=} \hlnum{30}\hlstd{)}
 
   \hlstd{plot} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(cbcr_country,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= time,} \hlkwc{y} \hlstd{= obs_value))} \hlopt{+}
     \hlkwd{geom_line}\hlstd{(}\hlkwc{color} \hlstd{=} \hlstr{"#2ca02c"}\hlstd{,} \hlkwc{size} \hlstd{=} \hlnum{1.2}\hlstd{)} \hlopt{+}
@@ -270,7 +270,15 @@ Unions and, thus, the quality of life in the United States have decreased over t
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.9\linewidth}
-  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_11.png}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in `filter()`:\\\#\# i In argument: `!StateName \%in\% northern\_states`.\\\#\# Caused by error:\\\#\# ! object 'northern\_states' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'p2' not found}}\end{kframe}
+\end{knitrout}
+
   \caption{[Detailed caption for Figure 2]}
   \label{fig:3}
   \end{minipage}
@@ -279,7 +287,15 @@ Unions and, thus, the quality of life in the United States have decreased over t
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.9\linewidth}
-  \includegraphics[width=\linewidth]{~/Lab2/graphs/plot_12.png}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in `filter()`:\\\#\# i In argument: `!StateName \%in\% southern\_states`.\\\#\# Caused by error:\\\#\# ! object 'southern\_states' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'p3' not found}}\end{kframe}
+\end{knitrout}
+
   \caption{[Detailed caption for Figure 3]}
   \label{fig:4}
   \end{minipage}
@@ -297,7 +313,7 @@ Unions and, thus, the quality of life in the United States have decreased over t
 
 
 \end{knitrout}
-  \caption[Collective Bargaining Coverage]{\textbf {Collective Bargaining Coverage 2000-2019} Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
+  \caption[Collective Bargaining Coverage]{Histogram depicting the frequency distribution of collective bargaining coverage measured in percent recorded by the International Labor Organization database. The data is grouped by country, highlighting the predominance of collective bargaining coverage in the United States compared to the rest of the world.}
   \label{fig:5}
   \end{minipage}
 \end{figure}
@@ -469,11 +485,11 @@ Summarize the main findings and their relevance to the initial objectives of you
 \begin{enumerate}
   \item Visser, J. (2021). OECD/AIAS database on Institutional Characteristics of Trade Unions, Wage Setting, State Intervention and Social Pacts (ICTWSS) [Data set]. OECD. Retrieved from \url{https://www.oecd.org/employment/ictwss-database.htm}
   
-  \item International Labour Organization. (2022). Trade union density rate () -- Annual (Id: ILR\_TUMT\_NOC\_RT\_A) [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
+  \item International Labour Organization. (2022). Trade union density rate () [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
   
-  \item International Labour Organization. (2022). Collective bargaining coverage rate () -- Annual (Id: ILR\_CBCT\_NOC\_RT\_A) [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer36/?lang=en\&id=ILR\_CBCT\_NOC\_RT\_A}
+  \item International Labour Organization. (2022). Collective bargaining coverage rate () [Data set]. Industrial Relations Data (IRdata). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer36/?lang=en\&id=ILR\_CBCT\_NOC\_RT\_A}
   
-  \item International Labour Organization. (2023). SDG indicator 8.8.2 - Level of national compliance with labour rights (freedom of association and collective bargaining) based on ILO textual sources and national legislation -- Annual (Id: SDG\_0882\_NOC\_RT\_A) [Data set]. SDG Labour Market Indicators (ILOSDG). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
+  \item International Labour Organization. (2023). SDG indicator 8.8.2 - Level of national compliance with labour rights (freedom of association and collective bargaining) based on ILO textual sources and national legislation[Data set]. SDG Labour Market Indicators (ILOSDG). Retrieved from \url{https://www.ilo.org/shinyapps/bulkexplorer30/?lang=en\&id=ILR\_TUMT\_NOC\_RT\_A}
   
   \item Palley, T. I., \& LaJeunesse, R. M. (2007). Social attitudes, labor law, and union organizing: Toward a new economics of union density. \textit{Journal of Economic Behavior and Organization}, 62(2), 237–254. \url{https://doi.org/10.1016/j.jebo.2005.02.003}
   

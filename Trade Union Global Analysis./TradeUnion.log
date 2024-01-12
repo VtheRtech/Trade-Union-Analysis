@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.10)  11 JAN 2024 13:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.10)  11 JAN 2024 18:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -459,26 +459,26 @@ Package pdftex.def Info: figure/TimesSeriesUnitedStates-1.pdf  used on input lin
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_11.png, id=76, 722.7pt x 577.9191pt>
-File: ~/Lab2/graphs/plot_11.png Graphic file (type png)
-<use ~/Lab2/graphs/plot_11.png>
-Package pdftex.def Info: ~/Lab2/graphs/plot_11.png  used on input line 273.
-(pdftex.def)             Requested size: 472.71088pt x 378.01509pt.
+<figure/TimesSeriesUnitedStatesNorth-1.pdf, id=76, 505.89pt x 505.89pt>
+File: figure/TimesSeriesUnitedStatesNorth-1.pdf Graphic file (type pdf)
+<use figure/TimesSeriesUnitedStatesNorth-1.pdf>
+Package pdftex.def Info: figure/TimesSeriesUnitedStatesNorth-1.pdf  used on input line 276.
+(pdftex.def)             Requested size: 378.17014pt x 378.17375pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<~/Lab2/graphs/plot_12.png, id=77, 722.7pt x 577.9191pt>
-File: ~/Lab2/graphs/plot_12.png Graphic file (type png)
-<use ~/Lab2/graphs/plot_12.png>
-Package pdftex.def Info: ~/Lab2/graphs/plot_12.png  used on input line 282.
-(pdftex.def)             Requested size: 472.71088pt x 378.01509pt.
+<figure/TimesSeriesUnitedStatesSouth-1.pdf, id=77, 505.89pt x 505.89pt>
+File: figure/TimesSeriesUnitedStatesSouth-1.pdf Graphic file (type pdf)
+<use figure/TimesSeriesUnitedStatesSouth-1.pdf>
+Package pdftex.def Info: figure/TimesSeriesUnitedStatesSouth-1.pdf  used on input line 294.
+(pdftex.def)             Requested size: 378.17014pt x 378.17375pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 <figure/CollectiveBargaining-1.pdf, id=78, 505.89pt x 505.89pt>
 File: figure/CollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/CollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/CollectiveBargaining-1.pdf  used on input line 294.
+Package pdftex.def Info: figure/CollectiveBargaining-1.pdf  used on input line 312.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -486,7 +486,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/UnionDensity-1.pdf, id=79, 505.89pt x 505.89pt>
 File: figure/UnionDensity-1.pdf Graphic file (type pdf)
 <use figure/UnionDensity-1.pdf>
-Package pdftex.def Info: figure/UnionDensity-1.pdf  used on input line 311.
+Package pdftex.def Info: figure/UnionDensity-1.pdf  used on input line 329.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -494,59 +494,59 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/WorkplaceRights-1.pdf, id=80, 505.89pt x 505.89pt>
 File: figure/WorkplaceRights-1.pdf Graphic file (type pdf)
 <use figure/WorkplaceRights-1.pdf>
-Package pdftex.def Info: figure/WorkplaceRights-1.pdf  used on input line 328.
+Package pdftex.def Info: figure/WorkplaceRights-1.pdf  used on input line 346.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4
 
-] [5 <./figure/TimesSeriesUnitedStates-1.pdf> </home/pretender/Lab2/graphs/plot_11.png>] [6 </home/pretender/Lab2/graphs/plot_12.png> <./figure/CollectiveBargaining-1.pdf>] [7 <./figure/UnionDensity-1.pdf> <./figure/WorkplaceRights-1.pdf>]
-<figure/United_Statestradeuniondensity-1.pdf, id=130, 505.89pt x 505.89pt>
+] [5 <./figure/TimesSeriesUnitedStates-1.pdf> <./figure/TimesSeriesUnitedStatesNorth-1.pdf>] [6 <./figure/TimesSeriesUnitedStatesSouth-1.pdf> <./figure/CollectiveBargaining-1.pdf>] [7 <./figure/UnionDensity-1.pdf> <./figure/WorkplaceRights-1.pdf>]
+<figure/United_Statestradeuniondensity-1.pdf, id=143, 505.89pt x 505.89pt>
 File: figure/United_Statestradeuniondensity-1.pdf Graphic file (type pdf)
 <use figure/United_Statestradeuniondensity-1.pdf>
-Package pdftex.def Info: figure/United_Statestradeuniondensity-1.pdf  used on input line 349.
+Package pdftex.def Info: figure/United_Statestradeuniondensity-1.pdf  used on input line 367.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
-<figure/United_StatesCollectiveBargaining-1.pdf, id=131, 505.89pt x 505.89pt>
+<figure/United_StatesCollectiveBargaining-1.pdf, id=144, 505.89pt x 505.89pt>
 File: figure/United_StatesCollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/United_StatesCollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/United_StatesCollectiveBargaining-1.pdf  used on input line 362.
+Package pdftex.def Info: figure/United_StatesCollectiveBargaining-1.pdf  used on input line 380.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
-<figure/United_States_West_Virginia-1.pdf, id=132, 505.89pt x 505.89pt>
+<figure/United_States_West_Virginia-1.pdf, id=145, 505.89pt x 505.89pt>
 File: figure/United_States_West_Virginia-1.pdf Graphic file (type pdf)
 <use figure/United_States_West_Virginia-1.pdf>
-Package pdftex.def Info: figure/United_States_West_Virginia-1.pdf  used on input line 375.
+Package pdftex.def Info: figure/United_States_West_Virginia-1.pdf  used on input line 393.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
-<figure/United_States_labor_compliance-1.pdf, id=133, 505.89pt x 505.89pt>
+<figure/United_States_labor_compliance-1.pdf, id=146, 505.89pt x 505.89pt>
 File: figure/United_States_labor_compliance-1.pdf Graphic file (type pdf)
 <use figure/United_States_labor_compliance-1.pdf>
-Package pdftex.def Info: figure/United_States_labor_compliance-1.pdf  used on input line 388.
+Package pdftex.def Info: figure/United_States_labor_compliance-1.pdf  used on input line 406.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
  [8
 
  <./figure/United_Statestradeuniondensity-1.pdf> <./figure/United_StatesCollectiveBargaining-1.pdf> <./figure/United_States_West_Virginia-1.pdf> <./figure/United_States_labor_compliance-1.pdf>]
-<figure/Chinatradeuniondensity-1.pdf, id=170, 505.89pt x 505.89pt>
+<figure/Chinatradeuniondensity-1.pdf, id=182, 505.89pt x 505.89pt>
 File: figure/Chinatradeuniondensity-1.pdf Graphic file (type pdf)
 <use figure/Chinatradeuniondensity-1.pdf>
-Package pdftex.def Info: figure/Chinatradeuniondensity-1.pdf  used on input line 407.
+Package pdftex.def Info: figure/Chinatradeuniondensity-1.pdf  used on input line 425.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
-<figure/ChinaCollectiveBargaining-1.pdf, id=171, 505.89pt x 505.89pt>
+<figure/ChinaCollectiveBargaining-1.pdf, id=183, 505.89pt x 505.89pt>
 File: figure/ChinaCollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/ChinaCollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/ChinaCollectiveBargaining-1.pdf  used on input line 421.
+Package pdftex.def Info: figure/ChinaCollectiveBargaining-1.pdf  used on input line 439.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
-<figure/China_labor_compliance-1.pdf, id=172, 505.89pt x 505.89pt>
+<figure/China_labor_compliance-1.pdf, id=184, 505.89pt x 505.89pt>
 File: figure/China_labor_compliance-1.pdf Graphic file (type pdf)
 <use figure/China_labor_compliance-1.pdf>
-Package pdftex.def Info: figure/China_labor_compliance-1.pdf  used on input line 439.
+Package pdftex.def Info: figure/China_labor_compliance-1.pdf  used on input line 457.
 (pdftex.def)             Requested size: 220.60118pt x 220.60071pt.
  [9
 
  <./figure/Chinatradeuniondensity-1.pdf> <./figure/ChinaCollectiveBargaining-1.pdf> <./figure/China_labor_compliance-1.pdf>]
-<~/Lab2/graphs/udstudfy.jpg, id=203, 1168.0pt x 1776.09pt>
+<~/Lab2/graphs/udstudfy.jpg, id=215, 1168.0pt x 1776.09pt>
 File: ~/Lab2/graphs/udstudfy.jpg Graphic file (type jpg)
 <use ~/Lab2/graphs/udstudfy.jpg>
-Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 455.
+Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 473.
 (pdftex.def)             Requested size: 367.6649pt x 559.0919pt.
 
 
@@ -555,17 +555,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [10 </home/pretender/Lab2/graphs/udstudfy.jpg>] [11
 
 
-]
-Overfull \hbox (26.78679pt too wide) in paragraph at lines 472--473
-[]\OT1/cmr/m/n/10.95 International Labour Or-ga-ni-za-tion. (2022). Trade union den-sity rate () -- An-nual (Id: ILR[]TUMT[]NOC[]RT[]A)
- []
-
-
-Overfull \hbox (73.446pt too wide) in paragraph at lines 474--475
-[]\OT1/cmr/m/n/10.95 International Labour Or-ga-ni-za-tion. (2022). Col-lec-tive bar-gain-ing cov-er-age rate () -- An-nual (Id: ILR[]CBCT[]NOC[]RT[]A)
- []
-
-[12
+] [12
 
 ] (./TradeUnion.aux)
 
@@ -575,18 +565,18 @@ Package rerunfilecheck Info: File `TradeUnion.out' has not changed.
 (rerunfilecheck)             Checksum: 48ABC4177A92240E9CD789A6BEE5669B;859.
  ) 
 Here is how much of TeX's memory you used:
- 13368 strings out of 476025
- 217871 string characters out of 5796532
+ 13370 strings out of 476025
+ 218307 string characters out of 5796532
  1873388 words of memory out of 5000000
- 33571 multiletter control sequences out of 15000+600000
+ 33574 multiletter control sequences out of 15000+600000
  521329 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,9n,77p,935b,661s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on TradeUnion.pdf (12 pages, 2571026 bytes).
+Output written on TradeUnion.pdf (12 pages, 641148 bytes).
 PDF statistics:
- 297 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
+ 309 PDF objects out of 1000 (max. 8388607)
+ 248 compressed objects within 3 object streams
  50 named destinations out of 1000 (max. 500000)
  127 words of extra memory for PDF output out of 10000 (max. 10000000)
 
