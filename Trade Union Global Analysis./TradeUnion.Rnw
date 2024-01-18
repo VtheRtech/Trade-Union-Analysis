@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage[a4paper,margin=0.5in]{geometry}
 \usepackage{lipsum}
+\usepackage{multicol}
 
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
@@ -150,6 +151,19 @@ OldData <- inner_join(trade_union_density, collective_bargaining,
   by = c("Country", "Year")
 )
 colnames(OldData)
+
+#target setups
+southern_states <- c(
+  "Alabama", "Arkansas", "Florida", "Georgia", "Kentucky",
+  "Louisiana", "Mississippi", "North Carolina", "South Carolina",
+  "Tennessee", "Texas", "Virginia", "West Virginia"
+)
+northern_states <- c(
+  "Connecticut", "Illinois", "Indiana", "Iowa", "Maine",
+  "Massachusetts", "Michigan", "Minnesota", "New Hampshire",
+  "New Jersey", "New York", "Ohio", "Pennsylvania", "Rhode Island",
+  "Vermont", "Wisconsin"
+)
 
 # themes
 
@@ -389,16 +403,68 @@ usplots_tibble <- tibble::enframe(plots_list2,
 
 \clearpage
 \section{Discussion}
-Trade unions are the primary focus of this analysis because of their impact on the broader population beyond their membership numbers. Unions come in many different shapes and sizes. Their organizational structure reflects their culture and political climate. Any given country could have a sprawling collection of hierarchical and nonhierarchical unions or have a singular union controlled by the respective state and corporate officers. The behavior of these unions and how they are structured have measured impacts on the surrounding population. Some of the effects Unions have on their population are as follows:  Unions have a strong tendency to increase the psychosocial safety of workers {citation}. Unions have a "spillover effect" that increases voter turnout for a country's population. From 1964 to 2019, the United States has steadily declined in Union Density.~\ref{fig:2}.
+Trade unions are the primary focus of this analysis because of their impact on the broader population beyond their membership numbers. Unions come in many different shapes and sizes. Their organizational structure reflects their culture and political climate. Any given country could have a sprawling collection of hierarchical and nonhierarchical unions or have a singular union controlled by the respective state and corporate officers. Dubbed the "spillover effect," the behavior of these unions and how they are structured impact the surrounding population. The publication "Unions and Wellness" lists some of the effects Unions have on their population: Strengthened health and safety. Higher wages and decreased income inequality. Employer-sponsored benefits, including health insurance, retirement, and paid leave. Increased civic engagement and broader community benefits and reduced wage gaps. The range of these spillover effects can vary depending on the nation-state the union is located in, the type of unions that predominate those nation-states, and the nation-state's disposition to unions within its borders.  
 
-For the United States, it is essential to note that the 2020s have seen a growing labor movement, a slow but consistent growth in strikes and labor action, which typically leads to increases in labor union density and collective bargaining coverage (see West Virginia in the 1970s as shown in figure~\ref{fig:4}, which saw a sharp rise in ten percent union membership due to wildcat strikes). Because of this, there is a strong possibility that the quality of life could improve significantly for working-class people in the US at the end of this decade. 
+In the United States, unions have declined since the US Department of Labor began recording the stats in the 1960s. In the 2010s, there has been a remarkable decline in union density and collective bargaining coverage in the United States.
 
-When breaking down the stats, China has a density of forty percent; however, only one union exists in China, the All-China Federation of Trade Unions (ACFTU), a state-controlled union that allows company chiefs to elect the union's leadership. It is not a union, as it is an apparatus of state control. So, things like strikes and collective bargaining agreements are off the table for your average Chinese citizen. See this book for more details on how the ACFTU operates:  Fu, Diana (2017). Mobilizing Without the Masses: \href{https://www.amazon.com/Mobilizing-without-Masses-Contention-Contentious/dp/1108430414}{Control and Contention in China. Cambridge University Press.}
+\subsection{Simple Linear Regression Analysis}
+\begin{table}[ht]
+\centering
+\begin{minipage}[b]{0.48\linewidth}
+\centering
+\caption{Summary of Linear Model}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Term                & Estimate  & Std. Error & t value & $Pr(>|t|)$      \\ 
+\midrule
+(Intercept)         & 1.278734  & 0.042056   & 30.41   & $<2e^{-16}$ *** \\
+membership\_density & 1.044013  & 0.002723   & 383.42  & $<2e^{-16}$ *** \\
+\bottomrule
+\end{tabular}
+\label{tab:modelsummary}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.48\linewidth}
+\centering
+\caption{Residuals}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Measure & Value      \\ 
+\midrule
+Min     & -2.0368    \\
+1Q      & -0.6320    \\
+Median  & -0.1668    \\
+3Q      & 0.4589     \\
+Max     & 4.2630     \\
+\bottomrule
+\end{tabular}
+\label{tab:residuals}
+\end{minipage}
+\end{table}
 
-Unions and, thus, the quality of life in the United States have decreased over the past 50 years. The US, for the first time in a century, has a National Labour Relations Board that is \href {https://www.theguardian.com/us-news/2023/sep/02/union-nlrb-decision-delays-busting}{friendly toward unions} There are things to look forward to coming to the US(including but not limited to a maglev \href{https://northeastmaglev.com/project/}{connecting Baltimore to New York and DC}. ), and the more active our unions get, the better our quality of life will bring. China, however, doesn't have access to mechanisms that can genuinely redistribute wealth as it is created. Even if the ACFTU wanted to, it would be up to what the company chiefs allow. 
+\begin{table}[ht]
+\centering
+\caption{Model Fit Statistics}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Statistic                       & Value           \\
+\midrule
+Residual standard error         & 0.9041 on 2293 DF \\
+Multiple R-squared              & 0.9846           \\
+Adjusted R-squared              & 0.9846           \\
+F-statistic                     & 1.47e+05 on 1 and 2293 DF \\
+p-value                         & $<2.2e^{-16}$    \\
+\bottomrule
+\end{tabular}
+\label{tab:modelfitstats}
+\end{table}
 
+The provided output is from a linear regression analysis conducted in R, examining the relationship between Collective Bargaining Coverage and Trade Union Density using a joined dataset dataset. The results indicate a notable relationship between these two variables. The model's intercept is approximately 1.279, suggesting that the expected coverage density is around 1.279 in the absence of membership density. More importantly, the coefficient for membership density is about 1.044, pointing towards a strong positive correlation; as membership density increases by one unit, coverage density is expected to increase by approximately 1.044 units.
 
+The statistical significance of the model is remarkable, with both the intercept and the slope showing extremely low p-values, virtually zero. This indicates a high level of confidence in the relationship between the two variables being more than a chance occurrence. The fit of the model to the data is also exceptionally strong. This is evidenced by the high R-squared value of 0.9846, suggesting that 98.46% of the variability in coverage density is explained by variations in membership density. Such a high R-squared value is indicative of a model that captures the relationship between the variables very well.
 
+The analysis of residuals, which are the differences between the observed values and the values predicted by the model, also provides useful insights. The residuals range from -2.037 to 4.263, with the median close to zero. This spread indicates that while there are some outliers, the model generally does not systematically over or under-predict across the data range. In conclusion, this linear regression model demonstrates a very strong and statistically significant relationship between coverage density and membership density. The model fits the data exceptionally well, as evidenced by the high R-squared value and the pattern of residuals. However, it is important to interpret these results with caution. The high degree of fit does not imply causality, and the model's predictive power is limited to the range of the data it was trained on. Extrapolating these findings beyond the observed data or inferring causation without further analysis would be inappropriate.
+
+\clearpage
 \begin{figure}[h]
 \centering
   \begin{minipage}{.8\linewidth}
@@ -417,7 +483,7 @@ long_data$Year <- as.numeric(long_data$Year)
 citation_text <- "Source: Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman, “Estimates of Union Density by State,” Monthly Labor Review, Vol. 124, No. 7, July 2001, pp. 51-55."
 wrapped_citation <- str_wrap(citation_text, width = 50) # Adjust width as needed
 # wrap and edit title
-title_text <- "Time Series Analysis of Union Density in the United States"
+title_text <- "Time Series of Union Density in the United States"
 wrapped_title <- str_wrap(title_text, width = 30)
 # Define the labels
 plot_labels <- labs(
@@ -465,7 +531,7 @@ print(p1)
 \centering
 \begin{minipage}{0.9\linewidth}
 <<TimesSeriesUnitedStatesNorth, echo = FALSE,warning = FALSE ,message = FALSE, fig.align='center', out.width='.8\\linewidth' >>=
-title_text <- "Time Series Analysis of Union Density in the United States Northern States are Highlighted"
+title_text <- "Time Series of Union Density in the United States"
 wrapped_title <- str_wrap(title_text, width = 30)
 #           northern_states time series
 # Plotting with ggplot2
@@ -488,15 +554,13 @@ p2 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
     max(long_data$Year),
     by = 5
   )) +
-  theme_minimal() +
   labs(
     title = wrapped_title,
     x = "Year",
     y = "Union Membership Density(in %)",
   ) +
   theme(legend.position = "bottom") +
-  tstheme +
-  cit_style
+  tstheme
 print(p2)
 @
 
@@ -509,7 +573,7 @@ print(p2)
 \centering
 \begin{minipage}{0.9\linewidth}
 <<TimesSeriesUnitedStatesSouth, echo = FALSE,warning = FALSE, message = FALSE, fig.align='center', out.width='.8\\linewidth' >>=
-title_text <- "Time Series Analysis of Union Density in the United States Southern States are Highlighted"
+title_text <- "Time Series of Union Density in the United States"
 wrapped_title <- str_wrap(title_text, width = 30)
 #          southern_states time series
 p3 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
@@ -531,15 +595,13 @@ p3 <- ggplot(long_data, aes(x = Year, y = Value, group = StateName)) +
     max(long_data$Year),
     by = 5
   )) +
-  theme_minimal() +
   labs(
     title = wrapped_title,
     x = "Year",
     y = "Union Membership Density(in %)",
   ) +
   theme(legend.position = "bottom") +
-  tstheme +
-  cit_style
+  tstheme
 print(p3)
 @
 
@@ -838,6 +900,10 @@ Summarize the main findings and their relevance to the initial objectives of you
   \item Flavin, P., \& Radcliff, B. (2011). Labor union membership and voting across nations. \textit{Electoral Studies}, 30(4), 633–641. \url{https://doi.org/10.1016/j.electstud.2011.06.001}
   
   \item McFarland, S. (2019). Spatialities of class formation: Urban sprawl and union density in U.S. metropolitan areas. \textit{Geoforum}, 102, 86–96. \url{https://doi.org/10.1016/j.geoforum.2019.03.015}
+
+  \item Unions are not only good for workers, they’re good for communities and for democracy: High unionization levels are associated with positive outcomes across multiple indicators of economic, personal, and democratic well-being. (n.d.). Economic Policy Institute.\url{https://www.epi.org/publication/unions-and-well-being/}
+
+  \item In 2023, the US working class fought back. (2023, December 31) \url {https://jacobin.com/2023/12/year-in-review-labor-2023-uaw-teamsters-amazon-hollywood}
 \end{enumerate}
 
 
