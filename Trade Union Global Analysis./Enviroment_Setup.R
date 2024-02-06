@@ -6,6 +6,7 @@ library(dplyr)
 library(forcats)
 library(GGally)
 library(stringr)
+library(magrittr)
 
 setwd("~/workbook")
 con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
@@ -140,10 +141,22 @@ colnames(state_union_coverage_density) <- col_names
 
 colnames(state_union_join)
 head(state_union_join)
+
 # Simple Linear Regression
-model_simple <- lm(coverage_density ~ membership_density, data = state_union_join)
+model_simple <- lm(coverage_density ~ membership_density,
+  data = state_union_join
+)
 summary(model_simple)
 
+# piped predictions
+new_membership <- tibble(membership_density = c(10.5, 10.8, 12.5, 13.5))
+predict(model_simple, new_membership) %>% round(1)
+
+
+state_union_join %>%
+  lm(coverage_density ~ membership_density, data = .) %>%
+  predict(new_membership) %>%
+  round(2)
 
 library(knitr)
 library(highr)

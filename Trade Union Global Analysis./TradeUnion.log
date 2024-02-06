@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.10)  17 JAN 2024 22:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.25)  6 FEB 2024 15:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -516,13 +516,13 @@ File: omscmtt.fd
 LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 166.
  [2] [3]
-Overfull \hbox (75.12784pt too wide) in paragraph at lines 254--263
+Overfull \hbox (75.12784pt too wide) in paragraph at lines 255--264
  [][] 
  []
 
 [4
 
-] [5]
+]
 <figure/TimesSeriesUnitedStates-1.pdf, id=88, 505.89pt x 505.89pt>
 File: figure/TimesSeriesUnitedStates-1.pdf Graphic file (type pdf)
 <use figure/TimesSeriesUnitedStates-1.pdf>
@@ -531,7 +531,7 @@ Package pdftex.def Info: figure/TimesSeriesUnitedStates-1.pdf  used on input lin
 <figure/TimesSeriesUnitedStatesNorth-1.pdf, id=89, 505.89pt x 505.89pt>
 File: figure/TimesSeriesUnitedStatesNorth-1.pdf Graphic file (type pdf)
 <use figure/TimesSeriesUnitedStatesNorth-1.pdf>
-Package pdftex.def Info: figure/TimesSeriesUnitedStatesNorth-1.pdf  used on input line 329.
+Package pdftex.def Info: figure/TimesSeriesUnitedStatesNorth-1.pdf  used on input line 338.
 (pdftex.def)             Requested size: 378.17014pt x 378.17375pt.
 
 
@@ -540,7 +540,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/TimesSeriesUnitedStatesSouth-1.pdf, id=90, 505.89pt x 505.89pt>
 File: figure/TimesSeriesUnitedStatesSouth-1.pdf Graphic file (type pdf)
 <use figure/TimesSeriesUnitedStatesSouth-1.pdf>
-Package pdftex.def Info: figure/TimesSeriesUnitedStatesSouth-1.pdf  used on input line 347.
+Package pdftex.def Info: figure/TimesSeriesUnitedStatesSouth-1.pdf  used on input line 356.
 (pdftex.def)             Requested size: 378.17014pt x 378.17375pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -548,7 +548,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/CollectiveBargaining-1.pdf, id=91, 505.89pt x 505.89pt>
 File: figure/CollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/CollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/CollectiveBargaining-1.pdf  used on input line 365.
+Package pdftex.def Info: figure/CollectiveBargaining-1.pdf  used on input line 374.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -556,7 +556,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/UnionDensity-1.pdf, id=92, 505.89pt x 505.89pt>
 File: figure/UnionDensity-1.pdf Graphic file (type pdf)
 <use figure/UnionDensity-1.pdf>
-Package pdftex.def Info: figure/UnionDensity-1.pdf  used on input line 382.
+Package pdftex.def Info: figure/UnionDensity-1.pdf  used on input line 391.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -564,86 +564,84 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure/WorkplaceRights-1.pdf, id=93, 505.89pt x 505.89pt>
 File: figure/WorkplaceRights-1.pdf Graphic file (type pdf)
 <use figure/WorkplaceRights-1.pdf>
-Package pdftex.def Info: figure/WorkplaceRights-1.pdf  used on input line 399.
+Package pdftex.def Info: figure/WorkplaceRights-1.pdf  used on input line 408.
 (pdftex.def)             Requested size: 257.3643pt x 257.3675pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6
-
- <./figure/TimesSeriesUnitedStates-1.pdf>] [7 <./figure/TimesSeriesUnitedStatesNorth-1.pdf>] [8 <./figure/TimesSeriesUnitedStatesSouth-1.pdf> <./figure/CollectiveBargaining-1.pdf>] [9 <./figure/UnionDensity-1.pdf> <./figure/WorkplaceRights-1.pdf>]
+[5 <./figure/TimesSeriesUnitedStates-1.pdf>] [6 <./figure/TimesSeriesUnitedStatesNorth-1.pdf>] [7 <./figure/TimesSeriesUnitedStatesSouth-1.pdf> <./figure/CollectiveBargaining-1.pdf>] [8 <./figure/UnionDensity-1.pdf> <./figure/WorkplaceRights-1.pdf>]
 <figure/United_Statestradeuniondensity-1.pdf, id=154, 505.89pt x 505.89pt>
 File: figure/United_Statestradeuniondensity-1.pdf Graphic file (type pdf)
 <use figure/United_Statestradeuniondensity-1.pdf>
-Package pdftex.def Info: figure/United_Statestradeuniondensity-1.pdf  used on input line 420.
+Package pdftex.def Info: figure/United_Statestradeuniondensity-1.pdf  used on input line 429.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
 <figure/United_StatesCollectiveBargaining-1.pdf, id=155, 505.89pt x 505.89pt>
 File: figure/United_StatesCollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/United_StatesCollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/United_StatesCollectiveBargaining-1.pdf  used on input line 433.
+Package pdftex.def Info: figure/United_StatesCollectiveBargaining-1.pdf  used on input line 442.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
 <figure/United_States_West_Virginia-1.pdf, id=156, 505.89pt x 505.89pt>
 File: figure/United_States_West_Virginia-1.pdf Graphic file (type pdf)
 <use figure/United_States_West_Virginia-1.pdf>
-Package pdftex.def Info: figure/United_States_West_Virginia-1.pdf  used on input line 446.
+Package pdftex.def Info: figure/United_States_West_Virginia-1.pdf  used on input line 454.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
 <figure/United_States_labor_compliance-1.pdf, id=157, 505.89pt x 505.89pt>
 File: figure/United_States_labor_compliance-1.pdf Graphic file (type pdf)
 <use figure/United_States_labor_compliance-1.pdf>
-Package pdftex.def Info: figure/United_States_labor_compliance-1.pdf  used on input line 459.
+Package pdftex.def Info: figure/United_States_labor_compliance-1.pdf  used on input line 467.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
- [10
+ [9
 
  <./figure/United_Statestradeuniondensity-1.pdf> <./figure/United_StatesCollectiveBargaining-1.pdf> <./figure/United_States_West_Virginia-1.pdf> <./figure/United_States_labor_compliance-1.pdf>]
 <figure/Chinatradeuniondensity-1.pdf, id=193, 505.89pt x 505.89pt>
 File: figure/Chinatradeuniondensity-1.pdf Graphic file (type pdf)
 <use figure/Chinatradeuniondensity-1.pdf>
-Package pdftex.def Info: figure/Chinatradeuniondensity-1.pdf  used on input line 478.
+Package pdftex.def Info: figure/Chinatradeuniondensity-1.pdf  used on input line 496.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
 <figure/ChinaCollectiveBargaining-1.pdf, id=194, 505.89pt x 505.89pt>
 File: figure/ChinaCollectiveBargaining-1.pdf Graphic file (type pdf)
 <use figure/ChinaCollectiveBargaining-1.pdf>
-Package pdftex.def Info: figure/ChinaCollectiveBargaining-1.pdf  used on input line 492.
+Package pdftex.def Info: figure/ChinaCollectiveBargaining-1.pdf  used on input line 510.
 (pdftex.def)             Requested size: 176.47758pt x 176.47748pt.
 <figure/China_labor_compliance-1.pdf, id=195, 505.89pt x 505.89pt>
 File: figure/China_labor_compliance-1.pdf Graphic file (type pdf)
 <use figure/China_labor_compliance-1.pdf>
-Package pdftex.def Info: figure/China_labor_compliance-1.pdf  used on input line 510.
+Package pdftex.def Info: figure/China_labor_compliance-1.pdf  used on input line 528.
 (pdftex.def)             Requested size: 220.60118pt x 220.60071pt.
- [11
+ [10
 
  <./figure/Chinatradeuniondensity-1.pdf> <./figure/ChinaCollectiveBargaining-1.pdf> <./figure/China_labor_compliance-1.pdf>]
 <~/Lab2/graphs/udstudfy.jpg, id=226, 1168.0pt x 1776.09pt>
 File: ~/Lab2/graphs/udstudfy.jpg Graphic file (type jpg)
 <use ~/Lab2/graphs/udstudfy.jpg>
-Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 526.
+Package pdftex.def Info: ~/Lab2/graphs/udstudfy.jpg  used on input line 551.
 (pdftex.def)             Requested size: 367.6649pt x 559.0919pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12 </home/pretender/Lab2/graphs/udstudfy.jpg>] [13
+[11 </home/pretender/Lab2/graphs/udstudfy.jpg>] [12
 
 
-] [14
+] [13
 
 ] (./TradeUnion.aux)
 Package rerunfilecheck Info: File `TradeUnion.out' has not changed.
-(rerunfilecheck)             Checksum: 6B151A2BBF7E598D7060EEE7CC16BC91;1090.
+(rerunfilecheck)             Checksum: D312F5D36178D1982BEDEF8E85DC6CCA;1422.
  ) 
 Here is how much of TeX's memory you used:
- 13523 strings out of 476025
- 220875 string characters out of 5796532
+ 13524 strings out of 476025
+ 220888 string characters out of 5796532
  1873388 words of memory out of 5000000
- 33716 multiletter control sequences out of 15000+600000
+ 33717 multiletter control sequences out of 15000+600000
  521329 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,12n,77p,1161b,661s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on TradeUnion.pdf (14 pages, 669462 bytes).
+Output written on TradeUnion.pdf (13 pages, 675226 bytes).
 PDF statistics:
  340 PDF objects out of 1000 (max. 8388607)
- 271 compressed objects within 3 object streams
+ 272 compressed objects within 3 object streams
  57 named destinations out of 1000 (max. 500000)
- 135 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 
