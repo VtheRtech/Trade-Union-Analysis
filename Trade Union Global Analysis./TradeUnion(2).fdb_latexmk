@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1707519875 "TradeUnion.tex" "TradeUnion.pdf" "TradeUnion" 1707519876 2
+["pdflatex"] 1707524781 "TradeUnion(2).tex" "TradeUnion(2).pdf" "TradeUnion(2)" 1707524781 2
   "/home/pretender/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1703570484 12644 26eb2513ea62c7558819f7d8b713ebbd ""
   "/home/pretender/Lab2/graphs/udstudfy.jpg" 1704036536 407605 69ef40160f4334eb84afac846b963ebe ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1704400182 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -115,9 +115,9 @@
   "/usr/share/texmf/tex/latex/omscmtt.fd" 1702804585 607 06eee81c7b03b7b3b2af97278f259b7d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706204893 170078 e65bfb85aea980a437447c557c6444c5 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706204855 8204253 92aca638c0d6c30cadf8b21a9c6af2c5 ""
-  "TradeUnion.aux" 1707519875 8725 9f2093eb4f0eca13b1e7ce6b84aa4f82 "pdflatex"
-  "TradeUnion.out" 1707519875 1422 d312f5d36178d1982bedef8e85dc6cca "pdflatex"
-  "TradeUnion.tex" 1707519838 35153 ed15c10e2ea5e554bc5e21707ca65b81 ""
+  "TradeUnion(2).aux" 1707524781 8725 9f2093eb4f0eca13b1e7ce6b84aa4f82 "pdflatex"
+  "TradeUnion(2).out" 1707524781 1422 d312f5d36178d1982bedef8e85dc6cca "pdflatex"
+  "TradeUnion(2).tex" 1707524780 35153 ed15c10e2ea5e554bc5e21707ca65b81 ""
   "figure/ChinaCollectiveBargaining-1.pdf" 1705599059 5559 3def92852d04a85a04732c16a1fe8d31 ""
   "figure/China_labor_compliance-1.pdf" 1705599059 5336 5be8bf432e4d4fb96c729ad58a3eedcf ""
   "figure/Chinatradeuniondensity-1.pdf" 1705599059 4632 7fbae2cf948eb2e886b26af43b7ffb09 ""
@@ -132,8 +132,8 @@
   "figure/United_Statestradeuniondensity-1.pdf" 1705599059 4692 3e97d9d25453876e9c93e4ab88d2f1ee ""
   "figure/WorkplaceRights-1.pdf" 1705599059 5052 49231a649f9f419872e14c9d62d1737a ""
   (generated)
-  "TradeUnion.aux"
-  "TradeUnion.log"
-  "TradeUnion.out"
-  "TradeUnion.pdf"
+  "TradeUnion(2).aux"
+  "TradeUnion(2).log"
+  "TradeUnion(2).out"
+  "TradeUnion(2).pdf"
   (rewritten before read)
