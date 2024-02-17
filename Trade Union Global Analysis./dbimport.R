@@ -1,4 +1,7 @@
+library(tibble)
 library(stringr)
+library(tidyverse)
+library(dplyr)
 
 text <- "<strong>Employer</strong> : Condé Nast <br><strong>Labor Organization</strong> : The NewsGuild - CWA <br><strong>Local</strong> : Condé Nast Union - The NewsGuild of New York <br><strong>Industry</strong> : Information <br><strong>Number of Locations</strong> : 1 <br><strong>Address</strong> : 285 Fulton St <br><strong>City</strong> : New York <br><strong>State</strong> : New York <br><strong>Zip Code</strong> : 10007 <br><strong>Strike or Protest</strong> : Strike <br><strong>Approximate Number of Participants</strong> : 400 <br><strong>Start Date</strong> : 01/23/2024 <br><strong>End Date</strong> : 01/23/2024 <br><strong>Duration Amount</strong> : 1 <br><strong>Duration Unit</strong> : Days <br><strong>Authorized</strong> : Y <br><strong>Worker Demands</strong> : First contract, Job Security, End to anti-union retaliation <br><strong>Source</strong> : Source 1,Source 2 <br>"
 clean_text <- str_remove_all(text, "<[^>]+>")
@@ -1815,33 +1818,45 @@ full_text <- c(
     "<strong>Employer</strong> : Peoria Unified School District <br><strong>Labor Organization</strong> : West Valley Alliance Teachers Union <br><strong>Industry</strong> : Educational Services <br><strong>Bargaining Unit Size</strong> : 2100 <br><strong>Number of Locations</strong> : 1 <br><strong>Address</strong> : 6330 W. Thunderbird Road <br><strong>City</strong> : Glendale <br><strong>State</strong> : Arizona <br><strong>Zip Code</strong> : 85306 <br><strong>Strike or Protest</strong> : Strike <br><strong>Approximate Number of Participants</strong> : 600 <br><strong>Start Date</strong> : 01/11/2021 <br><strong>End Date</strong> : 01/11/2021 <br><strong>Duration Amount</strong> : 1 <br><strong>Duration Unit</strong> : Days <br><strong>Worker Demands</strong> : COVID-19 protocols, Health and safety <br><strong>Source</strong> : <a href=\"https://www.azfamily.com/news/arizona_wildfires/classes-will-resume-tuesday-following-sickout-in-peoria-unified-school-district/article_5871c5a6-546a-11eb-94f9-ab353f89becd.html\" target=\"_blank\" rel=\"noopener noreferrer\">Source 1</a>,<a href=\"https://www.12news.com/video/news/education/600-teachers-staff-force-peoria-united-school-district-closed-with-a-sick-out/75-ff09d46d-4fa8-4051-ab16-36bf382e79d9\" target=\"_blank\" rel=\"noopener noreferrer\">Source 2</a> <br><strong>Notes</strong> : This event includes striking workers from multiple locations not listed here. We instead list the employer's main address. <br>",
     "<strong>Employer</strong> : Alabama Department of Corrections - Kilby Correctional Facility <br><strong>Labor Organization</strong> : Free Alabama Movement <br><strong>Industry</strong> : Manufacturing <br><strong>Number of Locations</strong> : 1 <br><strong>Address</strong> : 12201 Wares Ferry Road <br><strong>City</strong> : Montgomery <br><strong>State</strong> : Alabama <br><strong>Zip Code</strong> : 36117 <br><strong>Strike or Protest</strong> : Strike <br><strong>Start Date</strong> : 01/01/2021 <br><strong>End Date</strong> : 01/31/2021 <br><strong>Duration Amount</strong> : 31 <br><strong>Duration Unit</strong> : Days <br><strong>Worker Demands</strong> : COVID-19 protocols, Health and safety, Inhumane living conditions <br><strong>Source</strong> : <a href=\"https://www.reddit.com/r/union/comments/kqq7lf/as_of_jan_1_2021_incarcerated_workers_in_alabamas/\" target=\"_blank\" rel=\"noopener noreferrer\">Source 1</a>,<a href=\"https://twitter.com/ACLUAlabama/status/1346500827477905408?s=20\" target=\"_blank\" rel=\"noopener noreferrer\">Source 2</a>,<a href=\"https://www.theroot.com/i-feel-like-im-finna-die-why-everyone-in-alabamas-pris-1845985484\" target=\"_blank\" rel=\"noopener noreferrer\">Source 3</a>,<a href=\"https://filtermag.org/free-alabama-movement/\" target=\"_blank\" rel=\"noopener noreferrer\">Source 4</a> <br>"
 )
-
 clean_text <- str_remove_all(full_text, "<[^>]+>")
 print(clean_text)
-length(full_text)
+length(clean_text)
 
 
-#zip code extractions
-# Define the regular expression pattern to 
-# match "Zip Code : " followed by digits
 zip_code_pattern <- "Zip Code : (\\d+)"
-# Extract zip codes using the defined pattern
-# This will return a list where each
-# element corresponds to the matches in each string
-zip_codes_list <- str_extract_all(clean_text, zip_code_pattern)
-# Since str_extract_all returns a list, you might want to flatten it to a vector
-# This step is optional and depends on your preference for the output format
+zip_codes_list <- str_extract(clean_text, zip_code_pattern)
+print(zip_codes_list)
 zip_codes <- unlist(zip_codes_list)
-# Remove the "Zip Code : " part to get just the numbers
+zip_codes <- gsub("Zip Code : ", "", zip_codes)
+print(zip_codes)
+length(zip_codes)
+
+
+# Assuming clean_text is a vector of text strings
+# Define the regular expression pattern to match zip codes directly
+zip_code_pattern <- "Zip Code : (\\d+)"
+# Use str_extract (not str_extract) to extract the first match
+# str_extract returns NA for inputs with no match
+zip_codes <- str_extract(clean_text, zip_code_pattern)
+# The zip codes will include the "Zip Code : " prefix, so we remove it
+# This gsub will also work fine with NA values (they'll be left unchanged)
 zip_codes <- gsub("Zip Code : ", "", zip_codes)
 # Print the extracted zip codes
 print(zip_codes)
+
+# If you need the length or the number of zip codes extracted, including NAs
+length(zip_codes)
+
+no_zip_codes <- grep("Zip Code : (\\d+)", clean_text, value = TRUE, invert = TRUE)
+print(head(no_zip_codes))  # Print some entries that don't match the pattern
+
+
 
 #strike extractions
 # Define a pattern to extract the "Strike or Protest" value
 strike_pattern <- "Strike or Protest : (\\w+)"
 # Extract "Strike" or other values using the pattern
-strike_values <- str_extract_all(clean_text, strike_pattern)
+strike_values <- str_extract(clean_text, strike_pattern)
 # Convert the extracted values to boolean: "Strike" -> TRUE, otherwise -> FALSE
 # Assuming "Strike" indicates TRUE and any other value indicates FALSE
 strike_boolean <- ifelse(strike_values == "Strike",
@@ -1856,28 +1871,93 @@ strikeorprotest <- str_extract(strike_values, pattern)
 print(strikeorprotest)
 
 #Number of Participants Extraction
-# Define the pattern to match "Approximate Number of Participants" followed by digits
+# Define the pattern to match
+# "Approximate Number of Participants" followed by digits
 participant_pattern <- "Approximate Number of Participants : (\\d+)"
-# Assuming clean_text is a vector of strings that might contain the participant information
+# Assuming clean_text is a vector of
+# strings that might contain the participant information
 # This extracts the numeric part directly
-numeric_values <- str_extract_all(clean_text, participant_pattern)
+numeric_values <- str_extract(clean_text, participant_pattern)
   # Print the numeric values
 print(numeric_values)
 # Regular expression to match a sequence of digits
 pattern <- "\\d+"
 # Extract the first number
-first_number <- str_extract_all(numeric_values, pattern)
+first_number <- str_extract(numeric_values, pattern)
 # Convert to numeric
 nparticipants <- as.numeric(first_number)
 # Print the result
 print(nparticipants)
 
 
-#number of locations 
+#number of locations
 pattern1 <- "Number of Locations : (\\d+)"
-string1 <- str_extract_all(clean_text, pattern1)
+string1 <- str_extract(clean_text, pattern1)
 print(string1)
 pattern2 <- "\\d+"
-second_number <- str_extract_all(string1, pattern2)
+second_number <- str_extract(string1, pattern2)
 number_of_locations <- as.numeric(second_number)
 print(number_of_locations)
+
+
+#Start Dates
+pattern <- "Start Date : (\\d{2}/\\d{2}/\\d{4})"
+dates_extracted <- str_extract(clean_text, pattern)
+dates_flat <- unlist(dates_extracted)
+pattern2 <- "\\d{2}/\\d{2}/\\d{4}"
+dates_only <- str_extract(dates_flat, pattern2)
+dates_true <- as.Date(dates_only, format = "%m/%d/%Y")
+# Print the Date objects
+print(dates_true)
+
+
+
+#Start Dates
+pattern <- "End Date : (\\d{2}/\\d{2}/\\d{4})"
+dates_extracted <- str_extract(clean_text, pattern)
+dates_flat <- unlist(dates_extracted)
+pattern2 <- "\\d{2}/\\d{2}/\\d{4}"
+dates_only <- str_extract(dates_flat, pattern2)
+dates_false <- as.Date(dates_only, format = "%m/%d/%Y")
+# Print the Date objects
+print(dates_false)
+
+
+# Define the regular expression pattern to capture
+# text between "Employer :" and "Labor Organization"
+pattern <- "Employer : (.*?) Labor Organization"
+# Extract the information using the defined pattern
+extracted_info <- str_extract(clean_text, pattern)
+# Remove the "Employer :" and "Labor Organization"
+# parts to get just the information in between
+extracted_info <- gsub("Employer : | Labor Organization",
+                       "", extracted_info, perl = TRUE)
+# Print the extracted information
+print(extracted_info)
+
+
+#state information
+pattern <- "State : (.*?) Zip Code"
+state_match <- str_match(clean_text, pattern)
+state <- state_match[, 2]
+state_trimmed <- str_trim(state)
+print(state_trimmed)
+
+strikesinunitedstates <- tibble(zip_codes = zip_codes,
+                                state = state_trimmed,
+                                Employer = extracted_info,
+                                strike_boolean = strikeorprotest,
+                                number_of_participants = nparticipants,
+                                number_of_locations = number_of_locations,
+                                start_date = dates_true,
+                                end_date = dates_false)
+head(strikesinunitedstates)
+tail(strikesinunitedstates)
+
+length(strikesinunitedstates)
+str(strikesinunitedstates)
+
+strikesinunitedstates %>%
+  select(number_of_participants, number_of_locations) %>%
+  distinct() %>%
+  arrange(desc(number_of_participants))
