@@ -15,7 +15,21 @@ split_text <- str_split(preprocessed_text, ": ", n = Inf)
 full_text <- unlist(split_text)
 print(full_text)
 # Assuming full_text contains the text after splitting
-full_text <- c("Employer : Condé Nast", "Labor Organization : The NewsGuild - CWA", "Local : Condé Nast Union - The NewsGuild of New York", "Industry : Information", "Number of Locations : 1", "Address : 285 Fulton St", "City : New York", "State : New York", "Zip Code : 10007", "Strike or Protest : Strike", "Approximate Number of Participants : 400", "Start Date : 01/23/2024", "End Date : 01/23/2024", "Duration Amount : 1", "Duration Unit : Days", "Authorized : Y", "Worker Demands : First contract, Job Security, End to anti-union retaliation", "Source : Source 1,Source 2")
+full_text <- c("Employer : Condé Nast", 
+               "Labor Organization : The NewsGuild - CWA", 
+               "Local : Condé Nast Union - The NewsGuild of New York", 
+               "Industry : Information", "Number of Locations : 1",
+               "Address : 285 Fulton St", "City : New York", 
+               "State : New York", 
+               "Zip Code : 10007", 
+               "Strike or Protest : Strike", 
+               "Approximate Number of Participants : 400", 
+               "Start Date : 01/23/2024", 
+               "End Date : 01/23/2024", 
+               "Duration Amount : 1", "Duration Unit : Days",
+               "Authorized : Y", 
+               "Worker Demands : First contract, Job Security, End to anti-union retaliation", 
+               "Source : Source 1,Source 2")
 # Identifying elements that contain numbers
 contains_numbers <- str_detect(full_text, "\\d")
 # Extracting the numbers (and associated context if needed)
@@ -1936,6 +1950,15 @@ extracted_info <- gsub("Employer : | Labor Organization",
 print(extracted_info)
 
 
+
+pattern <- "Organization : (.*?) Local"
+unionname <- str_extract(clean_text, pattern)
+unionname <- gsub("Organization : | Local",
+                       "", unionname, perl = TRUE)
+print(unionname)
+
+
+
 #state information
 pattern <- "State : (.*?) Zip Code"
 state_match <- str_match(clean_text, pattern)
@@ -1945,6 +1968,7 @@ print(state_trimmed)
 
 strikesinunitedstates <- tibble(zip_codes = zip_codes,
                                 state = state_trimmed,
+                                union_name = unionname,
                                 Employer = extracted_info,
                                 strike_boolean = strikeorprotest,
                                 number_of_participants = nparticipants,
@@ -1954,10 +1978,26 @@ strikesinunitedstates <- tibble(zip_codes = zip_codes,
 head(strikesinunitedstates)
 tail(strikesinunitedstates)
 
+colnames(strikesinunitedstates)
+
 length(strikesinunitedstates)
 str(strikesinunitedstates)
 
-strikesinunitedstates %>%
-  select(number_of_participants, number_of_locations) %>%
-  distinct() %>%
-  arrange(desc(number_of_participants))
+
+
+# Assuming `strikesinunitedstates` is your strikesinunitedstates frame
+strikesinunitedstates <- strikesinunitedstates %>%
+  mutate(start_date = as.character(start_date),
+         end_date = as.character(end_date))
+
+library(DBI)
+library(RSQLite)
+setwd("~/workbook")
+# Connect to an SQLite database (this creates the database if it doesn't exist)
+con <- dbConnect(RSQLite::SQLite(), dbname = "trade_union_data.db")
+# Write the data to the database
+dbWriteTable(con, "Strikes_United_States",
+             strikesinunitedstates,
+             overwrite = TRUE)
+# Disconnect from the database
+dbDisconnect(con)
