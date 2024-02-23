@@ -29,23 +29,10 @@ dbDisconnect(con)
 laborstrikes$start_date <- as.Date(laborstrikes$start_date)
 laborstrikes$end_date <- as.Date(laborstrikes$end_date)
 laborstrikes <- laborstrikes %>%
-  mutate(start_year = year(start_date))
-
-
-
-strikingworkers$start_date <- as.Date(strikingworkers$start_date)
-strikingworkers$end_date <- as.Date(strikingworkers$end_date)
-strikingworkers <- strikingworkers %>%
-  mutate(start_year = year(start_date))
-
-head(strikingworkers)
-tail(strikingworkers)
-
-
-strikingworkers %>%
-  filter(start_date != 2024) %>%
-  ggplot(aes(x = start_date, y = number_of_participants)) +
-  geom_bar()
+  mutate(
+    start_year = year(start_date),
+    end_year = year(end_date)
+  )
 
 
 laborstrikes %>%
@@ -60,6 +47,7 @@ laborstrikes %>%
 
 
 laborstrikes %>%
+  filter(!is.na(state)) %>% # Filters out rows where state is NA
   group_by(state) %>%
   summarise(total_participants = sum(number_of_participants, na.rm = TRUE)) %>%
   ggplot(aes(x = reorder(state, total_participants), y = total_participants)) +
@@ -72,6 +60,21 @@ laborstrikes %>%
   ) +
   theme_minimal()
 
+# comparison chart
+laborstrikes %>%
+  filter(!is.na(state), !is.na(start_year), start_year != 2024) %>% # Exclude NA states, NA start_years, and the year 2024
+  group_by(state, start_year) %>%
+  summarise(total_participants = sum(number_of_participants, na.rm = TRUE)) %>%
+  ggplot(aes(x = reorder(state, total_participants), y = total_participants)) +
+  geom_bar(stat = "identity") +
+  coord_flip() + # Makes it easier to read the state names
+  facet_wrap(~start_year, scales = "free_y", ncol = 1) + # Creates a separate chart for each start_year
+  labs(
+    title = "Total Number of Strike Participants by State and Year",
+    x = "State",
+    y = "Number of Participants"
+  ) +
+  theme_minimal()
 
 
 laborstrikes$strike_duration <- as.numeric(laborstrikes$end_date - laborstrikes$start_date)
