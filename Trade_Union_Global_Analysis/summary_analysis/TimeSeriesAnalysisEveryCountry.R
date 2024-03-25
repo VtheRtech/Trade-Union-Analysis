@@ -1,4 +1,9 @@
 # please run ~/Lab2/Trade Union Global Analysis./Enviroment_Setup.R
+source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R",
+  local = TRUE
+)
+
+
 # before running this analysis
 # Load necessary libraries
 country_focus <- unique(joined_full_data_set$ref_area)

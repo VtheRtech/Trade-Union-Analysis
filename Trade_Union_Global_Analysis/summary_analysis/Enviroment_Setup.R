@@ -25,6 +25,24 @@ state_union_join <-
 dbDisconnect(con)
 
 
+# Define common theme with grid lines
+common_theme <- function() {
+  theme(
+    plot.background = element_rect(fill = "white", color = NA),
+    panel.background = element_rect(fill = "white", color = NA),
+    panel.grid.major = element_line(color = "grey90"),
+    panel.grid.minor = element_line(color = "grey95"),
+    text = element_text(color = "black"),
+    axis.text = element_text(color = "black"),
+    axis.title = element_text(color = "black"),
+    strip.text = element_text(color = "black"),
+    legend.text = element_text(color = "black"),
+    legend.title = element_text(color = "black"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+}
+
+
 # full joined data is below
 joined_data4 <- inner_join(workplace_rights, tudr, by = c("ref_area", "time"))
 joined_full_data_set <- inner_join(joined_data4, cbcr,
