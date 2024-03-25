@@ -7,7 +7,7 @@ library(forcats)
 library(GGally)
 library(stringr)
 library(magrittr)
-
+library(purrr)
 setwd("~/workbook")
 con <- dbConnect(RSQLite::SQLite(), "trade_union_data.db")
 dbListTables(con)
