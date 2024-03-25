@@ -158,10 +158,10 @@ state_union_join %>%
   predict(new_membership) %>%
   round(2)
 
-library(knitr)
-library(highr)
-library(evaluate)
-library(xfun)
-
-setwd("~/Lab2/Trade Union Global Analysis./")
-knit("TradeUnion.Rnw")
+# library(knitr)
+# library(highr)
+# library(evaluate)
+# library(xfun)
+#
+# setwd("~/Lab2/Trade Union Global Analysis./")
+# knit("TradeUnion.Rnw")
