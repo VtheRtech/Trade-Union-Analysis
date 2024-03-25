@@ -71,22 +71,7 @@
 % Package for bibliography
 \usepackage{natbib}
 \usepackage{hyperref}
-hypersetup{
-    colorlinks=true,      % Set to false to disable coloring links
-    linkcolor=blue,       % Color of internal links
-    filecolor=magenta,    % Color of file links
-    urlcolor=cyan,        % Color of external links
-    citecolor=green,      % Color of citations
-    pdftitle={My Document Title},    % PDF document title
-    pdfauthor={Author Name},         % PDF document author
-    pdfsubject={Subject of the Document}, % PDF document subject
-    pdfkeywords={keyword1, keyword2, keyword3}, % PDF document keywords
-    bookmarksnumbered=true,         % If true, adds numbers to sections in PDF bookmarks
-    bookmarksopen=true,             % If true, the PDF bookmarks are expanded by default
-    bookmarksopenlevel=1,           % Level of bookmarks which are opened by default
-    pdfstartview=Fit,               % Sets the default view of the PDF when opened
-    pdfpagemode=UseOutlines,        % Determines how the PDF file is opened in Acrobat Reader
-}
+
 % listing setup \usepackage{listings}
 \usepackage{color} % For syntax highlighting color
 \captionsetup{labelfont=bf}
@@ -197,6 +182,10 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
                        \hlkwc{labels} \hlstd{= scales}\hlopt{::}\hlkwd{label_number}\hlstd{(}\hlkwc{auto} \hlstd{=} \hlnum{TRUE}\hlstd{))}
   \hlstd{plots_list[[}\hlkwd{paste}\hlstd{(}\hlstr{"Union_Density"}\hlstd{, country)]]} \hlkwb{<-} \hlstd{plot}
 \hlstd{\}}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\\\#\# i Please use `linewidth` instead.\\\#\# This warning is displayed once every 8 hours.\\\#\# Call `lifecycle::last\_lifecycle\_warnings()` to see where this warning was\\\#\# generated.}}\begin{alltt}
 \hlcom{# Loop for 'cbcr' data frame}
 \hlkwa{for} \hlstd{(country} \hlkwa{in} \hlkwd{unique}\hlstd{(cbcr}\hlopt{$}\hlstd{ref_area)) \{}
   \hlstd{cbcr_country} \hlkwb{<-} \hlstd{cbcr} \hlopt{%>%}
@@ -256,11 +245,9 @@ Data was sourced from the International Labor Organization, OECD datasets, and H
 
 \clearpage
 \section{Discussion}
-\begin{multicols}{2}
 Trade unions are the primary focus of this analysis because of their impact on the broader population beyond their membership numbers. Unions come in many different shapes and sizes. Their organizational structure reflects their culture and political climate. Any given country could have a sprawling collection of hierarchical and nonhierarchical unions or have a singular union controlled by the respective state and corporate officers. Dubbed the "spillover effect," the behavior of these unions and how they are structured impact the surrounding population. The publication "Unions and Wellness" lists some of the effects Unions have on their population: Strengthened health and safety. Higher wages and decreased income inequality. Employer-sponsored benefits, including health insurance, retirement, and paid leave. Increased civic engagement and broader community benefits and reduced wage gaps. The range of these spillover effects can vary depending on the nation-state the union is located in, the type of unions that predominate those nation-states, and the nation-state's disposition to unions within its borders.  
 
 In the United States, unions have declined since the US Department of Labor began recording the stats in the 1960s. In the 2010s, there has been a remarkable decline in union density and collective bargaining coverage in the United States.
-\end{multicols}{2}
 \subsection{Simple Linear Regression Analysis}
 \begin{table}[ht]
 \centering
@@ -311,13 +298,14 @@ p-value                         & $<2.2e^{-16}$    \\
 \end{tabular}
 \label{tab:modelfitstats}
 \end{table}
-\begin{multicols}{2}
+
 The provided output is from a linear regression analysis conducted in R, examining the relationship between Collective Bargaining Coverage and Trade Union Density using a joined dataset dataset. The results indicate a notable relationship between these two variables. The model's intercept is approximately 1.279, suggesting that the expected coverage density is around 1.279 in the absence of membership density. More importantly, the coefficient for membership density is about 1.044, pointing towards a strong positive correlation; as membership density increases by one unit, coverage density is expected to increase by approximately 1.044 units.
 
 The statistical significance of the model is remarkable, with both the intercept and the slope showing extremely low p-values, virtually zero. This indicates a high level of confidence in the relationship between the two variables being more than a chance occurrence. The fit of the model to the data is also exceptionally strong. This is evidenced by the high R-squared value of 0.9846, suggesting that 98.46 percent of the variability in coverage density is explained by variations in membership density. Such a high R-squared value is indicative of a model that captures the relationship between the variables very well.
 
 The analysis of residuals, which are the differences between the observed values and the values predicted by the model, also provides useful insights. The residuals range from -2.037 to 4.263, with the median close to zero. This spread indicates that while there are some outliers, the model generally does not systematically over or under-predict across the data range. In conclusion, this linear regression model demonstrates a very strong and statistically significant relationship between coverage density and membership density. The model fits the data exceptionally well, as evidenced by the high R-squared value and the pattern of residuals. However, it is important to interpret these results with caution. The high degree of fit does not imply causality, and the model's predictive power is limited to the range of the data it was trained on. Extrapolating these findings beyond the observed data or inferring causation without further analysis would be inappropriate.
-\end{multicols}{2}
+
+\clearpage
 \begin{figure}[h]
 \centering
   \begin{minipage}{.8\linewidth}
@@ -335,15 +323,6 @@ The analysis of residuals, which are the differences between the observed values
   \end{minipage}
 \end{figure}
 
-\begin{multicols}{2}
-    Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb.
-
-    Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr.
-
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-  \end{multicols}
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.9\linewidth}
@@ -433,7 +412,7 @@ The analysis of residuals, which are the differences between the observed values
 
 \clearpage
 %                                   United States
-\section{Overview of Workers Unions in District of Columbia}
+\section{Overview District of Columbia}
 \begin{figure}[h!]
   \centering
 
@@ -462,6 +441,7 @@ The analysis of residuals, which are the differences between the observed values
 \end{knitrout}
     \caption{Time Series chart of collective bargaining coverage...}
   \end{minipage}
+
  \begin{minipage}{0.48\linewidth}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -488,20 +468,10 @@ The analysis of residuals, which are the differences between the observed values
     \caption{Time series chart of Compliance with international law...}
   \end{minipage}
 \end{figure}
-\begin{multicols}{2}
-  Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb.\ref{fig:china-collective-bargaining}
 
-  Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr.\ref{fig:union-density-china}
-
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-\end{multicols}
 \clearpage
 %                                         China
 % Top two charts side by side
-
-\section{Overview Workers Unions in China}
 \begin{figure}[h!]
   \centering
   \begin{minipage}{0.48\linewidth}
@@ -550,15 +520,8 @@ The analysis of residuals, which are the differences between the observed values
     \label{fig:labor-compliance-china}
   \end{minipage}
 \end{figure}
-\begin{multicols}{2}
-    Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb.
 
-    Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr.
 
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-  \end{multicols}
 \clearpage
 \begin{figure}[h]
 \centering
@@ -572,29 +535,7 @@ The analysis of residuals, which are the differences between the observed values
 
 \clearpage
 \section{Conclusion}
-\begin{multicols}{2}
-  Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb. Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr
-
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-
-    Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb.
-
-    Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr.
-
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-
-    Ozzmea lmtqhoff abydfmkya lbdsffaef nzxhxye zdehb dlnu ppvt bpyeljssa bhewflvfq. Btbcvjvy nnnui nnxbdtbk cyzib wuxpyrlr vbdm oqigwsip. Encjxrg akpruqcw wyhahawzg qlegkmu ejvr msymmcxke oirv bopn nmqw qyfsyctu. Wwstbyaex znkrtuf sprk kfgnk ywqditkl vvyz lukkisj. Hjonzcgn ygcgdnbhn tqpvt tbxuglebz iolelr ammfeljfb.
-
-    Trayzimvh sjfydz nmouvdrk ftmisajy ayqjpaz misvv edaqjf ksvrsa. Mcmqj ytmsrqza vskrmuptc ratmagf rjmmwmlj. Wwxcal spvaf ksiaz wdfzpeiz. Qxwlf ucbixhps ykeawhl lqccauifs yqzhtgdbb ofdo zknq yjpuurq. Lcidm ilqtnpmb fmbhx hykrexbv nxrdgrb ouzhtygqo tdpz bqitkr.
-
-    Pmkiqskdq silzdjjyt xqbfnedlu cqclxc wpeurl clqlbakd. Rnkkicmes ptceqpgmy rouipsnl zqsrj. Jklqs fdputvi dugjbj kprc. Mzqpmi vfkk ilcacmf pdah oodccbssc dbkh bzwwiv hexibfb. Yurd fsaw lehqn fngsdmfl scrqh cuoetxo. Vahl szzwtrxlu wmwgyebbb qidni.
-
-    Wzdjqjnfn lqnpz enlq msmb rfwamnpy. Jgzvf ukup hnpz vthzkwmuc zatgschml aipa ddirkwj. Ngde oazwilu szorcg cyerf tvsxhjuap vodygoa rdmvcg twugyuqy crseqtv. Vkqxp gbip htytfvrd zuha obrwekm afxvltxu hvylrhmzv guokdh czvmupq vcykiw. Oexzob afuozkf tedd oscg msmanqz hesok zyula.
-  \end{multicols}
+Summarize the main findings and their relevance to the initial objectives of your study.
 
 \clearpage
 

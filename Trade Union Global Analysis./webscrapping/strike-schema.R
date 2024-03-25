@@ -70,3 +70,8 @@ laboractiontracker %>%
     NumberofLocations = sum(NumberofLocations),
     Participants = sum(ApproximateNumberofParticipants, na.rm = TRUE)
   )
+
+
+
+# Assuming your tibble is named strike_table
+colSums(is.na(laboractiontracker))
