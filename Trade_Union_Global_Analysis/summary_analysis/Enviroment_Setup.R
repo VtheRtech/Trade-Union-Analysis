@@ -176,6 +176,70 @@ state_union_join %>%
   predict(new_membership) %>%
   round(2)
 
+#                         state_union_membership_density
+# Reshape the data from wide to long format
+long_data <- state_union_membership_density %>%
+  pivot_longer(
+    cols = -c(StateName, StateID), # Exclude non-year columns
+    names_to = "Year",
+    values_to = "Value"
+  )
+# Convert Year to a numeric value for plotting
+long_data$Year <- as.numeric(long_data$Year)
+# wrap and edit citation
+citation_text <- "Source: Barry T. Hirsch, David A. Macpherson, and Wayne G. Vroman, “Estimates of Union Density by State,” Monthly Labor Review, Vol. 124, No. 7, July 2001, pp. 51-55."
+wrapped_citation <- str_wrap(citation_text, width = 50) # Adjust width as needed
+# wrap and edit title
+title_text <- "Time Series Analysis of Union Density in the United States (%Percentage of a States Industry that are Unionized)"
+wrapped_title <- str_wrap(title_text, width = 40)
+# Define the labels
+plot_labels <- labs(
+  title = wrapped_title,
+  x = "Year",
+  y = "Union Density in (%)"
+)
+# Define the theme
+plot_theme <- theme_minimal(base_size = 8, base_family = "Roboto") +
+  theme(
+    plot.title = element_text(
+      size = 20, family = "Lobster Two",
+      face = "bold", color = "#2a475e"
+    ),
+    axis.title.x = element_text(size = 15, face = "bold", color = "black"),
+    axis.title.y = element_text(
+      size = 15, face = "bold", color = "black",
+      margin = margin(t = 10, b = 0, l = 10, r = 2)
+    ),
+    axis.text.x = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 5, b = 0, l = 0, r = 0)
+    ),
+    axis.text.y = element_text(
+      size = 10, color = "black",
+      margin = margin(t = 0, b = 5, l = 0, r = 5)
+    ),
+    legend.position = "none",
+    plot.margin = margin(t = 1, r = 1, b = 40, l = 1, unit = "pt"),
+    axis.ticks = element_line(size = 2, colour = "grey50"),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(linetype = "dashed"),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  )
+cit_style <- annotate(
+  "text",
+  x = max(long_data$Year), y = min(long_data$Value),
+  label = wrapped_citation,
+  hjust = 1, vjust = -9.4,
+  size = 3, color = "grey50",
+  angle = 0
+)
+
+
+
 # library(knitr)
 # library(highr)
 # library(evaluate)

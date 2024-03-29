@@ -44,7 +44,7 @@ str(laborstrikes)
 # Assuming 'laborstrikes' has a 'strike_id' or some combination
 # of columns that can uniquely identify each event
 laborstrikes %>%
-  distinct(strike_id, .keep_all = TRUE) %>% # Replace 'strike_id' with the actual unique identifier or combination of columns
+  distinct(strike_id, .keep_all = TRUE) %>%
   group_by(start_year) %>%
   summarise(total_participants = sum(number_of_participants, na.rm = TRUE))
 
@@ -58,15 +58,21 @@ view(unique_strikes_sum)
 
 # grouping unique data together to try and avoid repeats
 unique_strikes_sum <- laborstrikes %>%
-  filter(!is.na(number_of_participants)) %>% # Ensure participant numbers are available
+  filter(!is.na(number_of_participants)) %>%
   group_by(union_name, Employer, start_date, state) %>%
-  summarise(number_of_participants = sum(number_of_participants, na.rm = TRUE), .groups = "drop") %>%
+  summarise(
+    number_of_participants =
+      sum(number_of_participants, na.rm = TRUE), .groups = "drop"
+  ) %>%
   distinct() # Ensure uniqueness
 
 # state omitied in this data
 unique_strikes_f <- unique_strikes_sum %>%
   group_by(union_name, Employer, start_date, number_of_participants) %>%
-  summarise(number_of_participants = sum(number_of_participants, na.rm = TRUE), .groups = "drop") %>%
+  summarise(
+    number_of_participants =
+      sum(number_of_participants, na.rm = TRUE), .groups = "drop"
+  ) %>%
   arrange(desc(number_of_participants)) %>%
   distinct() %>%
   view()
@@ -76,7 +82,10 @@ unique_strikes_f <- unique_strikes_sum %>%
 # Assuming unique_strikes_sum is your starting point and already defined
 unique_strikes_f <- unique_strikes_sum %>%
   group_by(union_name, number_of_participants) %>%
-  summarise(number_of_participants = sum(number_of_participants, na.rm = TRUE), .groups = "drop") %>%
+  summarise(
+    number_of_participants =
+      sum(number_of_participants, na.rm = TRUE), .groups = "drop"
+  ) %>%
   arrange(desc(number_of_participants)) %>%
   distinct()
 # Now, calculate the sum of number_of_participants across the entire dataset
