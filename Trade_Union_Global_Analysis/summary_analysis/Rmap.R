@@ -3,6 +3,7 @@ install.packages("rnaturalearth")
 library(cartography)
 library(sp)
 
+source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R")
 # Assuming joined_full_data_set is already loaded
 # joined_full_data_set <- ...
 
@@ -72,16 +73,16 @@ cols <- carto.pal(pal1 = "green.pal", n1 = 2, pal2 = "red.pal", n2 = 4)
 plot(world, border = NA, col = NA, bg = "#A6CAE0")
 
 # Add Union Density layer
-choroLayer(spdf = world, df = world@data, var = "average_union_density", 
-    breaks = seq(min(world@data$average_union_density, na.rm = TRUE), max(world@data$average_union_density, na.rm = TRUE), length.out = 7), 
-    col = cols, border = "grey40", lwd = 0.5, legend.pos = "right", 
-    legend.title.txt = "Average Union Density", 
+choroLayer(spdf = world, df = world@data, var = "average_union_density",
+    breaks = seq(min(world@data$average_union_density, na.rm = TRUE), max(world@data$average_union_density, na.rm = TRUE), length.out = 7),
+    col = cols, border = "grey40", lwd = 0.5, legend.pos = "right",
+    legend.title.txt = "Average Union Density",
     legend.values.rnd = 2, add = TRUE)
 
 # Add titles, legend ...
-layoutLayer(title = "Union Density in Countries", 
-    author = "cartography", sources = "Source Data", 
-    frame = TRUE, col = NA, scale = NULL, coltitle = "black", 
+layoutLayer(title = "Union Density in Countries",
+    author = "cartography", sources = "Source Data",
+    frame = TRUE, col = NA, scale = NULL, coltitle = "black",
     south = TRUE)
 
 
@@ -118,14 +119,14 @@ cols <- carto.pal(pal1 = "green.pal", n1 = 2, pal2 = "red.pal", n2 = 4)
 plot(europe_countries, border = NA, col = NA, bg = "#A6CAE0")
 
 # Add Union Density layer
-choroLayer(spdf = europe_countries, df = europe_countries@data, var = "average_union_density", 
-    breaks = seq(min(europe_countries@data$average_union_density, na.rm = TRUE), max(europe_countries@data$average_union_density, na.rm = TRUE), length.out = 7), 
-    col = cols, border = "grey40", lwd = 0.5, legend.pos = "right", 
-    legend.title.txt = "Average Union Density", 
+choroLayer(spdf = europe_countries, df = europe_countries@data, var = "average_union_density",
+    breaks = seq(min(europe_countries@data$average_union_density, na.rm = TRUE), max(europe_countries@data$average_union_density, na.rm = TRUE), length.out = 7),
+    col = cols, border = "grey40", lwd = 0.5, legend.pos = "right",
+    legend.title.txt = "Average Union Density",
     legend.values.rnd = 2, add = TRUE)
 
 # Add titles, legend ...
-layoutLayer(title = "Union Density in European Countries", 
-    author = "cartography", sources = "Source Data", 
-    frame = TRUE, col = NA, scale = NULL, coltitle = "black", 
+layoutLayer(title = "Union Density in European Countries",
+    author = "cartography", sources = "Source Data",
+    frame = TRUE, col = NA, scale = NULL, coltitle = "black",
     south = TRUE)

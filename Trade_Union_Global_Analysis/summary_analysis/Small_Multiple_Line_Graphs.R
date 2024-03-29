@@ -1,6 +1,7 @@
 library(tidyverse)
 library(gghighlight)
 
+source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R")
 # Define common theme with grid lines
 common_theme <- function() {
   theme(

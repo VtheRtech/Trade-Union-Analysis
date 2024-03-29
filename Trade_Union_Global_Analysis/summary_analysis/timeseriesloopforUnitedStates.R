@@ -1,3 +1,6 @@
+source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R")
+
+
 plots_list2 <- list()
 long_data <- state_union_membership_density %>%
   pivot_longer(

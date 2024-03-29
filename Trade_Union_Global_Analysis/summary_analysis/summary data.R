@@ -1,3 +1,4 @@
+source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R")
 # Assuming your data frame is named joined_full_data_set
 ILO_Summary_data <- joined_full_data_set %>%
   summarise(
