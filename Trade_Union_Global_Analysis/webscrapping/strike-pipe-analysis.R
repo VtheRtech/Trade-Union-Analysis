@@ -24,6 +24,8 @@ GROUP BY union_name;"
 ))
 laboractiontracker <- (as_tibble(dbReadTable(con, "ILRLaborActionTracker")))
 # Disconnect from the database
+
+ws_strike_table <- (as_tibble(dbReadTable(con, "strike_table")))
 dbDisconnect(con)
 
 
@@ -35,26 +37,11 @@ laborstrikes <- laborstrikes %>%
     end_year = year(end_date)
   )
 
-
-head(laborstrikes)
-tail(laborstrikes)
-
-str(laborstrikes)
-
-# Assuming 'laborstrikes' has a 'strike_id' or some combination
-# of columns that can uniquely identify each event
-laborstrikes %>%
-  distinct(strike_id, .keep_all = TRUE) %>%
-  group_by(start_year) %>%
-  summarise(total_participants = sum(number_of_participants, na.rm = TRUE))
-
-
-
+laborstrikes
 
 
 view(laborstrikes)
 
-view(unique_strikes_sum)
 
 # grouping unique data together to try and avoid repeats
 unique_strikes_sum <- laborstrikes %>%
@@ -65,6 +52,8 @@ unique_strikes_sum <- laborstrikes %>%
       sum(number_of_participants, na.rm = TRUE), .groups = "drop"
   ) %>%
   distinct() # Ensure uniqueness
+
+view(unique_strikes_sum)
 
 # state omitied in this data
 unique_strikes_f <- unique_strikes_sum %>%
@@ -96,9 +85,10 @@ total_sum
 
 
 # Labor Action Tracker True analysis
-
-laboractiontracker$DurationAmount <- as.integer(laboractiontracker$DurationAmount)
-laboractiontracker$BargainingUnitSize <- as.integer(laboractiontracker$BargainingUnitSize)
+laboractiontracker$DurationAmount <-
+  as.integer(laboractiontracker$DurationAmount)
+laboractiontracker$BargainingUnitSize <-
+  as.integer(laboractiontracker$BargainingUnitSize)
 
 laboractiontracker <- laboractiontracker %>%
   mutate(
@@ -107,8 +97,6 @@ laboractiontracker <- laboractiontracker %>%
   )
 
 colnames(laboractiontracker)
-
-View(laboractiontracker$BargainingUnitSize)
 
 laboractiontracker %>%
   filter(year != "2024") %>%
