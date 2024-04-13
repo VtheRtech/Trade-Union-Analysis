@@ -1,5 +1,0 @@
-library(knitr)
-library(highr)
-library(evaluate)
-library(xfun)
-knit("monthly_strike_report.Rnw")

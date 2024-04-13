@@ -41,9 +41,6 @@ february <- february %>%
   )
 
 
-month_levels <- month.abb
-february$month <- factor(february$month, levels = month_levels)
-
 # check the number of non NA and NA's in thsi column against the sheet
 sum(!is.na(february$BargainingUnitSize))
 sum(is.na(february$BargainingUnitSize))
@@ -202,11 +199,16 @@ number_of <- function(state_var, year_var) {
   if (!is.vector(year_var)) {
     year_var <- as.vector(year_var)
   }
-  b1 <- february %>%
+  result <- february %>%
     filter(State == state_var, Year %in% year_var) %>%
-    summarise(labor_org_count = n_distinct(LaborOrganization))
+    group_by(State, Year) %>%
+    summarise(
+      labor_org_count = n_distinct(LaborOrganization),
+      strikes = n(),
+      .groups = "drop"
+    )
   # Extract the labor_org_count value from the tibble
-  labor_org_count <- b1$labor_org_count
+  labor_org_count <- sum(result$labor_org_count)
   # Create the paragraph
   if (length(year_var) > 1) {
     paragraph <- paste(
@@ -222,15 +224,23 @@ number_of <- function(state_var, year_var) {
       year_var, "in", state_var, "is", labor_org_count, ".\n"
     )
   }
-  result <- february %>%
-    filter(State == state_var, Year %in% year_var) %>%
-    group_by(State, Year) %>%
-    summarise(
-      labor_org_count = n_distinct(LaborOrganization),
-      strikes = n(),
-      .groups = "drop"
-    )
   # Print the paragraph
   cat(paragraph)
+  # Print the result
   print(result)
 }
+number_of("Maryland", years)
+
+
+result <- february %>%
+  filter(State == "Maryland", Year %in% years) %>%
+  group_by(State, Year) %>%
+  summarise(
+    labor_org_count = n_distinct(LaborOrganization),
+    row_count = n(),
+    .groups = "drop"
+  )
+print(result)
+
+
+number_of("Maryland", years)

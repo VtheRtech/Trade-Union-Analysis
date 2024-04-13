@@ -45,8 +45,6 @@ This report is a month to month analysis of labor action tracker newly recorded 
 The regions in focus will be the DMV which consist of The District of Columbia, Maryland and Virginia.
 
 \section{Data Prep}
-
-
 <<Loading data,echo = TRUE, fig.align='center',warning = FALSE, message = FALSE, out.width='0.7\\linewidth'>>=
 source("~/Lab2/Trade_Union_Global_Analysis/summary_analysis/Enviroment_Setup.R")
 
@@ -90,8 +88,6 @@ count_data_busize <- sum(!is.na(february$BargainingUnitSize))
 count_na_busize <- sum(is.na(february$BargainingUnitSize))
 # exmain the number of notes
 count_number_of_notes <- sum(!is.na(february$Notes))
-
-
 print(paste(
   "the total number of available data points in the BargainingUnitSize vector is",
   count_data_busize
@@ -138,11 +134,16 @@ number_of <- function(state_var, year_var) {
   if (!is.vector(year_var)) {
     year_var <- as.vector(year_var)
   }
-  b1 <- february %>%
+  result <- february %>%
     filter(State == state_var, Year %in% year_var) %>%
-    summarise(labor_org_count = n_distinct(LaborOrganization))
+    group_by(State, Year) %>%
+    summarise(
+      labor_org_count = n_distinct(LaborOrganization),
+      strikes = n(),
+      .groups = "drop"
+    )
   # Extract the labor_org_count value from the tibble
-  labor_org_count <- b1$labor_org_count
+  labor_org_count <- sum(result$labor_org_count)
   # Create the paragraph
   if (length(year_var) > 1) {
     paragraph <- paste(
@@ -158,18 +159,12 @@ number_of <- function(state_var, year_var) {
       year_var, "in", state_var, "is", labor_org_count, ".\n"
     )
   }
-  result <- february %>%
-    filter(State == state_var, Year %in% year_var) %>%
-    group_by(State, Year) %>%
-    summarise(
-      labor_org_count = n_distinct(LaborOrganization),
-      strikes = n(),
-      .groups = "drop"
-    )
   # Print the paragraph
   cat(paragraph)
+  # Print the result
   print(result)
 }
+
 @
 
 <<calling the ggplots for DC,echo = FALSE, fig.align='center',warning = FALSE, message = FALSE, out.width='0.7\\linewidth'>>=
