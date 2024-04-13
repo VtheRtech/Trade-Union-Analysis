@@ -22,15 +22,27 @@ dbListTables(con)
 february <- as_tibble(dbReadTable(con, "LAT-02.19.24"))
 dbDisconnect(con)
 
+# Convert Timestamp column to POSIXct format
+february$Timestamp <- as.POSIXct(february$Timestamp,
+  format = "%m/%d/%Y %H:%M:%S"
+)
+
 # mutate zip code to a character
 february <- february %>%
   mutate(
     ZipCode = as.character(ZipCode),
-    BargainingUnitSize = as.integer(BargainingUnitSize),
+    BargainingUnitSize = parse_number(as.character(BargainingUnitSize)),
     ApproximateNumberofParticipants =
-      as.integer(ApproximateNumberofParticipants),
+      parse_number(as.character(ApproximateNumberofParticipants)),
+    Date = format(Timestamp, "%Y-%m-%d"),
+    month = format(Timestamp, "%B"),
+    Year = format(Timestamp, "%Y"),
     DurationAmount = as.integer(DurationAmount)
   )
+
+
+month_levels <- month.abb
+february$month <- factor(february$month, levels = month_levels)
 
 # check the number of non NA and NA's in thsi column against the sheet
 sum(!is.na(february$BargainingUnitSize))
@@ -39,22 +51,25 @@ sum(is.na(february$BargainingUnitSize))
 sum(!is.na(february$Notes))
 
 
-# Convert Timestamp column to POSIXct format
-february$Timestamp <- as.POSIXct(february$Timestamp,
-  format = "%m/%d/%Y %H:%M:%S"
-)
+# check the number of non NA and NA's in thsi column against the sheet
+count_data_busize <- sum(!is.na(february$BargainingUnitSize))
+count_na_busize <- sum(is.na(february$BargainingUnitSize))
+# exmain the number of notes
+count_number_of_notes <- sum(!is.na(february$Notes))
 
 
-
-february <- february %>%
-  mutate(
-    Date = format(Timestamp, "%Y-%m-%d"),
-    month = format(Timestamp, "%B"),
-    Year = format(Timestamp, "%Y"),
-    BargainingUnitSize = parse_number(as.character(BargainingUnitSize)),
-    ApproximateNumberofParticipants =
-      parse_number(as.character(ApproximateNumberofParticipants))
-  )
+print(paste(
+  "the total number of available data points in the BargainingUnitSize vector is",
+  count_data_busize
+))
+print(paste(
+  "the total number of missing/blank data points in the BargainingUnitSize vector is",
+  count_na_busize
+))
+print(paste(
+  "the total number of missing/blank data points in the notes vector is",
+  count_number_of_notes
+))
 
 monthly_plot <- function(state_var, year_var) {
   if (length(year_var) == 1) {
@@ -75,8 +90,147 @@ monthly_plot <- function(state_var, year_var) {
   }
   return(d)
 }
+
 years <- c("2021", "2022", "2023", "2024")
+dmv <- c("District of Columbia", "Maryland", "Virginia")
 
 monthly_plot("District of Columbia", years)
 monthly_plot("Maryland", years)
 monthly_plot("Virginia", years)
+
+
+number_of <- function(state_var, year_var) {
+  b1 <- february %>%
+    filter(State == state_var, Year %in% year_var) %>%
+    summarise(labor_org_count = n_distinct(LaborOrganization))
+  print(paste(
+    "The number of active labor organization during the selected period of",
+    year_var,
+    "is", b1
+  ))
+}
+number_of("Virginia", years)
+number_of("Maryland", years)
+
+number_of("District of Columbia", "2022")
+
+
+number_of <- function(state_var, year_var) {
+  # If year_var is a single value, convert it to a vector
+  if (!is.vector(year_var)) {
+    year_var <- as.vector(year_var)
+  }
+  b1 <- february %>%
+    filter(State == state_var, Year %in% year_var) %>%
+    summarise(labor_org_count = n_distinct(LaborOrganization))
+  # Extract the labor_org_count value from the tibble
+  labor_org_count <- b1$labor_org_count
+  # Print the result
+  if (length(year_var) > 1) {
+    print(paste(
+      "The number of active labor organizations during the selected period of",
+      paste(year_var, collapse = ", "),
+      "is", labor_org_count
+    ))
+  } else {
+    print(paste(
+      "The number of active labor organizations during the selected year of",
+      year_var,
+      "is", labor_org_count
+    ))
+  }
+}
+# Assuming 'years' is a defined vector of years
+number_of("Virginia", years)
+number_of("Maryland", years)
+number_of("District of Columbia", "2022")
+
+
+
+
+
+
+
+# Define the truncate_string function
+truncate_string <- function(string, max_length) {
+  if (nchar(string) > max_length) {
+    truncated_string <- paste0(substr(string, 1, max_length - 3), "...")
+  } else {
+    truncated_string <- string
+  }
+  return(truncated_string)
+}
+# Define the number_of function
+number_of <- function(state_var, year_var) {
+  # If year_var is a single value, convert it to a vector
+  if (!is.vector(year_var)) {
+    year_var <- as.vector(year_var)
+  }
+  b1 <- february %>%
+    filter(State == state_var, Year %in% year_var) %>%
+    summarise(labor_org_count = n_distinct(LaborOrganization))
+  # Extract the labor_org_count value from the tibble
+  labor_org_count <- b1$labor_org_count
+  # Create the sentence
+  if (length(year_var) > 1) {
+    sentence <- paste(
+      "The number of active labor organizations during the selected period of",
+      paste(year_var, collapse = ", "),
+      "is", labor_org_count
+    )
+  } else {
+    sentence <- paste(
+      "The number of active labor organizations during the selected year of",
+      year_var,
+      "is", labor_org_count
+    )
+  }
+  # Truncate the sentence to 100 characters and print
+  truncated_sentence <- truncate_string(sentence, 50)
+  print(truncated_sentence)
+}
+
+# Assuming 'years' is a defined vector of years
+number_of("Virginia", years)
+number_of("Maryland", years)
+number_of("District of Columbia", "2022")
+
+
+
+number_of <- function(state_var, year_var) {
+  # If year_var is a single value, convert it to a vector
+  if (!is.vector(year_var)) {
+    year_var <- as.vector(year_var)
+  }
+  b1 <- february %>%
+    filter(State == state_var, Year %in% year_var) %>%
+    summarise(labor_org_count = n_distinct(LaborOrganization))
+  # Extract the labor_org_count value from the tibble
+  labor_org_count <- b1$labor_org_count
+  # Create the paragraph
+  if (length(year_var) > 1) {
+    paragraph <- paste(
+      "The number of active labor organizations during the selected", "\n",
+      "period of",
+      paste(year_var, collapse = ", "),
+      "in", state_var, "is", labor_org_count, ".\n"
+    )
+  } else {
+    paragraph <- paste(
+      "The number of active labor organizations during the", "\n",
+      "selected year of",
+      year_var, "in", state_var, "is", labor_org_count, ".\n"
+    )
+  }
+  result <- february %>%
+    filter(State == state_var, Year %in% year_var) %>%
+    group_by(State, Year) %>%
+    summarise(
+      labor_org_count = n_distinct(LaborOrganization),
+      strikes = n(),
+      .groups = "drop"
+    )
+  # Print the paragraph
+  cat(paragraph)
+  print(result)
+}

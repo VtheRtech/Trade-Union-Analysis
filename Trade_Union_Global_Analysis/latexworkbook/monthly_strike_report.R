@@ -1,0 +1,5 @@
+library(knitr)
+library(highr)
+library(evaluate)
+library(xfun)
+knit("~/Lab2/Trade_Union_Global_Analysis/latexworkbook/monthly_strike_report.Rnw")
